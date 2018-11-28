@@ -5,8 +5,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/fragment_container"
-    tools:context="com.squaresdevelopers.latestphonewallpapers.activities.MainActivity">
+    tools:context="com.squaresdevelopers.latestphonewallpapers.activities.SplashActivity">
 
 
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/splash"
+        android:scaleType="fitXY"/>
 </RelativeLayout>
