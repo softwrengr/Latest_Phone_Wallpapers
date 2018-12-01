@@ -8,10 +8,13 @@ import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.android.volley.AuthFailureError;
@@ -26,19 +29,34 @@ import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
 import com.squaresdevelopers.latestphonewallpapers.R;
+import com.squaresdevelopers.latestphonewallpapers.controllers.CategoriesAdapter;
+import com.squaresdevelopers.latestphonewallpapers.dataModels.CategoryModel;
+import com.squaresdevelopers.latestphonewallpapers.utils.AlertUtils;
+import com.squaresdevelopers.latestphonewallpapers.utils.Config;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 
 public class HomeFragment extends Fragment {
     View view;
-    AlertDialog alertDialog;
+    android.support.v7.app.AlertDialog alertDialog;
     private AdView mAdView;
     private AdRequest adRequest;
+    @BindView(R.id.rvCategory)
+    RecyclerView rvCategories;
+    CategoriesAdapter categoriesAdapter;
+    ArrayList<CategoryModel> categoryModelList;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -48,16 +66,49 @@ public class HomeFragment extends Fragment {
         mAdView = getActivity().findViewById(R.id.adView);
 
         showBannerAd();
+        initUI();
         return view;
+    }
+
+    private void initUI() {
+        ButterKnife.bind(this, view);
+
+        RecyclerView.LayoutManager layoutManager =  new LinearLayoutManager(getActivity());
+        rvCategories.setLayoutManager(layoutManager);
+        categoryModelList = new ArrayList<>();
+        alertDialog = AlertUtils.createProgressDialog(getActivity());
+        alertDialog.show();
+        categoriesAdapter = new CategoriesAdapter(getActivity(),categoryModelList);
+        rvCategories.setAdapter(categoriesAdapter);
+        apiCall();
     }
 
 
     public void apiCall() {
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, ""
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, Config.CATEGORIES
                 , new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 alertDialog.dismiss();
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    JSONArray dataArray = jsonObject.getJSONArray("data");
+                    for (int i = 0; i < dataArray.length(); i++) {
+                        JSONObject object = dataArray.getJSONObject(i);
+                        String id = object.getString("id");
+                        String name = object.getString("category_name");
+
+                        CategoryModel model = new CategoryModel();
+                        model.setId(id);
+                        model.setName(name);
+
+                        categoryModelList.add(model);
+                        categoriesAdapter.notifyDataSetChanged();
+
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
 
             }
         }, new Response.ErrorListener() {
@@ -80,7 +131,7 @@ public class HomeFragment extends Fragment {
         mRequestQueue.add(stringRequest);
     }
 
-    private void showBannerAd(){
+    private void showBannerAd() {
 
     }
 

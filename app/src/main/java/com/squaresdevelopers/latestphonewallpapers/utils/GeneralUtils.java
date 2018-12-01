@@ -50,16 +50,16 @@ public class GeneralUtils {
 
 
     public static SharedPreferences getSharedPreferences(Context context) {
-        return context.getSharedPreferences(Configuration.MY_PREF, 0);
+        return context.getSharedPreferences(Config.MY_PREF, 0);
     }
 
 
-    public static String getDescp(Context context){
-        return getSharedPreferences(context).getString("descp","");
+    public static String getID(Context context){
+        return getSharedPreferences(context).getString("id","");
     }
 
-    public static String getPrice(Context context){
-        return getSharedPreferences(context).getString("price","");
+    public static String getImage(Context context){
+        return getSharedPreferences(context).getString("image","");
     }
 
 

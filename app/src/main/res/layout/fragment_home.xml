@@ -5,117 +5,14 @@
     android:orientation="vertical"
     tools:context="com.squaresdevelopers.latestphonewallpapers.fragments.HomeFragment">
 
-    <ScrollView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rvCategory"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_above="@id/adView">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-
-
-            <FrameLayout
-                android:id="@+id/layout_android"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <ImageView
-                    android:id="@+id/iv_android"
-                    android:layout_width="match_parent"
-                    android:layout_height="280sp"
-                    android:scaleType="fitXY"
-                    android:src="@drawable/splash" />
-
-                <TextView
-                    android:id="@+id/tv_android"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:text="Android"
-                    android:textColor="@color/white"
-                    android:textSize="22sp"
-                    android:textStyle="bold" />
-            </FrameLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <FrameLayout
-                    android:id="@+id/layout_iphone"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
-
-                    <ImageView
-                        android:id="@+id/iv_iphone"
-                        android:layout_width="200sp"
-                        android:layout_height="200sp"
-                        android:scaleType="fitXY"
-                        android:src="@drawable/splash" />
-
-                    <TextView
-                        android:id="@+id/tv_iphone"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:text="Iphone"
-                        android:textColor="@color/white"
-                        android:textSize="22sp"
-                        android:textStyle="bold" />
-                </FrameLayout>
-
-                <FrameLayout
-                    android:id="@+id/layout_huwai"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
-
-                    <ImageView
-                        android:id="@+id/iv_huwai"
-                        android:layout_width="match_parent"
-                        android:layout_height="200sp"
-                        android:scaleType="fitXY"
-                        android:src="@drawable/splash" />
-
-                    <TextView
-                        android:id="@+id/tv_huwai"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:text="Huwai"
-                        android:textColor="@color/white"
-                        android:textSize="22sp"
-                        android:textStyle="bold" />
-                </FrameLayout>
-            </LinearLayout>
-
-            <FrameLayout
-                android:id="@+id/layout_google"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <ImageView
-                    android:id="@+id/iv_google"
-                    android:layout_width="match_parent"
-                    android:layout_height="200sp"
-                    android:scaleType="fitXY"
-                    android:src="@drawable/splash" />
-
-                <TextView
-                    android:id="@+id/tv_google"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:text="Google"
-                    android:textColor="@color/white"
-                    android:textSize="22sp"
-                    android:textStyle="bold" />
-            </FrameLayout>
-
-        </LinearLayout>
-    </ScrollView>
+    </android.support.v7.widget.RecyclerView>
     <com.google.android.gms.ads.AdView
         xmlns:ads="http://schemas.android.com/apk/res-auto"
         android:id="@+id/adView"
