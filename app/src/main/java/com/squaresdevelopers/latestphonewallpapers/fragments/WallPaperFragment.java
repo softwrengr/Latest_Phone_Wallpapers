@@ -4,6 +4,7 @@ import android.app.DownloadManager;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -13,11 +14,14 @@ import android.os.Environment;
 import android.os.StrictMode;
 import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.squaresdevelopers.latestphonewallpapers.R;
 import com.squaresdevelopers.latestphonewallpapers.utils.GeneralUtils;
@@ -31,6 +35,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -56,14 +62,18 @@ public class WallPaperFragment extends Fragment {
         initUI();
         StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
         StrictMode.setVmPolicy(builder.build());
+        
+        onback(view);
         return view;
     }
+
+   
 
     private void initUI() {
         ButterKnife.bind(this, view);
 
         image = GeneralUtils.getImage(getActivity());
-        Log.d("image",image);
+        Log.d("image", image);
         ButterKnife.bind(this, view);
         Picasso.with(getActivity()).load(image).into(ivWallPaper);
 
@@ -76,13 +86,12 @@ public class WallPaperFragment extends Fragment {
     }
 
 
-    public class ShareTask extends AsyncTask<String , String , String>
-    {
+    public class ShareTask extends AsyncTask<String, String, String> {
         private Context context;
         private ProgressDialog pDialog;
         URL myFileUrl;
         Bitmap bmImg = null;
-        File file ;
+        File file;
 
         public ShareTask(Context context) {
             this.context = context;
@@ -116,18 +125,19 @@ public class WallPaperFragment extends Fragment {
                 conn.connect();
                 InputStream is = conn.getInputStream();
                 bmImg = BitmapFactory.decodeStream(is);
-            }
-            catch (IOException e)
-            {
+            } catch (IOException e) {
                 e.printStackTrace();
             }
             try {
 
+
                 String path = myFileUrl.getPath();
                 String idStr = path.substring(path.lastIndexOf('/') + 1);
                 File filepath = Environment.getExternalStorageDirectory();
-                File dir = new File (filepath.getAbsolutePath() + "/HD-Wallpaper-foldername/");
-                dir.mkdirs();
+                File dir = new File(filepath.getAbsolutePath() + "/.HD Wallpaper");
+                if (!dir.exists()) {
+                    dir.mkdirs();
+                }
                 String fileName = idStr;
                 file = new File(dir, fileName);
                 FileOutputStream fos = new FileOutputStream(file);
@@ -135,9 +145,7 @@ public class WallPaperFragment extends Fragment {
                 fos.flush();
                 fos.close();
 
-            }
-            catch (Exception e)
-            {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
             return null;
@@ -150,12 +158,47 @@ public class WallPaperFragment extends Fragment {
 
             Intent share = new Intent(Intent.ACTION_SEND);
             share.setType("image/png");
-            Log.d("zma",String.valueOf(file.getAbsolutePath()));
+            Log.d("zma", String.valueOf(file.getAbsolutePath()));
             share.putExtra(Intent.EXTRA_STREAM, Uri.parse("file://" + file.getAbsolutePath()));
             startActivity(Intent.createChooser(share, "Share Image"));
             pDialog.dismiss();
         }
     }
+
+    private void onback(View view) {
+
+        view.setFocusableInTouchMode(true);
+        view.requestFocus();
+        view.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                //  Log.i(tag, "keyCode: " + keyCode);
+                if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_UP) {
+                    //   Log.i(tag, "onKey Back listener is working!!!");
+                    getFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+
+                    Toast.makeText(getActivity(), "back", Toast.LENGTH_SHORT).show();
+
+                    File dir = new File(Environment.getExternalStorageDirectory()+"/.HD Wallpaper");
+                    if (dir.isDirectory())
+                    {
+                        String[] children = dir.list();
+                        for (int i = 0; i < children.length; i++)
+                        {
+                            new File(dir, children[i]).delete();
+                        }
+                    }
+
+                    return true;
+                }
+                return false;
+            }
+        });
+
+    }
+    
+    
+
 }
 
 
