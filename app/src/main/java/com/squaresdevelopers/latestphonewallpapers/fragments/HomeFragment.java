@@ -97,10 +97,12 @@ public class HomeFragment extends Fragment {
                         JSONObject object = dataArray.getJSONObject(i);
                         String id = object.getString("id");
                         String name = object.getString("category_name");
+                        String image = object.getString("image");
 
                         CategoryModel model = new CategoryModel();
                         model.setId(id);
                         model.setName(name);
+                        model.setImage(image);
 
                         categoryModelList.add(model);
                         categoriesAdapter.notifyDataSetChanged();

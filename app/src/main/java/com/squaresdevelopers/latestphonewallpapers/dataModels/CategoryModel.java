@@ -5,7 +5,7 @@ package com.squaresdevelopers.latestphonewallpapers.dataModels;
  */
 
 public class CategoryModel {
-    String id, name;
+    String id, name,image;
 
     public String getId() {
         return id;
@@ -21,5 +21,13 @@ public class CategoryModel {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 }

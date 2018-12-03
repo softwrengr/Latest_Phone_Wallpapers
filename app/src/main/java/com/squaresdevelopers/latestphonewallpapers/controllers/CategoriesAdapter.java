@@ -54,6 +54,7 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.My
         final CategoryModel model = categoryModelList.get(position);
 
         holder.tvName.setText(model.getName());
+        Picasso.with(context).load(model.getImage()).into(holder.ivLayout);
         holder.ivLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
