@@ -69,13 +69,14 @@ public class ItemAdapter extends BaseAdapter {
         viewHolder.tvModelName=(TextView)convertView.findViewById(R.id.tv_model_name);
         viewHolder.layout = convertView.findViewById(R.id.layout);
 
-        viewHolder.tvModelName.setText(model.getModelNumber());
+        viewHolder.tvModelName.setText("Model "+model.getModelNumber());
         Picasso.with(context).load(model.getImage()).into(viewHolder.imageView);
 
         viewHolder.layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 GeneralUtils.putStringValueInEditor(context,"image",model.getImage());
+                GeneralUtils.putStringValueInEditor(context,"model_no",model.getModelNumber());
                 GeneralUtils.connectFragmentWithBackStack(context,new WallPaperFragment());
             }
         });

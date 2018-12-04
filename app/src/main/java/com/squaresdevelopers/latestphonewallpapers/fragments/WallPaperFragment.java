@@ -15,15 +15,20 @@ import android.os.StrictMode;
 import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.squaresdevelopers.latestphonewallpapers.R;
+import com.squaresdevelopers.latestphonewallpapers.utils.FileUtilitiy;
 import com.squaresdevelopers.latestphonewallpapers.utils.GeneralUtils;
 import com.squareup.picasso.Picasso;
 
@@ -45,12 +50,11 @@ import butterknife.ButterKnife;
 public class WallPaperFragment extends Fragment {
     @BindView(R.id.wallpaper)
     ImageView ivWallPaper;
-    @BindView(R.id.iv_favorite)
-    ImageView ivFavorite;
-    @BindView(R.id.iv_share)
-    ImageView iv_share;
+    @BindView(R.id.apply_wallpaper)
+    LinearLayout layoutApplyWallPaper;
+
     View view;
-    String image;
+    String image, strModelNo;
     Bitmap bitmap = null;
     File file;
 
@@ -59,30 +63,33 @@ public class WallPaperFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_wall_paper, container, false);
+        strModelNo = GeneralUtils.getModel(getActivity());
+        customActionBar();
+
         initUI();
         StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
         StrictMode.setVmPolicy(builder.build());
-        
+
         onback(view);
         return view;
     }
 
-   
 
     private void initUI() {
         ButterKnife.bind(this, view);
-
         image = GeneralUtils.getImage(getActivity());
-        Log.d("image", image);
+
         ButterKnife.bind(this, view);
         Picasso.with(getActivity()).load(image).into(ivWallPaper);
 
-        iv_share.setOnClickListener(new View.OnClickListener() {
+        layoutApplyWallPaper.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                (new ShareTask(getActivity())).execute(image);
+                Toast.makeText(getActivity(), "WallPaper set Successfully", Toast.LENGTH_SHORT).show();
+                FileUtilitiy.setWallPaper(getActivity(), image);
             }
         });
+
     }
 
 
@@ -134,7 +141,8 @@ public class WallPaperFragment extends Fragment {
                 String path = myFileUrl.getPath();
                 String idStr = path.substring(path.lastIndexOf('/') + 1);
                 File filepath = Environment.getExternalStorageDirectory();
-                File dir = new File(filepath.getAbsolutePath() + "/.HD Wallpaper");
+                //File dir = new File(filepath.getAbsolutePath() + "/.HD Wallpaper");
+                File dir = new File(filepath.getParentFile() + "/.HD Wallpaper");
                 if (!dir.exists()) {
                     dir.mkdirs();
                 }
@@ -179,7 +187,7 @@ public class WallPaperFragment extends Fragment {
 
                     File filepath = Environment.getExternalStorageDirectory();
                     File dir = new File(filepath.getAbsolutePath() + "/.HD Wallpaper");
-                   deleteDir(dir);
+                    deleteDir(dir);
                     return true;
                 }
                 return false;
@@ -192,7 +200,7 @@ public class WallPaperFragment extends Fragment {
     public static boolean deleteDir(File dir) {
         if (dir.isDirectory()) {
             String[] children = dir.list();
-            for (int i=0; i<children.length; i++) {
+            for (int i = 0; i < children.length; i++) {
                 boolean success = deleteDir(new File(dir, children[i]));
                 if (!success) {
                     return false;
@@ -202,6 +210,47 @@ public class WallPaperFragment extends Fragment {
 
         // The directory is now empty so delete it
         return dir.delete();
+    }
+
+    public void customActionBar() {
+        android.support.v7.app.ActionBar mActionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
+        mActionBar.setDisplayShowHomeEnabled(false);
+        mActionBar.setDisplayShowTitleEnabled(false);
+        mActionBar.setDisplayHomeAsUpEnabled(false);
+        LayoutInflater mInflater = LayoutInflater.from(getActivity());
+        View mCustomView = mInflater.inflate(R.layout.custom_actionbar, null);
+        TextView tvTitle = mCustomView.findViewById(R.id.title);
+        ImageView share = mCustomView.findViewById(R.id.share);
+        final ImageView favorite = mCustomView.findViewById(R.id.favorite);
+        RelativeLayout layout_save = mCustomView.findViewById(R.id.layout_save);
+        tvTitle.setText("Model " + strModelNo);
+        share.setVisibility(View.VISIBLE);
+        layout_save.setVisibility(View.VISIBLE);
+        favorite.setVisibility(View.VISIBLE);
+
+        share.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                (new ShareTask(getActivity())).execute(image);
+            }
+        });
+
+        favorite.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+        layout_save.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getActivity(), "will be done soon", Toast.LENGTH_SHORT).show();
+            }
+        });
+        mActionBar.setCustomView(mCustomView);
+        mActionBar.setDisplayShowCustomEnabled(true);
+        mActionBar.show();
     }
 
 }

@@ -61,6 +61,9 @@ public class GeneralUtils {
     public static String getImage(Context context){
         return getSharedPreferences(context).getString("image","");
     }
+    public static String getModel(Context context){
+        return getSharedPreferences(context).getString("model_no","");
+    }
 
 
 }

@@ -12,9 +12,57 @@
         android:text="Title"
         android:textSize="20sp"
         android:textStyle="bold"
-        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="10sp"
         android:layout_centerVertical="true"
         android:textColor="#fff"/>
+
+    <RelativeLayout
+        android:id="@+id/layout_save"
+        android:layout_width="40sp"
+        android:layout_height="40sp"
+        android:layout_marginRight="5sp"
+        android:visibility="gone"
+        android:layout_toLeftOf="@id/favorite">
+
+        <ImageView
+            android:layout_width="20sp"
+            android:layout_height="20sp"
+            android:src="@drawable/store"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/save"
+            android:layout_marginRight="5sp" />
+
+        <TextView
+            android:id="@+id/save"
+            android:layout_width="wrap_content"
+            android:layout_height="10sp"
+            android:textColor="@color/white"
+            android:layout_centerHorizontal="true"
+            android:textSize="8sp"
+            android:text="save"/>
+
+
+
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/favorite"
+        android:layout_width="30sp"
+        android:layout_height="30sp"
+        android:src="@drawable/heart"
+        android:visibility="gone"
+        android:layout_marginRight="5sp"
+        android:layout_toLeftOf="@id/share" />
+
+    <ImageView
+        android:id="@+id/share"
+        android:layout_width="30sp"
+        android:layout_height="30sp"
+        android:src="@drawable/share"
+        android:visibility="gone"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="5sp"/>
 
 
 </RelativeLayout>

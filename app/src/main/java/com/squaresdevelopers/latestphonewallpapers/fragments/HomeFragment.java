@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
@@ -33,6 +34,7 @@ import com.squaresdevelopers.latestphonewallpapers.controllers.CategoriesAdapter
 import com.squaresdevelopers.latestphonewallpapers.dataModels.CategoryModel;
 import com.squaresdevelopers.latestphonewallpapers.utils.AlertUtils;
 import com.squaresdevelopers.latestphonewallpapers.utils.Config;
+import com.squaresdevelopers.latestphonewallpapers.utils.NetworkUtils;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -63,6 +65,11 @@ public class HomeFragment extends Fragment {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_home, container, false);
         customActionBar();
+
+        if(!NetworkUtils.isNetworkConnected(getActivity())){
+            Toast.makeText(getActivity(), "you have lost your internet connection", Toast.LENGTH_SHORT).show();
+        }
+
         mAdView = getActivity().findViewById(R.id.adView);
 
         showBannerAd();
