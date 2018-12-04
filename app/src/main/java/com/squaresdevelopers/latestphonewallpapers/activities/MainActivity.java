@@ -7,6 +7,7 @@ import android.os.Bundle;
 
 import com.squaresdevelopers.latestphonewallpapers.R;
 import com.squaresdevelopers.latestphonewallpapers.fragments.HomeFragment;
+import com.squaresdevelopers.latestphonewallpapers.fragments.TabsFragment;
 import com.squaresdevelopers.latestphonewallpapers.utils.GeneralUtils;
 
 public class MainActivity extends AppCompatActivity {
@@ -16,7 +17,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        GeneralUtils.connectFragment(MainActivity.this,new HomeFragment());
+        GeneralUtils.connectFragment(MainActivity.this,new TabsFragment());
 
     }
 }

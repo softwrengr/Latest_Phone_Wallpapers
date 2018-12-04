@@ -3,6 +3,7 @@ package com.squaresdevelopers.latestphonewallpapers.utils;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.provider.Settings;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 
@@ -63,6 +64,11 @@ public class GeneralUtils {
     }
     public static String getModel(Context context){
         return getSharedPreferences(context).getString("model_no","");
+    }
+
+    public static String getDeviceID(Context context){
+       return Settings.Secure.getString(context.getContentResolver(),
+                Settings.Secure.ANDROID_ID);
     }
 
 

@@ -20,7 +20,7 @@
         android:id="@+id/layout_save"
         android:layout_width="40sp"
         android:layout_height="40sp"
-        android:layout_marginRight="5sp"
+        android:layout_marginRight="6sp"
         android:visibility="gone"
         android:layout_toLeftOf="@id/favorite">
 
@@ -47,17 +47,17 @@
 
     <ImageView
         android:id="@+id/favorite"
-        android:layout_width="30sp"
-        android:layout_height="30sp"
+        android:layout_width="25sp"
+        android:layout_height="25sp"
         android:src="@drawable/heart"
         android:visibility="gone"
-        android:layout_marginRight="5sp"
+        android:layout_marginRight="10sp"
         android:layout_toLeftOf="@id/share" />
 
     <ImageView
         android:id="@+id/share"
-        android:layout_width="30sp"
-        android:layout_height="30sp"
+        android:layout_width="25sp"
+        android:layout_height="25sp"
         android:src="@drawable/share"
         android:visibility="gone"
         android:layout_alignParentEnd="true"

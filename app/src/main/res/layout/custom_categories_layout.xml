@@ -10,10 +10,9 @@
         android:layout_gravity="center"
         android:layout_width="match_parent"
         android:layout_height="180sp"
-        card_view:cardCornerRadius="10dp"
         android:background="@color/black"
-        card_view:cardPreventCornerOverlap="true"
-        card_view:cardUseCompatPadding="true">
+        android:layout_marginTop="2sp">
+
        <FrameLayout
            android:id="@+id/category_layout"
            android:layout_width="match_parent"
