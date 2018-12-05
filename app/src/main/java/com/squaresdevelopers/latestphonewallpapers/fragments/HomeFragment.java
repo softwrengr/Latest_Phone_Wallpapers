@@ -1,6 +1,7 @@
 package com.squaresdevelopers.latestphonewallpapers.fragments;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.net.Uri;
@@ -66,13 +67,12 @@ public class HomeFragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_home, container, false);
         customActionBar();
 
+        customActionBar();
+
         if(!NetworkUtils.isNetworkConnected(getActivity())){
             Toast.makeText(getActivity(), "you have lost your internet connection", Toast.LENGTH_SHORT).show();
         }
 
-        mAdView = getActivity().findViewById(R.id.adView);
-
-        showBannerAd();
         initUI();
         return view;
     }
@@ -140,9 +140,6 @@ public class HomeFragment extends Fragment {
         mRequestQueue.add(stringRequest);
     }
 
-    private void showBannerAd() {
-
-    }
 
     public void customActionBar() {
         android.support.v7.app.ActionBar mActionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
@@ -152,10 +149,24 @@ public class HomeFragment extends Fragment {
         LayoutInflater mInflater = LayoutInflater.from(getActivity());
         View mCustomView = mInflater.inflate(R.layout.custom_actionbar, null);
         TextView tvTitle = mCustomView.findViewById(R.id.title);
+        ImageView ivFeedback = mCustomView.findViewById(R.id.ivFeedback);
         tvTitle.setText("HD WallPapers");
+        ivFeedback.setVisibility(View.VISIBLE);
+        ivFeedback.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showDialogFeedBack();
+            }
+        });
         mActionBar.setCustomView(mCustomView);
         mActionBar.setDisplayShowCustomEnabled(true);
         mActionBar.show();
+    }
+
+    private void showDialogFeedBack(){
+        Dialog dialog = new Dialog(getActivity());
+        dialog.setContentView(R.layout.custom_dialog_layout);
+        dialog.show();
     }
 
 }

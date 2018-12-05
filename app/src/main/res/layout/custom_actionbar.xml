@@ -16,6 +16,16 @@
         android:layout_centerVertical="true"
         android:textColor="#fff"/>
 
+    <ImageView
+        android:id="@+id/ivFeedback"
+        android:layout_width="25sp"
+        android:layout_height="25sp"
+        android:src="@drawable/bullets"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:visibility="gone"
+        android:layout_marginRight="5sp"/>
+
     <RelativeLayout
         android:id="@+id/layout_save"
         android:layout_width="40sp"

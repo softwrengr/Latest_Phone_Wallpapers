@@ -16,11 +16,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".activities.MainActivity">
-        </activity>
 
-        <activity android:name=".activities.SplashActivity"
-            android:noHistory="true"
-            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -28,9 +24,12 @@
             </intent-filter>
         </activity>
 
-        <meta-data
-            android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="[ADMOB_APP_ID]"/>
+        <activity android:name=".activities.SplashActivity"
+            android:noHistory="true"
+            >
+
+        </activity>
+
     </application>
 
 </manifest>

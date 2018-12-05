@@ -25,7 +25,7 @@ public class LikeFragment extends Fragment {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_like, container, false);
         strDeviceID = GeneralUtils.getDeviceID(getActivity());
-        Toast.makeText(getActivity(), strDeviceID, Toast.LENGTH_SHORT).show();
+
         return view;
     }
 

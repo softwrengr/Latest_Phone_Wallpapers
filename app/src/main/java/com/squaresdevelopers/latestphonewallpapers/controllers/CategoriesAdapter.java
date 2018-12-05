@@ -58,6 +58,7 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.My
         holder.ivLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 GeneralUtils.putStringValueInEditor(context, "id", model.getId());
                 GeneralUtils.connectFragmentWithBackStack(context, new ItemsFragment());
             }
