@@ -36,7 +36,7 @@ public class TabsFragment extends Fragment {
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
         mLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         tabLayout.addTab(tabLayout.newTab().setText("Categories"));
-        tabLayout.addTab(tabLayout.newTab().setText("Like"));
+        tabLayout.addTab(tabLayout.newTab().setText("Liked"));
 
         viewPager.setAdapter(new PagerAdapter(((FragmentActivity) getActivity()).getSupportFragmentManager(), tabLayout.getTabCount()));
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));

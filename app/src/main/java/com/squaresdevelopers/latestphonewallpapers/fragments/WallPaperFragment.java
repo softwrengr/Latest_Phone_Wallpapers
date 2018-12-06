@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -30,6 +31,7 @@ import android.widget.Toast;
 import com.squaresdevelopers.latestphonewallpapers.R;
 import com.squaresdevelopers.latestphonewallpapers.utils.FileUtilitiy;
 import com.squaresdevelopers.latestphonewallpapers.utils.GeneralUtils;
+import com.squaresdevelopers.latestphonewallpapers.utils.NetworkUtils;
 import com.squareup.picasso.Picasso;
 
 import java.io.ByteArrayOutputStream;
@@ -41,6 +43,7 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 import butterknife.BindView;
@@ -56,7 +59,7 @@ public class WallPaperFragment extends Fragment {
     View view;
     String image, strModelNo;
     Bitmap bitmap = null;
-    File file;
+    File path;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -76,6 +79,7 @@ public class WallPaperFragment extends Fragment {
 
 
     private void initUI() {
+        NetworkUtils.grantPermession(getActivity());
         ButterKnife.bind(this, view);
         image = GeneralUtils.getImage(getActivity());
 
@@ -245,7 +249,13 @@ public class WallPaperFragment extends Fragment {
         layout_save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getActivity(), "will be done soon", Toast.LENGTH_SHORT).show();
+                try {
+                    URL url = new URL(image);
+                    bitmap = BitmapFactory.decodeStream(url.openConnection().getInputStream());
+                    FileUtilitiy.saveWallPaper(getActivity(),bitmap);
+                } catch(IOException e) {
+                    System.out.println(e);
+                }
             }
         });
         mActionBar.setCustomView(mCustomView);
