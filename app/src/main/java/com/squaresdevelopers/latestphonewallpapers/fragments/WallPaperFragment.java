@@ -271,7 +271,8 @@ public class WallPaperFragment extends Fragment {
             public void onClick(View v) {
              favorite.setImageDrawable(getActivity().getResources().getDrawable(R.drawable.heart_one));
                 if (validate()) {
-                   // apiCallLiked();
+                    apiCallLiked();
+                    Toast.makeText(getActivity(), "Liked", Toast.LENGTH_SHORT).show();
                 }
             }
         });
