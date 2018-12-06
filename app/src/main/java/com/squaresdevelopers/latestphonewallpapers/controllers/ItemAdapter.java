@@ -69,7 +69,7 @@ public class ItemAdapter extends BaseAdapter {
         viewHolder.tvModelName=(TextView)convertView.findViewById(R.id.tv_model_name);
         viewHolder.layout = convertView.findViewById(R.id.layout);
 
-        viewHolder.tvModelName.setText("Model "+model.getModelNumber());
+        viewHolder.tvModelName.setText(model.getModelNumber());
         Picasso.with(context).load(model.getImage()).into(viewHolder.imageView);
 
         viewHolder.layout.setOnClickListener(new View.OnClickListener() {

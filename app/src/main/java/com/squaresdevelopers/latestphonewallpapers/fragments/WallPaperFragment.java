@@ -16,7 +16,9 @@ import android.os.StrictMode;
 import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.telecom.Call;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -29,6 +31,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.squaresdevelopers.latestphonewallpapers.R;
+import com.squaresdevelopers.latestphonewallpapers.dataModels.likeDataModel.LikeResponseModel;
+import com.squaresdevelopers.latestphonewallpapers.networking.ApiClient;
+import com.squaresdevelopers.latestphonewallpapers.networking.ApiInterface;
+import com.squaresdevelopers.latestphonewallpapers.utils.AlertUtils;
 import com.squaresdevelopers.latestphonewallpapers.utils.FileUtilitiy;
 import com.squaresdevelopers.latestphonewallpapers.utils.GeneralUtils;
 import com.squaresdevelopers.latestphonewallpapers.utils.NetworkUtils;
@@ -48,18 +54,23 @@ import java.util.Date;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import okhttp3.MediaType;
+import okhttp3.RequestBody;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 public class WallPaperFragment extends Fragment {
+    AlertDialog alertDialog;
     @BindView(R.id.wallpaper)
     ImageView ivWallPaper;
     @BindView(R.id.apply_wallpaper)
     LinearLayout layoutApplyWallPaper;
 
     View view;
-    String image, strModelNo;
+    String image, strModelNo,strUUID;
     Bitmap bitmap = null;
-    File path;
+    private boolean valid = false;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -79,12 +90,21 @@ public class WallPaperFragment extends Fragment {
 
 
     private void initUI() {
+        ButterKnife.bind(this, view);
         NetworkUtils.grantPermession(getActivity());
-        ButterKnife.bind(this, view);
-        image = GeneralUtils.getImage(getActivity());
 
-        ButterKnife.bind(this, view);
-        Picasso.with(getActivity()).load(image).into(ivWallPaper);
+        image = GeneralUtils.getImage(getActivity());
+        strUUID = GeneralUtils.getDeviceID(getActivity());
+
+        if(image.equals("") || image==null){
+            ivWallPaper.setImageDrawable(getActivity().getResources().getDrawable(R.drawable.transparent_background));
+        }
+        else {
+            Picasso.with(getActivity()).load(image).into(ivWallPaper);
+        }
+
+
+
 
         layoutApplyWallPaper.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -227,7 +247,7 @@ public class WallPaperFragment extends Fragment {
         ImageView share = mCustomView.findViewById(R.id.share);
         final ImageView favorite = mCustomView.findViewById(R.id.favorite);
         RelativeLayout layout_save = mCustomView.findViewById(R.id.layout_save);
-        tvTitle.setText("Model " + strModelNo);
+        tvTitle.setText(strModelNo);
         share.setVisibility(View.VISIBLE);
         layout_save.setVisibility(View.VISIBLE);
         favorite.setVisibility(View.VISIBLE);
@@ -242,7 +262,10 @@ public class WallPaperFragment extends Fragment {
         favorite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+             favorite.setImageDrawable(getActivity().getResources().getDrawable(R.drawable.heart_one));
+                if (validate()) {
+                   // apiCallLiked();
+                }
             }
         });
 
@@ -263,6 +286,46 @@ public class WallPaperFragment extends Fragment {
         mActionBar.show();
     }
 
+
+    private void apiCallLiked() {
+
+        ApiInterface services = ApiClient.getApiClient().create(ApiInterface.class);
+
+        retrofit2.Call<LikeResponseModel> userLogin = services.like(image, strUUID);
+        userLogin.enqueue(new Callback<LikeResponseModel>() {
+            @Override
+            public void onResponse(retrofit2.Call<LikeResponseModel> call, Response<LikeResponseModel> response) {
+
+                if (response.body().getMessage().equals("Image Like successfully")) {
+                    Toast.makeText(getActivity(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(getActivity(), "you got some error", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(retrofit2.Call<LikeResponseModel> call, Throwable t) {
+             Log.d("error",t.getMessage());
+            }
+        });
+
+    }
+
+    private boolean validate() {
+        valid = true;
+
+
+        if (image.isEmpty()) {
+            Toast.makeText(getActivity(), "Image path not getting", Toast.LENGTH_SHORT).show();
+            valid = false;
+        }
+        else if (strUUID.isEmpty()) {
+            Toast.makeText(getActivity(), "you got some error please try again", Toast.LENGTH_SHORT).show();
+            valid = false;
+        }
+
+        return valid;
+    }
 }
 
 

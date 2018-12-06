@@ -28,27 +28,28 @@
 
     <RelativeLayout
         android:id="@+id/layout_save"
-        android:layout_width="40sp"
-        android:layout_height="40sp"
-        android:layout_marginRight="6sp"
+        android:layout_width="50sp"
+        android:layout_height="50sp"
+        android:layout_marginRight="8sp"
         android:visibility="gone"
+        android:layout_marginBottom="3sp"
         android:layout_toLeftOf="@id/favorite">
 
         <ImageView
-            android:layout_width="20sp"
-            android:layout_height="20sp"
+            android:layout_width="22sp"
+            android:layout_height="22sp"
             android:src="@drawable/store"
             android:layout_centerHorizontal="true"
-            android:layout_below="@id/save"
-            android:layout_marginRight="5sp" />
+            android:layout_below="@id/save" />
 
         <TextView
             android:id="@+id/save"
             android:layout_width="wrap_content"
-            android:layout_height="10sp"
+            android:layout_height="12sp"
             android:textColor="@color/white"
             android:layout_centerHorizontal="true"
-            android:textSize="8sp"
+            android:textSize="11sp"
+            android:textStyle="bold"
             android:text="save"/>
 
 
@@ -61,7 +62,8 @@
         android:layout_height="25sp"
         android:src="@drawable/heart"
         android:visibility="gone"
-        android:layout_marginRight="10sp"
+        android:layout_marginTop="2sp"
+        android:layout_marginRight="12sp"
         android:layout_toLeftOf="@id/share" />
 
     <ImageView
@@ -72,6 +74,7 @@
         android:visibility="gone"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
+        android:layout_marginTop="2sp"
         android:layout_marginRight="5sp"/>
 
 

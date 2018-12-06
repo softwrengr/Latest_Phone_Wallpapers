@@ -35,6 +35,7 @@ import com.squaresdevelopers.latestphonewallpapers.controllers.CategoriesAdapter
 import com.squaresdevelopers.latestphonewallpapers.dataModels.CategoryModel;
 import com.squaresdevelopers.latestphonewallpapers.utils.AlertUtils;
 import com.squaresdevelopers.latestphonewallpapers.utils.Config;
+import com.squaresdevelopers.latestphonewallpapers.utils.GeneralUtils;
 import com.squaresdevelopers.latestphonewallpapers.utils.NetworkUtils;
 
 import org.json.JSONArray;
@@ -67,8 +68,6 @@ public class HomeFragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_home, container, false);
         customActionBar();
 
-        customActionBar();
-
         if(!NetworkUtils.isNetworkConnected(getActivity())){
             Toast.makeText(getActivity(), "you have lost your internet connection", Toast.LENGTH_SHORT).show();
         }
@@ -88,6 +87,7 @@ public class HomeFragment extends Fragment {
         categoriesAdapter = new CategoriesAdapter(getActivity(),categoryModelList);
         rvCategories.setAdapter(categoriesAdapter);
         apiCall();
+       // test();
     }
 
 
@@ -167,6 +167,12 @@ public class HomeFragment extends Fragment {
         Dialog dialog = new Dialog(getActivity());
         dialog.setContentView(R.layout.custom_dialog_layout);
         dialog.show();
+    }
+
+    private void test(){
+
+
+
     }
 
 }

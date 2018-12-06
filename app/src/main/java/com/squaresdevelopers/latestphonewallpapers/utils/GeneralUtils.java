@@ -66,10 +66,13 @@ public class GeneralUtils {
         return getSharedPreferences(context).getString("model_no","");
     }
 
+    public static String getName(Context context){
+        return getSharedPreferences(context).getString("name","");
+    }
+
     public static String getDeviceID(Context context){
        return Settings.Secure.getString(context.getContentResolver(),
                 Settings.Secure.ANDROID_ID);
     }
-
 
 }
