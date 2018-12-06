@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -164,14 +165,16 @@ public class WallPaperFragment extends Fragment {
 
                 String path = myFileUrl.getPath();
                 String idStr = path.substring(path.lastIndexOf('/') + 1);
-                File filepath = Environment.getExternalStorageDirectory();
-                //File dir = new File(filepath.getAbsolutePath() + "/.HD Wallpaper");
-                File dir = new File(filepath.getParentFile() + "/.HD Wallpaper");
+                File dir = new File(Environment.getExternalStorageDirectory(),  "/.HD Wallpaper");
+
                 if (!dir.exists()) {
                     dir.mkdirs();
                 }
                 String fileName = idStr;
+
                 file = new File(dir, fileName);
+
+
                 FileOutputStream fos = new FileOutputStream(file);
                 bmImg.compress(Bitmap.CompressFormat.PNG, 75, fos);
                 fos.flush();
@@ -187,6 +190,10 @@ public class WallPaperFragment extends Fragment {
         @Override
         protected void onPostExecute(String args) {
             // TODO Auto-generated method stub
+
+
+
+
 
             Intent share = new Intent(Intent.ACTION_SEND);
             share.setType("image/png");
