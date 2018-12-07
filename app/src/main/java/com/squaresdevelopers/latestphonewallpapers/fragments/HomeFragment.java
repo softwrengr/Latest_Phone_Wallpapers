@@ -86,8 +86,8 @@ public class HomeFragment extends Fragment {
         alertDialog.show();
         categoriesAdapter = new CategoriesAdapter(getActivity(),categoryModelList);
         rvCategories.setAdapter(categoriesAdapter);
+        categoriesAdapter.notifyDataSetChanged();
         apiCall();
-       // test();
     }
 
 
@@ -167,12 +167,6 @@ public class HomeFragment extends Fragment {
         Dialog dialog = new Dialog(getActivity());
         dialog.setContentView(R.layout.custom_dialog_layout);
         dialog.show();
-    }
-
-    private void test(){
-
-
-
     }
 
 }
