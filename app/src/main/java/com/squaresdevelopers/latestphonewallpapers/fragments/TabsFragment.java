@@ -49,6 +49,7 @@ public class TabsFragment extends Fragment {
     @BindView(R.id.missions_pager)
     ViewPager viewPager;
     Unbinder unbinder;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -57,8 +58,9 @@ public class TabsFragment extends Fragment {
         unbinder = ButterKnife.bind(this, view);
 
 
-       showPager();
-       customActionBar();
+        customActionBar();
+        showPager();
+
 
         return view;
     }
@@ -120,7 +122,7 @@ public class TabsFragment extends Fragment {
 
     }
 
-    private void showPager(){
+    private void showPager() {
 
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
         mLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
@@ -161,9 +163,11 @@ public class TabsFragment extends Fragment {
         LayoutInflater mInflater = LayoutInflater.from(getActivity());
         View mCustomView = mInflater.inflate(R.layout.custom_actionbar, null);
         TextView tvTitle = mCustomView.findViewById(R.id.title);
-        tvTitle.setText("WallPapers");
+        tvTitle.setText("HD WallPapers");
         mActionBar.setCustomView(mCustomView);
         mActionBar.setDisplayShowCustomEnabled(true);
         mActionBar.show();
     }
+
+
 }

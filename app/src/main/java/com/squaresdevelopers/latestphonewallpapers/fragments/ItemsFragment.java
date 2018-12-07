@@ -122,7 +122,6 @@ public class ItemsFragment extends Fragment {
                 if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_UP) {
                     //   Log.i(tag, "onKey Back listener is working!!!");
                     getFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
-
                     GeneralUtils.connectFragment(getActivity(),new TabsFragment());
                     return true;
                 }

@@ -167,6 +167,8 @@ public class HomeFragment extends Fragment {
         Dialog dialog = new Dialog(getActivity());
         dialog.setContentView(R.layout.custom_dialog_layout);
         dialog.show();
+
+        GeneralUtils.connectFragment(getActivity(),new TabsFragment());
     }
 
 }
