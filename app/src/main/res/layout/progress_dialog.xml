@@ -8,16 +8,12 @@
     android:orientation="vertical"
     >
 
-    <ProgressBar
+    <ImageView
         android:id="@+id/indeterminateBar"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_gravity="center"
-        android:indeterminateTint="@color/colorPrimary"
-        android:indeterminate="true"
-        android:indeterminateTintMode="src_atop"
-
-        />
+        android:src="@drawable/progress_animation"/>
 
 
 </LinearLayout>

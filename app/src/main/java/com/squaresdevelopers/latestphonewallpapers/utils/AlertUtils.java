@@ -6,6 +6,7 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 
 import com.squaresdevelopers.latestphonewallpapers.R;
@@ -22,7 +23,7 @@ public class AlertUtils {
                 , null);
 
         dialogBuilder.setView(dialogView);
-        ProgressBar pd = dialogView.findViewById(R.id.indeterminateBar);
+        ImageView pd = dialogView.findViewById(R.id.indeterminateBar);
         AlertDialog alertDialog = dialogBuilder.create();
         alertDialog.setCancelable(false);
         WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
