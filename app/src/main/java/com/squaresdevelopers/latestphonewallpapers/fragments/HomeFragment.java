@@ -66,7 +66,7 @@ public class HomeFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_home, container, false);
-        customActionBar();
+        getActivity().setTitle("Latest Phone Wallpapers");
 
         if(!NetworkUtils.isNetworkConnected(getActivity())){
             Toast.makeText(getActivity(), "you have lost your internet connection", Toast.LENGTH_SHORT).show();

@@ -13,7 +13,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.squaresdevelopers.latestphonewallpapers.R;
+import com.squaresdevelopers.latestphonewallpapers.dataModels.wallpaperDataModel.ItemReponseModel;
+import com.squaresdevelopers.latestphonewallpapers.networking.ApiClient;
+import com.squaresdevelopers.latestphonewallpapers.networking.ApiInterface;
 import com.squaresdevelopers.latestphonewallpapers.utils.GeneralUtils;
+
+import retrofit2.Call;
+import retrofit2.Callback;
 
 
 public class LikeFragment extends Fragment {
@@ -27,6 +33,8 @@ public class LikeFragment extends Fragment {
         strDeviceID = GeneralUtils.getDeviceID(getActivity());
 
         return view;
+
+
     }
 
 

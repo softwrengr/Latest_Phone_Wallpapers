@@ -29,6 +29,6 @@ public interface ApiInterface {
     @FormUrlEncoded
     @POST("like")
     Call<LikeResponseModel> like(  @Field("image_url") String photo,
-                                 @Part("uuid") String uuid);
+                                 @Field("uuid") String uuid);
 
 }
