@@ -3,13 +3,16 @@ package com.squaresdevelopers.latestphonewallpapers.fragments;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,6 +36,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
 import java.util.ArrayList;
 
 import butterknife.BindView;
@@ -56,6 +60,7 @@ public class ItemsFragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_items, container, false);
         customActionBar();
         initUI();
+        onback(view);
         return view;
     }
 
@@ -104,5 +109,26 @@ public class ItemsFragment extends Fragment {
         mActionBar.setCustomView(mCustomView);
         mActionBar.setDisplayShowCustomEnabled(true);
         mActionBar.show();
+    }
+
+    private void onback(View view) {
+
+        view.setFocusableInTouchMode(true);
+        view.requestFocus();
+        view.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                //  Log.i(tag, "keyCode: " + keyCode);
+                if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_UP) {
+                    //   Log.i(tag, "onKey Back listener is working!!!");
+                    getFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+
+                    GeneralUtils.connectFragmentWithBackStack(getActivity(),new HomeFragment());
+                    return true;
+                }
+                return false;
+            }
+        });
+
     }
 }
