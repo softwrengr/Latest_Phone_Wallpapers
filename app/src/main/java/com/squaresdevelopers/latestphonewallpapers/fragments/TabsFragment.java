@@ -29,6 +29,7 @@ import com.squaresdevelopers.latestphonewallpapers.controllers.CategoriesAdapter
 import com.squaresdevelopers.latestphonewallpapers.dataModels.CategoryModel;
 import com.squaresdevelopers.latestphonewallpapers.utils.AlertUtils;
 import com.squaresdevelopers.latestphonewallpapers.utils.Config;
+import com.squaresdevelopers.latestphonewallpapers.utils.GeneralUtils;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -126,7 +127,7 @@ public class TabsFragment extends Fragment {
 
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
         mLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-        tabLayout.addTab(tabLayout.newTab().setText("Categories"));
+        tabLayout.addTab(tabLayout.newTab().setText("Phone Models"));
         tabLayout.addTab(tabLayout.newTab().setText("Liked"));
 
         viewPager.setAdapter(new PagerAdapter(((FragmentActivity) getActivity()).getSupportFragmentManager(), tabLayout.getTabCount()));
@@ -163,11 +164,34 @@ public class TabsFragment extends Fragment {
         LayoutInflater mInflater = LayoutInflater.from(getActivity());
         View mCustomView = mInflater.inflate(R.layout.custom_actionbar, null);
         TextView tvTitle = mCustomView.findViewById(R.id.title);
+        ImageView ivFilter = mCustomView.findViewById(R.id.ivFilter);
+        ImageView ivFeedback = mCustomView.findViewById(R.id.ivFeedback);
         tvTitle.setText("HD WallPapers");
+        ivFeedback.setVisibility(View.VISIBLE);
+        ivFilter.setVisibility(View.VISIBLE);
+        ivFilter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                GeneralUtils.connectFragmentWithBackStack(getActivity(),new FilterImageFragment());
+            }
+        });
+        ivFeedback.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showDialogFeedBack();
+            }
+        });
+
+        tvTitle.setText("HD WallPapers");
+
         mActionBar.setCustomView(mCustomView);
         mActionBar.setDisplayShowCustomEnabled(true);
         mActionBar.show();
     }
 
-
+    private void showDialogFeedBack(){
+        Dialog dialog = new Dialog(getActivity());
+        dialog.setContentView(R.layout.custom_dialog_layout);
+        dialog.show();
+    }
 }
