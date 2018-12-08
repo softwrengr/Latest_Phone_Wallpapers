@@ -306,6 +306,7 @@ public class WallPaperFragment extends Fragment {
 
                 if (response.body().getMessage().equals("Image Like successfully")) {
                     Toast.makeText(getActivity(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                    GeneralUtils.connectFragmentWithBackStack(getActivity(),new TabsFragment());
                 } else {
                     Toast.makeText(getActivity(), "you got some error", Toast.LENGTH_SHORT).show();
                 }

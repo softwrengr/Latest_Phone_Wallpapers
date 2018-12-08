@@ -6,6 +6,8 @@
     tools:context="com.squaresdevelopers.latestphonewallpapers.fragments.HomeFragment">
 
 
+
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rvCategory"
         android:layout_width="match_parent"

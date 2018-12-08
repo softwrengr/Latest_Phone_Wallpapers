@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/samsung"
+        android:title="Samsung"/>
+
+    <item
+        android:id="@+id/apple"
+        android:title="Apple"/>
+
+    <item
+        android:id="@+id/huawei"
+        android:title="Huawei"/>
+    <item
+        android:id="@+id/blackberry"
+        android:title="Blackberyy"/>
+
+    <item
+        android:id="@+id/nokia"
+        android:title="Nokia"/>
+
+    <item
+        android:id="@+id/LG"
+        android:title="LG"/>
+    <item
+        android:id="@+id/sony"
+        android:title="Sony"/>
+
+    <item
+        android:id="@+id/pixel"
+        android:title="Google Pixel"/>
+    <item
+        android:id="@+id/xiaomi"
+        android:title="Xiaomi"/>
+</menu>

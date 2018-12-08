@@ -14,13 +14,24 @@
         android:textStyle="bold"
         android:layout_marginLeft="10sp"
         android:layout_centerVertical="true"
+        android:layout_toRightOf="@id/ivFeedback"
         android:textColor="#fff"/>
 
     <ImageView
         android:id="@+id/ivFeedback"
+        android:layout_width="22sp"
+        android:layout_height="22sp"
+        android:src="@drawable/bullets"
+        android:visibility="gone"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="5sp"/>
+
+    <ImageView
+        android:id="@+id/ivFilter"
         android:layout_width="25sp"
         android:layout_height="25sp"
-        android:src="@drawable/bullets"
+        android:src="@drawable/search"
+        android:layout_centerVertical="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:visibility="gone"

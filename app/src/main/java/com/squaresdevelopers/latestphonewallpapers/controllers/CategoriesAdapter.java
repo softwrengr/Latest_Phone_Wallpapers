@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -54,18 +55,19 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.My
         final CategoryModel model = categoryModelList.get(position);
 
         holder.tvName.setText(model.getName());
-        if(model.getImage()==null){
-            holder.ivLayout.setImageDrawable(context.getResources().getDrawable(R.drawable.transparent_background));
-        }
-        else {
-            Picasso.with(context).load(model.getImage()).into(holder.ivLayout);
-        }
+//        if(model.getImage()==null){
+//            holder.ivLayout.setImageDrawable(context.getResources().getDrawable(R.drawable.transparent_background));
+//        }
+//        else {
+//            Picasso.with(context).load(model.getImage()).into(holder.ivLayout);
+//        }
 
         holder.ivLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 GeneralUtils.putStringValueInEditor(context, "id", model.getId());
+                GeneralUtils.putStringValueInEditor(context,"name",model.getName());
                 GeneralUtils.connectFragment(context, new ItemsFragment());
             }
         });
@@ -78,13 +80,13 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.My
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         TextView tvName;
-        ImageView ivLayout;
+        FrameLayout ivLayout;
 
         public MyViewHolder(View itemView) {
             super(itemView);
 
             tvName = itemView.findViewById(R.id.name);
-            ivLayout = itemView.findViewById(R.id.iv_category);
+            ivLayout = itemView.findViewById(R.id.category_layout);
 
         }
     }

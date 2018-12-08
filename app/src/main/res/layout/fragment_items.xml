@@ -2,6 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/gray"
     tools:context="com.squaresdevelopers.latestphonewallpapers.fragments.ItemsFragment">
 
     <GridView
@@ -9,11 +10,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:columnWidth="90dp"
-        android:padding="10sp"
-        android:horizontalSpacing="10dp"
+        android:padding="7sp"
+        android:horizontalSpacing="7dp"
         android:numColumns="2"
         android:stretchMode="columnWidth"
-        android:verticalSpacing="10dp"
+        android:verticalSpacing="7dp"
         ></GridView>
 
 </RelativeLayout>

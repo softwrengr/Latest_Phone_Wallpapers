@@ -105,7 +105,7 @@ public class ItemsFragment extends Fragment {
         LayoutInflater mInflater = LayoutInflater.from(getActivity());
         View mCustomView = mInflater.inflate(R.layout.custom_actionbar, null);
         TextView tvTitle = mCustomView.findViewById(R.id.title);
-        tvTitle.setText("WallPapers");
+        tvTitle.setText(GeneralUtils.getName(getActivity()));
         mActionBar.setCustomView(mCustomView);
         mActionBar.setDisplayShowCustomEnabled(true);
         mActionBar.show();
