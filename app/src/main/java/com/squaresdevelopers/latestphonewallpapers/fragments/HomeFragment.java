@@ -61,13 +61,12 @@ public class HomeFragment extends Fragment {
     CategoriesAdapter categoriesAdapter;
     ArrayList<CategoryModel> categoryModelList;
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_home, container, false);
-      //  customActionBar();
+        getActivity().setTitle("Latest Phone Wallpapers");
 
         if(!NetworkUtils.isNetworkConnected(getActivity())){
             Toast.makeText(getActivity(), "you have lost your internet connection", Toast.LENGTH_SHORT).show();
@@ -141,5 +140,35 @@ public class HomeFragment extends Fragment {
         mRequestQueue.add(stringRequest);
     }
 
+
+    public void customActionBar() {
+        android.support.v7.app.ActionBar mActionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
+        mActionBar.setDisplayShowHomeEnabled(false);
+        mActionBar.setDisplayShowTitleEnabled(false);
+        mActionBar.setDisplayHomeAsUpEnabled(false);
+        LayoutInflater mInflater = LayoutInflater.from(getActivity());
+        View mCustomView = mInflater.inflate(R.layout.custom_actionbar, null);
+        TextView tvTitle = mCustomView.findViewById(R.id.title);
+        ImageView ivFeedback = mCustomView.findViewById(R.id.ivFeedback);
+        tvTitle.setText("HD WallPapers");
+        ivFeedback.setVisibility(View.VISIBLE);
+        ivFeedback.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showDialogFeedBack();
+            }
+        });
+        mActionBar.setCustomView(mCustomView);
+        mActionBar.setDisplayShowCustomEnabled(true);
+        mActionBar.show();
+    }
+
+    private void showDialogFeedBack(){
+        Dialog dialog = new Dialog(getActivity());
+        dialog.setContentView(R.layout.custom_dialog_layout);
+        dialog.show();
+
+        GeneralUtils.connectFragment(getActivity(),new TabsFragment());
+    }
 
 }
