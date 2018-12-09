@@ -305,8 +305,9 @@ public class WallPaperFragment extends Fragment {
             public void onResponse(retrofit2.Call<LikeResponseModel> call, Response<LikeResponseModel> response) {
 
                 if (response.body().getMessage().equals("Image Like successfully")) {
-                    Toast.makeText(getActivity(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
-                    GeneralUtils.connectFragmentWithBackStack(getActivity(),new TabsFragment());
+                    Bundle bundle = new Bundle();
+                    bundle.putInt("tab",1);
+                    GeneralUtils.connectFragmentWithBackStack(getActivity(),new TabsFragment()).setArguments(bundle);
                 } else {
                     Toast.makeText(getActivity(), "you got some error", Toast.LENGTH_SHORT).show();
                 }

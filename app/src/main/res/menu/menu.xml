@@ -14,7 +14,7 @@
         android:title="Huawei"/>
     <item
         android:id="@+id/blackberry"
-        android:title="Blackberyy"/>
+        android:title="Blackberry"/>
 
     <item
         android:id="@+id/nokia"

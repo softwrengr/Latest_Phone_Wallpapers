@@ -50,6 +50,7 @@ public class TabsFragment extends Fragment {
     @BindView(R.id.missions_pager)
     ViewPager viewPager;
     Unbinder unbinder;
+    int tabNum = 0;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -57,9 +58,17 @@ public class TabsFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_tabs, container, false);
         unbinder = ButterKnife.bind(this, view);
-
-
         customActionBar();
+
+        Bundle bundle = this.getArguments();
+        if(bundle!=null){
+          tabNum = bundle.getInt("tab");
+        }
+        else {
+            tabNum = 0;
+
+        }
+
         showPager();
 
 
@@ -119,7 +128,7 @@ public class TabsFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        viewPager.setCurrentItem(0);
+        viewPager.setCurrentItem(tabNum);
 
     }
 
@@ -133,6 +142,7 @@ public class TabsFragment extends Fragment {
         viewPager.setAdapter(new PagerAdapter(((FragmentActivity) getActivity()).getSupportFragmentManager(), tabLayout.getTabCount()));
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         viewPager.setCurrentItem(0);
+        viewPager.setCurrentItem(0,true);
         tabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
         reduceMarginsInTabs(tabLayout, 70);
         tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
