@@ -1,5 +1,6 @@
 package com.squaresdevelopers.latestphonewallpapers.utils;
 
+import android.app.ProgressDialog;
 import android.app.WallpaperManager;
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -24,7 +25,6 @@ import java.util.Date;
 
 public class FileUtilitiy {
 
-
     public static void setWallPaper(Context context,String string){
         WallpaperManager myWallpaperManager
                 = WallpaperManager.getInstance(context);
@@ -32,13 +32,16 @@ public class FileUtilitiy {
             URL url = new URL(string);
             Bitmap bitmap = BitmapFactory.decodeStream(url.openConnection().getInputStream());
             myWallpaperManager.setBitmap(bitmap);
+            Toast.makeText(context, "WallPaper set Successfully", Toast.LENGTH_SHORT).show();
         } catch (IOException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
     }
 
-    public static void saveWallPaper(Context context,Bitmap bm) throws IOException{
+    public static void saveWallPaper(Context context, Bitmap bm) throws IOException{
+
+
         Date currentTime = Calendar.getInstance().getTime();
         String dataTime = String.valueOf(currentTime);
         File path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES+"Latest WallPaper");
@@ -53,7 +56,6 @@ public class FileUtilitiy {
             out.flush();
             out.close();
 
-
             // Tell the media scanner about the new file so that it is
             // immediately available to the user.
             MediaScannerConnection.scanFile(context,new String[] { imageFile.getAbsolutePath() }, null,new MediaScannerConnection.OnScanCompletedListener() {
@@ -65,8 +67,10 @@ public class FileUtilitiy {
 
             Toast.makeText(context, "WallPaper saved in folder Latest WallPaper", Toast.LENGTH_SHORT).show();
 
+
         } catch (FileNotFoundException e) {
             e.printStackTrace();
+
         }
     }
 }

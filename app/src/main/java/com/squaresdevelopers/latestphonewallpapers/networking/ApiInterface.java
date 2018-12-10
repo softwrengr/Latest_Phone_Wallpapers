@@ -1,6 +1,7 @@
 package com.squaresdevelopers.latestphonewallpapers.networking;
 
 import com.squaresdevelopers.latestphonewallpapers.dataModels.likeDataModel.LikeResponseModel;
+import com.squaresdevelopers.latestphonewallpapers.dataModels.showLikeDataModel.ShowLikeResponseModel;
 import com.squaresdevelopers.latestphonewallpapers.dataModels.wallpaperDataModel.ItemReponseModel;
 
 import java.io.File;
@@ -30,5 +31,8 @@ public interface ApiInterface {
     @POST("like")
     Call<LikeResponseModel> like(@Field("image_url") String photo,
                                  @Field("uuid") String uuid);
+
+    @GET("like/{version}/")
+    Call<ShowLikeResponseModel> showLikeItems(@Path("version") String deviceId);
 
 }

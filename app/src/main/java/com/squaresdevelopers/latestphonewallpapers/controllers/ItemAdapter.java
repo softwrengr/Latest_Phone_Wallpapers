@@ -66,10 +66,10 @@ public class ItemAdapter extends BaseAdapter {
         viewHolder = new MyViewHolder();
         convertView=layoutInflater.inflate(R.layout.wallpaper_layout,parent,false);
         viewHolder.imageView = convertView.findViewById(R.id.iv_wallpaper);
-        viewHolder.tvModelName=(TextView)convertView.findViewById(R.id.tv_model_name);
+       // viewHolder.tvModelName=(TextView)convertView.findViewById(R.id.tv_model_name);
         viewHolder.layout = convertView.findViewById(R.id.layout);
 
-        viewHolder.tvModelName.setText(model.getModelNumber());
+//        viewHolder.tvModelName.setText(model.getModelNumber());
         Picasso.with(context).load(model.getImage()).into(viewHolder.imageView);
 
         viewHolder.layout.setOnClickListener(new View.OnClickListener() {
@@ -77,7 +77,7 @@ public class ItemAdapter extends BaseAdapter {
             public void onClick(View v) {
                 GeneralUtils.putStringValueInEditor(context,"image",model.getImage());
                 GeneralUtils.putStringValueInEditor(context,"model_no",model.getModelNumber());
-                GeneralUtils.connectFragmentWithBackStack(context,new WallPaperFragment());
+                GeneralUtils.connectFragmentWithDrawer(context,new WallPaperFragment());
             }
         });
 

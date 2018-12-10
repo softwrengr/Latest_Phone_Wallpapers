@@ -1,11 +1,41 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="com.squaresdevelopers.latestphonewallpapers.fragments.HomeFragment">
 
+    <!--<FrameLayout-->
+        <!--android:id="@+id/layout_search"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:background="@color/black"-->
+        <!--android:orientation="horizontal">-->
 
+        <!--<ImageView-->
+            <!--android:layout_width="30sp"-->
+            <!--android:layout_height="50sp"-->
+            <!--android:layout_marginRight="15sp"-->
+            <!--android:layout_gravity="right"-->
+            <!--android:src="@drawable/search"-->
+            <!--/>-->
+
+        <!--<TextView-->
+            <!--android:id="@+id/et_filer"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="50sp"-->
+            <!--android:textColor="@color/white"-->
+            <!--android:hint="search by manafacture"-->
+            <!--android:layout_marginLeft="15sp"-->
+            <!--android:paddingLeft="5sp"-->
+            <!--android:gravity="center"-->
+            <!--android:textColorHint="@color/white"/>-->
+    <!--</FrameLayout>-->
+
+    <!--<View-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="1sp"-->
+        <!--android:background="@color/white"/>-->
 
 
     <android.support.v7.widget.RecyclerView
@@ -27,4 +57,4 @@
         <!--ads:adUnitId="ca-app-pub-3940256099942544/6300978111">-->
     <!--</com.google.android.gms.ads.AdView>-->
 
-</RelativeLayout>
+</LinearLayout>

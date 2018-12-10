@@ -68,7 +68,7 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.My
 
                 GeneralUtils.putStringValueInEditor(context, "id", model.getId());
                 GeneralUtils.putStringValueInEditor(context,"name",model.getName());
-                GeneralUtils.connectFragment(context, new ItemsFragment());
+                GeneralUtils.connectFragmentWithDrawer(context, new ItemsFragment());
             }
         });
     }

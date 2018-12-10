@@ -62,6 +62,7 @@ import retrofit2.Response;
 
 
 public class WallPaperFragment extends Fragment {
+    private ProgressDialog pDialog;
     AlertDialog alertDialog;
     @BindView(R.id.wallpaper)
     ImageView ivWallPaper;
@@ -72,6 +73,7 @@ public class WallPaperFragment extends Fragment {
     String image, strModelNo,strUUID;
     Bitmap bitmap = null;
     private boolean valid = false;
+    String strCheckedLikedImage;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -110,8 +112,9 @@ public class WallPaperFragment extends Fragment {
         layoutApplyWallPaper.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getActivity(), "WallPaper set Successfully", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "Applying...", Toast.LENGTH_SHORT).show();
                 FileUtilitiy.setWallPaper(getActivity(), image);
+
             }
         });
 
@@ -120,7 +123,6 @@ public class WallPaperFragment extends Fragment {
 
     public class ShareTask extends AsyncTask<String, String, String> {
         private Context context;
-        private ProgressDialog pDialog;
         URL myFileUrl;
         Bitmap bmImg = null;
         File file;
@@ -134,12 +136,7 @@ public class WallPaperFragment extends Fragment {
             // TODO Auto-generated method stub
 
             super.onPreExecute();
-
-            pDialog = new ProgressDialog(context);
-            pDialog.setMessage("Please Wait ...");
-            pDialog.setIndeterminate(false);
-            pDialog.setCancelable(false);
-            pDialog.show();
+            showProgressBar();
 
         }
 
@@ -252,12 +249,34 @@ public class WallPaperFragment extends Fragment {
         View mCustomView = mInflater.inflate(R.layout.custom_actionbar, null);
         TextView tvTitle = mCustomView.findViewById(R.id.title);
         ImageView share = mCustomView.findViewById(R.id.share);
-        final ImageView favorite = mCustomView.findViewById(R.id.favorite);
+        final ImageView ivFavorite = mCustomView.findViewById(R.id.favorite);
         RelativeLayout layout_save = mCustomView.findViewById(R.id.layout_save);
         tvTitle.setText(strModelNo);
         share.setVisibility(View.VISIBLE);
         layout_save.setVisibility(View.VISIBLE);
-        favorite.setVisibility(View.VISIBLE);
+
+        Bundle bundle = this.getArguments();
+        if(bundle!=null){
+            strCheckedLikedImage = bundle.getString("liked");
+        }
+
+
+        if(strCheckedLikedImage!=null && strCheckedLikedImage.equals("aleadyLiked")){
+            ivFavorite.setVisibility(View.GONE);
+        }
+        else {
+            ivFavorite.setVisibility(View.VISIBLE);
+            ivFavorite.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    ivFavorite.setImageDrawable(getActivity().getResources().getDrawable(R.drawable.heart_one));
+                    if (validate()) {
+                        showProgressBar();
+                        apiCallLiked();
+                    }
+                }
+            });
+        }
 
         share.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -266,20 +285,12 @@ public class WallPaperFragment extends Fragment {
             }
         });
 
-        favorite.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-             favorite.setImageDrawable(getActivity().getResources().getDrawable(R.drawable.heart_one));
-                if (validate()) {
-                    apiCallLiked();
-                    Toast.makeText(getActivity(), "Liked", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
+
 
         layout_save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Toast.makeText(getActivity(), "Saving please wait a while!", Toast.LENGTH_SHORT).show();
                 try {
                     URL url = new URL(image);
                     bitmap = BitmapFactory.decodeStream(url.openConnection().getInputStream());
@@ -289,6 +300,7 @@ public class WallPaperFragment extends Fragment {
                 }
             }
         });
+
         mActionBar.setCustomView(mCustomView);
         mActionBar.setDisplayShowCustomEnabled(true);
         mActionBar.show();
@@ -303,11 +315,11 @@ public class WallPaperFragment extends Fragment {
         userLogin.enqueue(new Callback<LikeResponseModel>() {
             @Override
             public void onResponse(retrofit2.Call<LikeResponseModel> call, Response<LikeResponseModel> response) {
-
+                pDialog.dismiss();
                 if (response.body().getMessage().equals("Image Like successfully")) {
                     Bundle bundle = new Bundle();
                     bundle.putInt("tab",1);
-                    GeneralUtils.connectFragmentWithBackStack(getActivity(),new TabsFragment()).setArguments(bundle);
+                    GeneralUtils.connectFragmentWithDrawer(getActivity(),new LikeFragment()).setArguments(bundle);
                 } else {
                     Toast.makeText(getActivity(), "you got some error", Toast.LENGTH_SHORT).show();
                 }
@@ -335,6 +347,14 @@ public class WallPaperFragment extends Fragment {
         }
 
         return valid;
+    }
+
+    private void showProgressBar(){
+        pDialog = new ProgressDialog(getActivity());
+        pDialog.setMessage("Please Wait ...");
+        pDialog.setIndeterminate(false);
+        pDialog.setCancelable(false);
+        pDialog.show();
     }
 }
 

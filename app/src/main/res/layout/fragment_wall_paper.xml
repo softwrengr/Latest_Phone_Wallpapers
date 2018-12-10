@@ -19,6 +19,7 @@
         android:orientation="horizontal"
         android:layout_gravity="right|bottom"
         android:layout_marginBottom="10sp"
+        android:padding="10sp"
         android:layout_marginRight="20sp">
 
         <TextView

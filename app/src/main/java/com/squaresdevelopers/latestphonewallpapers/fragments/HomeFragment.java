@@ -13,9 +13,12 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,6 +33,7 @@ import com.android.volley.toolbox.Volley;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
+import com.squaresdevelopers.latestphonewallpapers.NetworkingCall;
 import com.squaresdevelopers.latestphonewallpapers.R;
 import com.squaresdevelopers.latestphonewallpapers.controllers.CategoriesAdapter;
 import com.squaresdevelopers.latestphonewallpapers.dataModels.CategoryModel;
@@ -60,87 +64,38 @@ public class HomeFragment extends Fragment {
     RecyclerView rvCategories;
     CategoriesAdapter categoriesAdapter;
     ArrayList<CategoryModel> categoryModelList;
+    public static String strFiltercategory = "";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_home, container, false);
-        getActivity().setTitle("Latest Phone Wallpapers");
+        customActionBar();
 
-        if(!NetworkUtils.isNetworkConnected(getActivity())){
+        if (!NetworkUtils.isNetworkConnected(getActivity())) {
             Toast.makeText(getActivity(), "you have lost your internet connection", Toast.LENGTH_SHORT).show();
+        } else {
+            initUI(strFiltercategory);
         }
 
-        initUI();
         return view;
     }
 
-    private void initUI() {
+    public void initUI(String s) {
         ButterKnife.bind(this, view);
-
-        RecyclerView.LayoutManager layoutManager =  new LinearLayoutManager(getActivity());
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
         rvCategories.setLayoutManager(layoutManager);
         categoryModelList = new ArrayList<>();
         alertDialog = AlertUtils.createProgressDialog(getActivity());
         alertDialog.show();
-        categoriesAdapter = new CategoriesAdapter(getActivity(),categoryModelList);
+        categoriesAdapter = new CategoriesAdapter(getActivity(), categoryModelList);
         rvCategories.setAdapter(categoriesAdapter);
-        categoriesAdapter.notifyDataSetChanged();
-        apiCall();
+        NetworkingCall.apiCall(getActivity(), categoriesAdapter, categoryModelList, alertDialog, s);
+
     }
 
-
-    public void apiCall() {
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, Config.CATEGORIES
-                , new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                alertDialog.dismiss();
-                try {
-                    JSONObject jsonObject = new JSONObject(response);
-                    JSONArray dataArray = jsonObject.getJSONArray("data");
-                    for (int i = 0; i < dataArray.length(); i++) {
-                        JSONObject object = dataArray.getJSONObject(i);
-                        String id = object.getString("id");
-                        String name = object.getString("category_name");
-                        String image = object.getString("image");
-
-                        CategoryModel model = new CategoryModel();
-                        model.setId(id);
-                        model.setName(name);
-                        model.setImage(image);
-
-                        categoryModelList.add(model);
-                        categoriesAdapter.notifyDataSetChanged();
-
-                    }
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-
-            }
-        }) {
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                HashMap<String, String> headers = new HashMap<String, String>();
-                return headers;
-            }
-
-        };
-        RequestQueue mRequestQueue = Volley.newRequestQueue(getActivity());
-        stringRequest.setRetryPolicy(new DefaultRetryPolicy(20000,
-                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
-                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-        mRequestQueue.add(stringRequest);
-    }
-
-
+    //cutomAction Bar
     public void customActionBar() {
         android.support.v7.app.ActionBar mActionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
         mActionBar.setDisplayShowHomeEnabled(false);
@@ -149,26 +104,74 @@ public class HomeFragment extends Fragment {
         LayoutInflater mInflater = LayoutInflater.from(getActivity());
         View mCustomView = mInflater.inflate(R.layout.custom_actionbar, null);
         TextView tvTitle = mCustomView.findViewById(R.id.title);
-        ImageView ivFeedback = mCustomView.findViewById(R.id.ivFeedback);
+        final ImageView ivFilter = mCustomView.findViewById(R.id.ivFilter);
         tvTitle.setText("HD WallPapers");
-        ivFeedback.setVisibility(View.VISIBLE);
-        ivFeedback.setOnClickListener(new View.OnClickListener() {
+        ivFilter.setVisibility(View.VISIBLE);
+        ivFilter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showDialogFeedBack();
+                showDropDownMenu(ivFilter);
+
             }
         });
+
+        tvTitle.setText("HD WallPapers");
+
         mActionBar.setCustomView(mCustomView);
         mActionBar.setDisplayShowCustomEnabled(true);
         mActionBar.show();
+
     }
 
-    private void showDialogFeedBack(){
-        Dialog dialog = new Dialog(getActivity());
-        dialog.setContentView(R.layout.custom_dialog_layout);
-        dialog.show();
 
-        GeneralUtils.connectFragment(getActivity(),new TabsFragment());
+    private void showDropDownMenu(ImageView layout) {
+        //Creating the instance of PopupMenu
+        PopupMenu popup = new PopupMenu(getActivity(), layout);
+        //Inflating the Popup using xml file
+        popup.getMenuInflater()
+                .inflate(R.menu.menu, popup.getMenu());
+
+        //registering popup with OnMenuItemClickListener
+        popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            public boolean onMenuItemClick(MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.all:
+                        initUI("");
+                        break;
+                    case R.id.samsung:
+                        initUI("Samsung");
+                        break;
+                    case R.id.apple:
+                        initUI("Apple");
+                        break;
+                    case R.id.nokia:
+                        initUI("Nokia");
+                        break;
+                    case R.id.huawei:
+                        initUI("Huawei");
+                        break;
+                    case R.id.blackberry:
+                        initUI("Blackberry");
+                        break;
+                    case R.id.LG:
+                        initUI("LG");
+                        break;
+                    case R.id.xiaomi:
+                        initUI("Xiaomi");
+                        break;
+                    case R.id.pixel:
+                        initUI("Google Pixel");
+                        break;
+                    case R.id.sony:
+                        initUI("Sony");
+                        break;
+
+                }
+                return true;
+            }
+        });
+
+        popup.show();
     }
 
 }

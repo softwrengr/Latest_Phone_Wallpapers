@@ -60,7 +60,6 @@ public class ItemsFragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_items, container, false);
         customActionBar();
         initUI();
-        onback(view);
         return view;
     }
 
@@ -111,23 +110,4 @@ public class ItemsFragment extends Fragment {
         mActionBar.show();
     }
 
-    private void onback(View view) {
-
-        view.setFocusableInTouchMode(true);
-        view.requestFocus();
-        view.setOnKeyListener(new View.OnKeyListener() {
-            @Override
-            public boolean onKey(View v, int keyCode, KeyEvent event) {
-                //  Log.i(tag, "keyCode: " + keyCode);
-                if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_UP) {
-                    //   Log.i(tag, "onKey Back listener is working!!!");
-                    getFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
-                    GeneralUtils.connectFragment(getActivity(),new TabsFragment());
-                    return true;
-                }
-                return false;
-            }
-        });
-
-    }
 }
