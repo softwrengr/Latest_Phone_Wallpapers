@@ -1,4 +1,4 @@
-package com.squaresdevelopers.latestphonewallpapers;
+package com.squaresdevelopers.latestphonewallpapers.networking;
 
 import android.app.AlertDialog;
 import android.content.Context;

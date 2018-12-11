@@ -1,9 +1,13 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:ads="http://schemas.android.com/apk/res-auto"
     android:background="@color/gray"
     tools:context="com.squaresdevelopers.latestphonewallpapers.fragments.ItemsFragment">
+
+
+
 
     <GridView
         android:id="@+id/gv_categories_items"
@@ -17,4 +21,7 @@
         android:verticalSpacing="7dp"
         ></GridView>
 
-</RelativeLayout>
+
+
+
+</FrameLayout>

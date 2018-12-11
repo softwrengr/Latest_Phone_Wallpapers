@@ -3,8 +3,8 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 28
     defaultConfig {
-        applicationId "com.squaresdevelopers.latestphonewallpapers"
-        minSdkVersion 16
+        applicationId "com.squaresdevelopers.lateststockwallpapers"
+        minSdkVersion 19
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
@@ -22,6 +22,7 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+    //noinspection GradleCompatible
     implementation 'com.android.support:appcompat-v7:28.0.0'
     implementation 'com.android.support.constraint:constraint-layout:1.1.3'
     implementation 'com.android.support:design:28.0.0'
@@ -38,9 +39,14 @@ dependencies {
     implementation 'com.squareup.retrofit2:retrofit:2.1.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.1.0'
     implementation 'com.squareup.picasso:picasso:2.5.0'
-    //noinspection GradleCompatible
-    implementation 'com.google.android.gms:play-services-ads:11.8.0'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+
+    //ads libraries
+    //noinspection GradleCompatible
+    implementation 'com.google.firebase:firebase-ads:17.0.0'
+    implementation 'com.google.android.gms:play-services-ads:17.0.0'
 }
+
+apply plugin: 'com.google.gms.google-services'
