@@ -14,11 +14,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:columnWidth="90dp"
-        android:padding="7sp"
-        android:horizontalSpacing="7dp"
+        android:padding="5sp"
         android:numColumns="2"
         android:stretchMode="columnWidth"
-        android:layout_marginBottom="50sp"
+        android:horizontalSpacing="7dp"
         android:verticalSpacing="7dp"
         ></GridView>
 
@@ -34,7 +33,7 @@
             android:layout_height="50dp"
             android:layout_centerHorizontal="true"
             ads:adSize="BANNER"
-            ads:adUnitId="@string/banner_ad_unit_id">
+            ads:adUnitId="@string/test_banner_id">
         </com.google.android.gms.ads.AdView>
 
 

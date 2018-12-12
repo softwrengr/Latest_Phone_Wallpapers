@@ -87,7 +87,6 @@ public class WallPaperFragment extends Fragment {
         StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
         StrictMode.setVmPolicy(builder.build());
 
-        onback(view);
         return view;
     }
 

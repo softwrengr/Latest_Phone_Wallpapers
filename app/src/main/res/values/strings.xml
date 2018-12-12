@@ -10,5 +10,7 @@
 
     <string name="action_settings">Settings</string>
 
-    <string name="banner_ad_unit_id">ca-app-pub-9746083138551194/2507782103</string>
+    <string name="banner_ad_unit_id">ca-app-pub-9746083138551194/6243916949</string>
+    <string name="test_banner_id">ca-app-pub-3940256099942544/6300978111</string>
+    <string name="test_app_id">ca-app-pub-3940256099942544~3347511713</string>
 </resources>
