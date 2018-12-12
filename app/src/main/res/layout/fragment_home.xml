@@ -8,24 +8,22 @@
     tools:context="com.squaresdevelopers.latestphonewallpapers.fragments.HomeFragment">
 
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/rvCategory"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_above="@id/ad_view"
-        android:layout_marginBottom="50sp"
-        >
-
-    </android.support.v7.widget.RecyclerView>
+      <android.support.v7.widget.RecyclerView
+          android:id="@+id/rvCategory"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          >
+      </android.support.v7.widget.RecyclerView>
 
 
-    <com.google.android.gms.ads.AdView
-        android:id="@+id/ad_view"
-        android:layout_width="wrap_content"
-        android:layout_height="50sp"
-        android:layout_gravity="bottom|center"
-        ads:adSize="BANNER"
-        ads:adUnitId="@string/banner_ad_unit_id">
-    </com.google.android.gms.ads.AdView>
+
+    <!--<com.google.android.gms.ads.AdView-->
+        <!--android:id="@+id/ad_view"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="50sp"-->
+        <!--android:layout_gravity="bottom|center"-->
+        <!--ads:adSize="BANNER"-->
+        <!--ads:adUnitId="@string/banner_ad_unit_id">-->
+    <!--</com.google.android.gms.ads.AdView>-->
 
 </FrameLayout>

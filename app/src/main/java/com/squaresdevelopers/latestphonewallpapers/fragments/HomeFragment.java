@@ -33,9 +33,6 @@ import butterknife.ButterKnife;
 public class HomeFragment extends Fragment {
     View view;
     android.support.v7.app.AlertDialog alertDialog;
-    @BindView(R.id.ad_view)
-    AdView adView;
-    AdRequest adRequest;
     @BindView(R.id.rvCategory)
     RecyclerView rvCategories;
     CategoriesAdapter categoriesAdapter;
@@ -53,12 +50,12 @@ public class HomeFragment extends Fragment {
             Toast.makeText(getActivity(), "you have lost your internet connection", Toast.LENGTH_SHORT).show();
         } else {
             initUI(strFiltercategory);
-
-            MobileAds.initialize(getActivity(),
-                    "ca-app-pub-3940256099942544~3347511713");
-
-            adRequest = new AdRequest.Builder().build();
-            adView.loadAd(adRequest);
+//
+//            MobileAds.initialize(getActivity(),
+//                    "ca-app-pub-9746083138551194~7732188628");
+//
+//            adRequest = new AdRequest.Builder().build();
+//            adView.loadAd(adRequest);
         }
 
         return view;
@@ -87,7 +84,7 @@ public class HomeFragment extends Fragment {
         View mCustomView = mInflater.inflate(R.layout.custom_actionbar, null);
         TextView tvTitle = mCustomView.findViewById(R.id.title);
         final ImageView ivFilter = mCustomView.findViewById(R.id.ivFilter);
-        tvTitle.setText("HD WallPapers");
+        tvTitle.setText("Stock HD Wallpapers");
         ivFilter.setVisibility(View.VISIBLE);
         ivFilter.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -96,8 +93,6 @@ public class HomeFragment extends Fragment {
 
             }
         });
-
-        tvTitle.setText("HD WallPapers");
 
         mActionBar.setCustomView(mCustomView);
         mActionBar.setDisplayShowCustomEnabled(true);
@@ -155,23 +150,5 @@ public class HomeFragment extends Fragment {
 
         popup.show();
     }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        if (adView != null) {
-            adView.resume();
-        }
-    }
-
-    /** Called before the activity is destroyed */
-    @Override
-    public void onDestroy() {
-        if (adView != null) {
-            adView.destroy();
-        }
-        super.onDestroy();
-    }
-
 
 }

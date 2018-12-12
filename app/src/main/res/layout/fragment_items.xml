@@ -18,10 +18,27 @@
         android:horizontalSpacing="7dp"
         android:numColumns="2"
         android:stretchMode="columnWidth"
+        android:layout_marginBottom="50sp"
         android:verticalSpacing="7dp"
         ></GridView>
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_gravity="bottom|center"
+        android:layout_height="50sp">
 
+
+        <com.google.android.gms.ads.AdView
+            android:id="@+id/ad_view"
+            android:layout_width="320dp"
+            android:layout_height="50dp"
+            android:layout_centerHorizontal="true"
+            ads:adSize="BANNER"
+            ads:adUnitId="@string/banner_ad_unit_id">
+        </com.google.android.gms.ads.AdView>
+
+
+    </RelativeLayout>
 
 
 </FrameLayout>
