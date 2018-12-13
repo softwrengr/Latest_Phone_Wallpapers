@@ -14,6 +14,7 @@ import com.squaresdevelopers.latestphonewallpapers.R;
 import com.squaresdevelopers.latestphonewallpapers.dataModels.likeDataModel.LikeDetailModel;
 import com.squaresdevelopers.latestphonewallpapers.dataModels.showLikeDataModel.ShowDetailModel;
 import com.squaresdevelopers.latestphonewallpapers.dataModels.wallpaperDataModel.ItemDetailModel;
+import com.squaresdevelopers.latestphonewallpapers.fragments.UnLikeFragment;
 import com.squaresdevelopers.latestphonewallpapers.fragments.WallPaperFragment;
 import com.squaresdevelopers.latestphonewallpapers.utils.GeneralUtils;
 import com.squareup.picasso.Picasso;
@@ -74,9 +75,9 @@ public class LikeItemAdapter extends BaseAdapter {
             @Override
             public void onClick(View v) {
                 Bundle bundle = new Bundle();
-                bundle.putString("liked","aleadyLiked");
+                bundle.putInt("delete",model.getId());
                 GeneralUtils.putStringValueInEditor(context,"image",model.getImageUrl());
-                GeneralUtils.connectFragmentWithDrawer(context,new WallPaperFragment()).setArguments(bundle);
+                GeneralUtils.connectFragmentWithDrawer(context,new UnLikeFragment()).setArguments(bundle);
             }
         });
 

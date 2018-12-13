@@ -79,7 +79,6 @@ public class ItemsFragment extends Fragment {
             @Override
             public void onAdLoaded() {
                 // Code to be executed when an ad finishes loading.
-                Toast.makeText(getActivity(), "ad Loaded", Toast.LENGTH_SHORT).show();
             }
 
             @Override

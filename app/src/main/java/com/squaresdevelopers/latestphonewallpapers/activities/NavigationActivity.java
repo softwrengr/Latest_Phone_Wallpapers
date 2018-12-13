@@ -1,5 +1,8 @@
 package com.squaresdevelopers.latestphonewallpapers.activities;
 
+import android.content.ActivityNotFoundException;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -13,6 +16,7 @@ import com.squaresdevelopers.latestphonewallpapers.R;
 import com.squaresdevelopers.latestphonewallpapers.fragments.HomeFragment;
 import com.squaresdevelopers.latestphonewallpapers.fragments.LikeFragment;
 import com.squaresdevelopers.latestphonewallpapers.utils.GeneralUtils;
+import com.squaresdevelopers.latestphonewallpapers.utils.ShareUtils;
 
 public class NavigationActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -55,12 +59,8 @@ public class NavigationActivity extends AppCompatActivity
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
         }
@@ -79,17 +79,26 @@ public class NavigationActivity extends AppCompatActivity
         }
         else if (id == R.id.nav_liked) {
            GeneralUtils.connectFragmentWithDrawer(NavigationActivity.this,new LikeFragment());
-        } else if (id == R.id.nav_gallery) {
+        } else if (id == R.id.nav_policy) {
 
-        } else if (id == R.id.nav_slideshow) {
-
+        } else if (id == R.id.nav_feedback) {
+          loadGooglePlay();
         } else if (id == R.id.nav_share) {
-
+            startActivity(ShareUtils.shareApp());
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    private void loadGooglePlay(){
+        try {
+            startActivity(ShareUtils.loadApp(this));
+        } catch (ActivityNotFoundException e) {
+            startActivity(new Intent(Intent.ACTION_VIEW,
+                    Uri.parse("http://play.google.com/store/apps/details?id=" + this.getPackageName())));
+        }
     }
 
 }

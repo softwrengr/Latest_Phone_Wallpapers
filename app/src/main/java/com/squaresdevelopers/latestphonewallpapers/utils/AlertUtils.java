@@ -1,6 +1,8 @@
 package com.squaresdevelopers.latestphonewallpapers.utils;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
+import android.graphics.Color;
 import android.support.v7.app.AlertDialog;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -10,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 
 import com.squaresdevelopers.latestphonewallpapers.R;
+import com.yarolegovich.lovelydialog.LovelyInfoDialog;
 
 
 public class AlertUtils {
@@ -36,6 +39,24 @@ public class AlertUtils {
         pd.setVisibility(View.VISIBLE);
         return alertDialog;
 
+    }
+
+    public static ProgressDialog createProgressBar(Activity activity){
+        ProgressDialog pDialog = new ProgressDialog(activity);
+        pDialog.setMessage("Please Wait ...");
+        pDialog.setIndeterminate(false);
+        pDialog.setCancelable(false);
+        //pDialog.show();
+        return pDialog;
+    }
+
+    public static void showFancyDialog(final Activity activity, String string){
+        new LovelyInfoDialog(activity)
+        .setTopColorRes(R.color.sky)
+                .setIcon(R.drawable.cancel)
+                .setTitle(string)
+                .setMessage("you have lost your internet connection")
+                .show();
     }
 
 

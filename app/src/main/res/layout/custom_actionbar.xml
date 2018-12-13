@@ -3,7 +3,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="10sp">
+    android:paddingTop="10sp"
+    android:paddingBottom="10sp">
 
     <TextView
         android:id="@+id/title"
@@ -15,22 +16,38 @@
         android:layout_centerVertical="true"
         android:textColor="#fff"/>
 
-    <ImageView
+    <TextView
         android:id="@+id/ivFilter"
-        android:layout_width="25sp"
-        android:layout_height="25sp"
-        android:src="@drawable/search"
-        android:layout_centerVertical="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Filter"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:textSize="14sp"
+        android:gravity="top"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:visibility="gone"
         android:layout_marginRight="5sp"/>
 
+
+    <TextView
+        android:id="@+id/tvUnlike"
+        android:layout_width="wrap_content"
+        android:layout_height="20sp"
+        android:text="unlike"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:visibility="gone"
+        android:layout_marginTop="2sp"
+        android:layout_toLeftOf="@id/layout_save"
+        android:layout_marginRight="13sp"/>
+
     <RelativeLayout
         android:id="@+id/layout_save"
         android:layout_width="50sp"
         android:layout_height="50sp"
-        android:layout_marginRight="8sp"
+        android:layout_marginRight="5sp"
         android:visibility="gone"
         android:layout_marginBottom="3sp"
         android:layout_toLeftOf="@id/favorite">
@@ -56,15 +73,20 @@
 
     </RelativeLayout>
 
-    <ImageView
-        android:id="@+id/favorite"
-        android:layout_width="25sp"
-        android:layout_height="25sp"
-        android:src="@drawable/heart"
-        android:layout_marginTop="2sp"
-        android:visibility="gone"
-        android:layout_marginRight="10sp"
-        android:layout_toLeftOf="@id/share" />
+
+        <ImageView
+            android:id="@+id/favorite"
+            android:layout_width="25sp"
+            android:layout_height="25sp"
+            android:src="@drawable/heart"
+            android:visibility="gone"
+            android:layout_marginTop="2sp"
+            android:layout_centerHorizontal="true"
+            android:layout_toLeftOf="@id/share"
+            android:layout_marginRight="14sp" />
+
+
+
 
     <ImageView
         android:id="@+id/share"
@@ -75,7 +97,7 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_marginTop="2sp"
-        android:layout_marginRight="5sp"/>
+        android:layout_marginRight="8sp"/>
 
 
 </RelativeLayout>

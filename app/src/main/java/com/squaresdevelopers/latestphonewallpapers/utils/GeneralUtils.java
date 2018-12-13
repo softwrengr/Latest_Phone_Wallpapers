@@ -73,6 +73,9 @@ public class GeneralUtils {
     public static String getName(Context context){
         return getSharedPreferences(context).getString("name","");
     }
+    public static String checkLikedPicture(Context context){
+        return getSharedPreferences(context).getString("liked_picture","");
+    }
 
     public static String getDeviceID(Context context){
        return Settings.Secure.getString(context.getContentResolver(),

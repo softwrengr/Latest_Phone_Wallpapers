@@ -31,6 +31,9 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
 import com.squaresdevelopers.latestphonewallpapers.R;
 import com.squaresdevelopers.latestphonewallpapers.dataModels.likeDataModel.LikeResponseModel;
 import com.squaresdevelopers.latestphonewallpapers.networking.ApiClient;
@@ -70,10 +73,11 @@ public class WallPaperFragment extends Fragment {
     LinearLayout layoutApplyWallPaper;
 
     View view;
-    String image, strModelNo,strUUID;
+    String image, strModelNo, strUUID;
     Bitmap bitmap = null;
     private boolean valid = false;
-    String strCheckedLikedImage;
+    @BindView(R.id.ad_view)
+    AdView adView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -87,6 +91,12 @@ public class WallPaperFragment extends Fragment {
         StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
         StrictMode.setVmPolicy(builder.build());
 
+        MobileAds.initialize(getActivity(),
+                getActivity().getResources().getString(R.string.test_app_id));
+
+        AdRequest adRequest = new AdRequest.Builder().build();
+        adView.loadAd(adRequest);
+
         return view;
     }
 
@@ -98,14 +108,11 @@ public class WallPaperFragment extends Fragment {
         image = GeneralUtils.getImage(getActivity());
         strUUID = GeneralUtils.getDeviceID(getActivity());
 
-        if(image.equals("") || image==null){
+        if (image.equals("") || image == null) {
             ivWallPaper.setImageDrawable(getActivity().getResources().getDrawable(R.drawable.transparent_background));
-        }
-        else {
+        } else {
             Picasso.with(getActivity()).load(image).into(ivWallPaper);
         }
-
-
 
 
         layoutApplyWallPaper.setOnClickListener(new View.OnClickListener() {
@@ -135,7 +142,7 @@ public class WallPaperFragment extends Fragment {
             // TODO Auto-generated method stub
 
             super.onPreExecute();
-            showProgressBar();
+            pDialog = AlertUtils.createProgressBar(getActivity());
 
         }
 
@@ -161,7 +168,7 @@ public class WallPaperFragment extends Fragment {
 
                 String path = myFileUrl.getPath();
                 String idStr = path.substring(path.lastIndexOf('/') + 1);
-                File dir = new File(Environment.getExternalStorageDirectory(),  "/.HD Wallpaper");
+                File dir = new File(Environment.getExternalStorageDirectory(), "/.HD Wallpaper");
 
                 if (!dir.exists()) {
                     dir.mkdirs();
@@ -182,14 +189,9 @@ public class WallPaperFragment extends Fragment {
             return null;
         }
 
-
         @Override
         protected void onPostExecute(String args) {
             // TODO Auto-generated method stub
-
-
-
-
 
             Intent share = new Intent(Intent.ACTION_SEND);
             share.setType("image/png");
@@ -239,6 +241,48 @@ public class WallPaperFragment extends Fragment {
         return dir.delete();
     }
 
+    private void apiCallLiked() {
+
+        ApiInterface services = ApiClient.getApiClient().create(ApiInterface.class);
+
+        retrofit2.Call<LikeResponseModel> userLogin = services.like(image, strUUID, strModelNo);
+        userLogin.enqueue(new Callback<LikeResponseModel>() {
+            @Override
+            public void onResponse(retrofit2.Call<LikeResponseModel> call, Response<LikeResponseModel> response) {
+                pDialog.dismiss();
+                if (response.body().getMessage().equals("Image Like successfully")) {
+                    GeneralUtils.connectFragmentWithDrawer(getActivity(), new LikeFragment());
+                    GeneralUtils.putStringValueInEditor(getActivity(), "liked_picture", image);
+                } else {
+                    Toast.makeText(getActivity(), "you got some error", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(retrofit2.Call<LikeResponseModel> call, Throwable t) {
+                Log.d("error", t.getMessage());
+                pDialog.dismiss();
+            }
+        });
+
+    }
+
+
+    private boolean validate() {
+        valid = true;
+
+        if (image.isEmpty()) {
+            Toast.makeText(getActivity(), "Image path not getting", Toast.LENGTH_SHORT).show();
+            valid = false;
+        } else if (strUUID.isEmpty()) {
+            Toast.makeText(getActivity(), "you got some error please try again", Toast.LENGTH_SHORT).show();
+            valid = false;
+        }
+
+        return valid;
+    }
+
+
     public void customActionBar() {
         android.support.v7.app.ActionBar mActionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
         mActionBar.setDisplayShowHomeEnabled(false);
@@ -253,30 +297,42 @@ public class WallPaperFragment extends Fragment {
         tvTitle.setText(strModelNo);
         share.setVisibility(View.VISIBLE);
         layout_save.setVisibility(View.VISIBLE);
+        ivFavorite.setVisibility(View.VISIBLE);
 
-        Bundle bundle = this.getArguments();
-        if(bundle!=null){
-            strCheckedLikedImage = bundle.getString("liked");
-        }
-
-
-        if(strCheckedLikedImage!=null && strCheckedLikedImage.equals("aleadyLiked")){
-            ivFavorite.setVisibility(View.GONE);
-        }
-        else {
-            ivFavorite.setVisibility(View.VISIBLE);
             ivFavorite.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    ivFavorite.setImageDrawable(getActivity().getResources().getDrawable(R.drawable.heart_one));
+                    ivFavorite.setImageDrawable(getActivity().getResources().getDrawable(R.drawable.like));
                     if (validate()) {
-                        showProgressBar();
-                        apiCallLiked();
+
+                        if (image.equals(GeneralUtils.checkLikedPicture(getActivity()))) {
+                            GeneralUtils.connectFragmentWithDrawer(getActivity(), new LikeFragment());
+                        } else {
+                            pDialog = AlertUtils.createProgressBar(getActivity());
+                            pDialog.show();
+                            apiCallLiked();
+                        }
+
                     }
                 }
             });
-        }
 
+
+        //saving wallpaper
+        layout_save.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getActivity(), "Saving please wait a while!", Toast.LENGTH_SHORT).show();
+                try {
+                    URL url = new URL(image);
+                    bitmap = BitmapFactory.decodeStream(url.openConnection().getInputStream());
+                    FileUtilitiy.saveWallPaper(getActivity(), bitmap);
+                } catch (IOException e) {
+                    System.out.println(e);
+                }
+            }
+        });
+        //sharing wallpaper
         share.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -285,75 +341,9 @@ public class WallPaperFragment extends Fragment {
         });
 
 
-
-        layout_save.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(getActivity(), "Saving please wait a while!", Toast.LENGTH_SHORT).show();
-                try {
-                    URL url = new URL(image);
-                    bitmap = BitmapFactory.decodeStream(url.openConnection().getInputStream());
-                    FileUtilitiy.saveWallPaper(getActivity(),bitmap);
-                } catch(IOException e) {
-                    System.out.println(e);
-                }
-            }
-        });
-
         mActionBar.setCustomView(mCustomView);
         mActionBar.setDisplayShowCustomEnabled(true);
         mActionBar.show();
-    }
-
-
-    private void apiCallLiked() {
-
-        ApiInterface services = ApiClient.getApiClient().create(ApiInterface.class);
-
-        retrofit2.Call<LikeResponseModel> userLogin = services.like(image, strUUID);
-        userLogin.enqueue(new Callback<LikeResponseModel>() {
-            @Override
-            public void onResponse(retrofit2.Call<LikeResponseModel> call, Response<LikeResponseModel> response) {
-                pDialog.dismiss();
-                if (response.body().getMessage().equals("Image Like successfully")) {
-                    Bundle bundle = new Bundle();
-                    bundle.putInt("tab",1);
-                    GeneralUtils.connectFragmentWithDrawer(getActivity(),new LikeFragment()).setArguments(bundle);
-                } else {
-                    Toast.makeText(getActivity(), "you got some error", Toast.LENGTH_SHORT).show();
-                }
-            }
-
-            @Override
-            public void onFailure(retrofit2.Call<LikeResponseModel> call, Throwable t) {
-             Log.d("error",t.getMessage());
-            }
-        });
-
-    }
-
-    private boolean validate() {
-        valid = true;
-
-
-        if (image.isEmpty()) {
-            Toast.makeText(getActivity(), "Image path not getting", Toast.LENGTH_SHORT).show();
-            valid = false;
-        }
-        else if (strUUID.isEmpty()) {
-            Toast.makeText(getActivity(), "you got some error please try again", Toast.LENGTH_SHORT).show();
-            valid = false;
-        }
-
-        return valid;
-    }
-
-    private void showProgressBar(){
-        pDialog = new ProgressDialog(getActivity());
-        pDialog.setMessage("Please Wait ...");
-        pDialog.setIndeterminate(false);
-        pDialog.setCancelable(false);
-        pDialog.show();
     }
 }
 

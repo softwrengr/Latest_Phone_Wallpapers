@@ -22,6 +22,7 @@ import com.squaresdevelopers.latestphonewallpapers.R;
 import com.squaresdevelopers.latestphonewallpapers.controllers.CategoriesAdapter;
 import com.squaresdevelopers.latestphonewallpapers.dataModels.CategoryModel;
 import com.squaresdevelopers.latestphonewallpapers.utils.AlertUtils;
+import com.squaresdevelopers.latestphonewallpapers.utils.GeneralUtils;
 import com.squaresdevelopers.latestphonewallpapers.utils.NetworkUtils;
 
 import java.util.ArrayList;
@@ -47,15 +48,9 @@ public class HomeFragment extends Fragment {
         customActionBar();
 
         if (!NetworkUtils.isNetworkConnected(getActivity())) {
-            Toast.makeText(getActivity(), "you have lost your internet connection", Toast.LENGTH_SHORT).show();
+            AlertUtils.showFancyDialog(getActivity(),"Internet Connection Problem");
         } else {
             initUI(strFiltercategory);
-//
-//            MobileAds.initialize(getActivity(),
-//                    "ca-app-pub-9746083138551194~7732188628");
-//
-//            adRequest = new AdRequest.Builder().build();
-//            adView.loadAd(adRequest);
         }
 
         return view;
@@ -83,13 +78,13 @@ public class HomeFragment extends Fragment {
         LayoutInflater mInflater = LayoutInflater.from(getActivity());
         View mCustomView = mInflater.inflate(R.layout.custom_actionbar, null);
         TextView tvTitle = mCustomView.findViewById(R.id.title);
-        final ImageView ivFilter = mCustomView.findViewById(R.id.ivFilter);
+        final TextView tvFilter = mCustomView.findViewById(R.id.ivFilter);
         tvTitle.setText("Stock HD Wallpapers");
-        ivFilter.setVisibility(View.VISIBLE);
-        ivFilter.setOnClickListener(new View.OnClickListener() {
+        tvFilter.setVisibility(View.VISIBLE);
+        tvFilter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showDropDownMenu(ivFilter);
+                showDropDownMenu(tvFilter);
 
             }
         });
@@ -101,7 +96,7 @@ public class HomeFragment extends Fragment {
     }
 
 
-    private void showDropDownMenu(ImageView layout) {
+    private void showDropDownMenu(TextView layout) {
         //Creating the instance of PopupMenu
         PopupMenu popup = new PopupMenu(getActivity(), layout);
         //Inflating the Popup using xml file

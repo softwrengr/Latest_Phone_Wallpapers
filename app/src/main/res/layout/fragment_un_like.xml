@@ -1,0 +1,43 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.squaresdevelopers.latestphonewallpapers.fragments.UnLikeFragment">
+
+    <ImageView
+        android:id="@+id/like_wallpaper"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="fitXY"
+        android:src="@drawable/transparent_background"
+        />
+
+    <LinearLayout
+        android:id="@+id/like_apply_wallpaper"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="right|bottom"
+        android:layout_marginBottom="10sp"
+        android:padding="10sp"
+        android:layout_marginRight="20sp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Set WallPaper"
+            android:textColor="@color/white"
+            android:layout_marginRight="10sp"
+            android:layout_gravity="center"
+            android:textSize="14sp"
+            android:textStyle="bold"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:src="@drawable/apply"/>
+
+    </LinearLayout>
+
+</FrameLayout>
