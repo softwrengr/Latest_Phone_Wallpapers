@@ -44,11 +44,11 @@ public class LikedImagesCurd {
 
     public void DeleteLikeImage(String strLikeImage) {
 
-        if (checkImageUrl(strLikeImage)) {
+        if (!checkImageUrl(strLikeImage)) {
             Cursor cursor = this.sqLiteDatabase.rawQuery("SELECT * FROM LIKED_IMAGE_TABLE WHERE URL = '" + strLikeImage + "' ", null);
             if (cursor.moveToFirst()) {
 
-                this.sqLiteDatabase.delete("ORDER_NAME_TABLE", "URL = '" + strLikeImage + "'", null);
+                this.sqLiteDatabase.delete("LIKED_IMAGE_TABLE", "URL = '" + strLikeImage + "'", null);
                 Toast.makeText(context, "unlike successful", Toast.LENGTH_SHORT).show();
 
 
