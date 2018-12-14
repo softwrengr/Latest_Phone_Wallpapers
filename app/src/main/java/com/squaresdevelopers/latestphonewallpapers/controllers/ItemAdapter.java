@@ -8,9 +8,11 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.squaresdevelopers.latestphonewallpapers.R;
+import com.squaresdevelopers.latestphonewallpapers.dataBase.LikedImagesCurd;
 import com.squaresdevelopers.latestphonewallpapers.dataModels.WallpaperItems;
 import com.squaresdevelopers.latestphonewallpapers.dataModels.wallpaperDataModel.ItemDetailModel;
 import com.squaresdevelopers.latestphonewallpapers.dataModels.wallpaperDataModel.ItemReponseModel;
@@ -29,10 +31,13 @@ public class ItemAdapter extends BaseAdapter {
     Context context;
     private LayoutInflater layoutInflater;
     MyViewHolder viewHolder = null;
+    private LikedImagesCurd likedImagesCurd;
 
     public ItemAdapter(Context context, ArrayList<ItemDetailModel> itemReponseModelArrayList) {
         this.itemReponseModelArrayList=itemReponseModelArrayList;
         this.context=context;
+
+        likedImagesCurd = new LikedImagesCurd(context);
         if (context!=null)
         {
             this.layoutInflater=LayoutInflater.from(context);
@@ -75,6 +80,10 @@ public class ItemAdapter extends BaseAdapter {
         viewHolder.layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                boolean b  = likedImagesCurd.checkImageUrl(model.getImage());
+                GeneralUtils.putBooleanValueInEditor(context,"like_image",b);
+                Toast.makeText(context, String.valueOf(b), Toast.LENGTH_SHORT).show();
                 GeneralUtils.putStringValueInEditor(context,"image",model.getImage());
                 GeneralUtils.putStringValueInEditor(context,"model_no",model.getModelNumber());
                 GeneralUtils.connectFragmentWithDrawer(context,new WallPaperFragment());

@@ -35,6 +35,7 @@ import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
 import com.squaresdevelopers.latestphonewallpapers.R;
+import com.squaresdevelopers.latestphonewallpapers.dataBase.LikedImagesCurd;
 import com.squaresdevelopers.latestphonewallpapers.dataModels.likeDataModel.LikeResponseModel;
 import com.squaresdevelopers.latestphonewallpapers.networking.ApiClient;
 import com.squaresdevelopers.latestphonewallpapers.networking.ApiInterface;
@@ -78,7 +79,10 @@ public class WallPaperFragment extends Fragment {
     private boolean valid = false;
     @BindView(R.id.ad_view)
     AdView adView;
+    private  ImageView ivFavorite;
+    private boolean aBooleanLikeImage;
 
+    private LikedImagesCurd likedImagesCurd;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -86,6 +90,12 @@ public class WallPaperFragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_wall_paper, container, false);
         strModelNo = GeneralUtils.getModel(getActivity());
         customActionBar();
+        likedImagesCurd = new LikedImagesCurd(getActivity());
+
+        aBooleanLikeImage = GeneralUtils.getSharedPreferences(getActivity()).getBoolean("like_image",false);
+        if (!aBooleanLikeImage){
+            ivFavorite.setImageDrawable(getActivity().getResources().getDrawable(R.drawable.like));
+        }
 
         initUI();
         StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
@@ -251,8 +261,21 @@ public class WallPaperFragment extends Fragment {
             public void onResponse(retrofit2.Call<LikeResponseModel> call, Response<LikeResponseModel> response) {
                 pDialog.dismiss();
                 if (response.body().getMessage().equals("Image Like successfully")) {
-                    GeneralUtils.connectFragmentWithDrawer(getActivity(), new LikeFragment());
-                    GeneralUtils.putStringValueInEditor(getActivity(), "liked_picture", image);
+
+
+                    if (likedImagesCurd.checkImageUrl(image)){
+
+
+                        likedImagesCurd.insertData(image);
+                        GeneralUtils.connectFragmentWithDrawer(getActivity(), new LikeFragment());
+                        GeneralUtils.putStringValueInEditor(getActivity(), "liked_picture", image);
+                    }
+
+
+
+
+
+
                 } else {
                     Toast.makeText(getActivity(), "you got some error", Toast.LENGTH_SHORT).show();
                 }
@@ -292,7 +315,7 @@ public class WallPaperFragment extends Fragment {
         View mCustomView = mInflater.inflate(R.layout.custom_actionbar, null);
         TextView tvTitle = mCustomView.findViewById(R.id.title);
         ImageView share = mCustomView.findViewById(R.id.share);
-        final ImageView ivFavorite = mCustomView.findViewById(R.id.favorite);
+         ivFavorite = mCustomView.findViewById(R.id.favorite);
         RelativeLayout layout_save = mCustomView.findViewById(R.id.layout_save);
         tvTitle.setText(strModelNo);
         share.setVisibility(View.VISIBLE);

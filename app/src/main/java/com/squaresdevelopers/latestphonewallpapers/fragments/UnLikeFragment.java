@@ -31,6 +31,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.squaresdevelopers.latestphonewallpapers.R;
+import com.squaresdevelopers.latestphonewallpapers.dataBase.LikedImagesCurd;
 import com.squaresdevelopers.latestphonewallpapers.dataModels.CategoryModel;
 import com.squaresdevelopers.latestphonewallpapers.dataModels.likeDataModel.LikeResponseModel;
 import com.squaresdevelopers.latestphonewallpapers.dataModels.unLikeDataModel.UnLikeModel;
@@ -71,10 +72,12 @@ public class UnLikeFragment extends Fragment {
     LinearLayout layoutApplyWallPaper;
 
     View view;
-    String image, strModelNo;
+    String image, strModelNo, strImageUrl;
     Bitmap bitmap = null;
     private boolean valid = false;
     int imageId;
+
+    private LikedImagesCurd likedImagesCurd;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -83,6 +86,7 @@ public class UnLikeFragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_un_like, container, false);
         customActionBar();
         initUI();
+        likedImagesCurd  =new LikedImagesCurd(getActivity());
         StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
         StrictMode.setVmPolicy(builder.build());
 
@@ -97,6 +101,8 @@ public class UnLikeFragment extends Fragment {
         image = GeneralUtils.getImage(getActivity());
         Bundle bundle = this.getArguments();
         imageId = bundle.getInt("delete");
+        strImageUrl = bundle.getString("image_url");
+
 
         if (image.equals("") || image == null) {
             ivWallPaper.setImageDrawable(getActivity().getResources().getDrawable(R.drawable.transparent_background));
@@ -286,17 +292,19 @@ public class UnLikeFragment extends Fragment {
 //            }
 //        });
 
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, Config.DELETE+String.valueOf(imageId)
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, Config.DELETE + String.valueOf(imageId)
                 , new com.android.volley.Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 pDialog.dismiss();
                 try {
-                JSONObject jsonObject = new JSONObject(response);
-                String message = jsonObject.getString("message");
-                if(message.equals("Liked Wallpaper successfully deleted")){
-                    GeneralUtils.connectFragmentWithDrawer(getActivity(),new LikeFragment());
-                }
+                    JSONObject jsonObject = new JSONObject(response);
+                    String message = jsonObject.getString("message");
+                    if (message.equals("Liked Wallpaper successfully deleted")) {
+
+                        likedImagesCurd.DeleteLikeImage(strImageUrl);
+                        GeneralUtils.connectFragmentWithDrawer(getActivity(), new LikeFragment());
+                    }
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -307,17 +315,16 @@ public class UnLikeFragment extends Fragment {
             public void onErrorResponse(VolleyError error) {
                 Toast.makeText(getActivity(), error.getMessage(), Toast.LENGTH_SHORT).show();
             }
-        })
-        {
+        }) {
             @Override
             public String getBodyContentType() {
                 return "application/json; charset=utf-8";
             }
 
             @Override
-            protected Map<String,String> getParams(){
-                Map<String,String> params = new HashMap<String, String>();
-               // params.put("_method","DELETE");
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<String, String>();
+                // params.put("_method","DELETE");
 
                 return params;
             }

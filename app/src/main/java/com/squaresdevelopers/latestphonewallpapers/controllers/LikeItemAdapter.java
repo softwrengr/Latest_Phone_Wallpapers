@@ -76,6 +76,7 @@ public class LikeItemAdapter extends BaseAdapter {
             public void onClick(View v) {
                 Bundle bundle = new Bundle();
                 bundle.putInt("delete",model.getId());
+                bundle.putString("image_url",model.getImageUrl());
                 GeneralUtils.putStringValueInEditor(context,"image",model.getImageUrl());
                 GeneralUtils.connectFragmentWithDrawer(context,new UnLikeFragment()).setArguments(bundle);
             }

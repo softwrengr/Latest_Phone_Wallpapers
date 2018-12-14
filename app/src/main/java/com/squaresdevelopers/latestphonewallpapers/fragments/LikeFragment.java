@@ -18,6 +18,8 @@ import android.widget.Toast;
 import com.squaresdevelopers.latestphonewallpapers.R;
 import com.squaresdevelopers.latestphonewallpapers.controllers.ItemAdapter;
 import com.squaresdevelopers.latestphonewallpapers.controllers.LikeItemAdapter;
+import com.squaresdevelopers.latestphonewallpapers.dataBase.LikedImagesCurd;
+import com.squaresdevelopers.latestphonewallpapers.dataModels.LikedImagesmodel;
 import com.squaresdevelopers.latestphonewallpapers.dataModels.likeDataModel.LikeDetailModel;
 import com.squaresdevelopers.latestphonewallpapers.dataModels.likeDataModel.LikeResponseModel;
 import com.squaresdevelopers.latestphonewallpapers.dataModels.showLikeDataModel.ShowDetailModel;
@@ -31,6 +33,7 @@ import com.squaresdevelopers.latestphonewallpapers.utils.GeneralUtils;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -46,12 +49,23 @@ public class LikeFragment extends Fragment {
     GridView gvLikeItems;
     ArrayList<ShowDetailModel> itemReponseModelArrayList;
     LikeItemAdapter likeItemAdapter;
+
+    LikedImagesCurd likedImagesCurd;
+    List<LikedImagesmodel> likedImagesmodels;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_like, container, false);
         customActionBar();
+
+        likedImagesCurd = new LikedImagesCurd(getActivity());
+
+
+
+
+
 
         initUI();
 
