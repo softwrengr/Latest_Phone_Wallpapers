@@ -42,7 +42,7 @@ public class LikedImagesCurd {
 
     }
 
-    public void DeleteLikeImage(String strLikeImage) {
+    public void deleteLikeImage(String strLikeImage) {
 
         if (!checkImageUrl(strLikeImage)) {
             Cursor cursor = this.sqLiteDatabase.rawQuery("SELECT * FROM LIKED_IMAGE_TABLE WHERE URL = '" + strLikeImage + "' ", null);

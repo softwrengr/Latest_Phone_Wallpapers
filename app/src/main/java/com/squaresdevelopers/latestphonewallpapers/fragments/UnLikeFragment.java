@@ -302,7 +302,7 @@ public class UnLikeFragment extends Fragment {
                     String message = jsonObject.getString("message");
                     if (message.equals("Liked Wallpaper successfully deleted")) {
 
-                        likedImagesCurd.DeleteLikeImage(strImageUrl);
+                        likedImagesCurd.deleteLikeImage(strImageUrl);
                         GeneralUtils.connectFragmentWithDrawer(getActivity(), new LikeFragment());
                     }
                 } catch (JSONException e) {
