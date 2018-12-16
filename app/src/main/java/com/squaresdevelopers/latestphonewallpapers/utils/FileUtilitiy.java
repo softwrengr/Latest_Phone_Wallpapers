@@ -1,6 +1,5 @@
 package com.squaresdevelopers.latestphonewallpapers.utils;
 
-import android.app.ProgressDialog;
 import android.app.WallpaperManager;
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -25,7 +24,8 @@ import java.util.Date;
 
 public class FileUtilitiy {
 
-    public static void setWallPaper(Context context,String string){
+
+    public static void setWallPaper(Context context, String string) {
         WallpaperManager myWallpaperManager
                 = WallpaperManager.getInstance(context);
         try {
@@ -39,12 +39,14 @@ public class FileUtilitiy {
         }
     }
 
-    public static void saveWallPaper(Context context, Bitmap bm) throws IOException{
+    public static boolean saveWallPaper(Context context, Bitmap bm) throws IOException {
+        Toast.makeText(context, "WallPaper saved in folder Latest WallPaper", Toast.LENGTH_SHORT).show();
 
+        boolean imageSave = false;
 
         Date currentTime = Calendar.getInstance().getTime();
         String dataTime = String.valueOf(currentTime);
-        File path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES+"Latest WallPaper");
+        File path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES + "Latest WallPaper");
 
         if (!path.exists()) {
             path.mkdirs();
@@ -52,25 +54,27 @@ public class FileUtilitiy {
         File imageFile = new File(path, dataTime + ".PNG");
         try {
             FileOutputStream out = new FileOutputStream(imageFile);
-            bm.compress(Bitmap.CompressFormat.PNG, 100, out); // Compress Image
+            bm.compress(Bitmap.CompressFormat.JPEG, 100, out); // Compress Image
             out.flush();
             out.close();
 
             // Tell the media scanner about the new file so that it is
             // immediately available to the user.
-            MediaScannerConnection.scanFile(context,new String[] { imageFile.getAbsolutePath() }, null,new MediaScannerConnection.OnScanCompletedListener() {
-                public void onScanCompleted(String path, Uri uri) {
-                    Log.i("ExternalStorage", "Scanned " + path + ":");
-                    Log.i("ExternalStorage", "-> uri=" + uri);
-                }
-            });
-
-            Toast.makeText(context, "WallPaper saved in folder Latest WallPaper", Toast.LENGTH_SHORT).show();
-
+//            MediaScannerConnection.scanFile(context, new String[]{imageFile.getAbsolutePath()}, null, new MediaScannerConnection.OnScanCompletedListener() {
+//                public void onScanCompleted(String path, Uri uri) {
+//                    Log.i("ExternalStorage", "Scanned " + path + ":");
+//                    Log.i("ExternalStorage", "-> uri=" + uri);
+//
+//
+//                }
+//            });
+            imageSave = true;
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();
 
         }
+
+        return imageSave;
     }
 }

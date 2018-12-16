@@ -13,6 +13,7 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
 import android.os.StrictMode;
 import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
@@ -79,10 +80,11 @@ public class WallPaperFragment extends Fragment {
     private boolean valid = false;
     @BindView(R.id.ad_view)
     AdView adView;
-    private  ImageView ivFavorite;
+    private ImageView ivFavorite;
     private boolean aBooleanLikeImage;
 
     private LikedImagesCurd likedImagesCurd;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -90,10 +92,11 @@ public class WallPaperFragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_wall_paper, container, false);
         strModelNo = GeneralUtils.getModel(getActivity());
         customActionBar();
+        onback(view);
         likedImagesCurd = new LikedImagesCurd(getActivity());
 
-        aBooleanLikeImage = GeneralUtils.getSharedPreferences(getActivity()).getBoolean("like_image",false);
-        if (!aBooleanLikeImage){
+        aBooleanLikeImage = GeneralUtils.getSharedPreferences(getActivity()).getBoolean("like_image", false);
+        if (!aBooleanLikeImage) {
             ivFavorite.setImageDrawable(getActivity().getResources().getDrawable(R.drawable.like));
         }
 
@@ -223,7 +226,6 @@ public class WallPaperFragment extends Fragment {
                 if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_UP) {
                     //   Log.i(tag, "onKey Back listener is working!!!");
                     getFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
-
                     File filepath = Environment.getExternalStorageDirectory();
                     File dir = new File(filepath.getAbsolutePath() + "/.HD Wallpaper");
                     deleteDir(dir);
@@ -263,17 +265,13 @@ public class WallPaperFragment extends Fragment {
                 if (response.body().getMessage().equals("Image Like successfully")) {
 
 
-                    if (likedImagesCurd.checkImageUrl(image)){
+                    if (likedImagesCurd.checkImageUrl(image)) {
 
 
                         likedImagesCurd.insertData(image);
                         GeneralUtils.connectFragmentWithDrawer(getActivity(), new LikeFragment());
                         GeneralUtils.putStringValueInEditor(getActivity(), "liked_picture", image);
                     }
-
-
-
-
 
 
                 } else {
@@ -315,44 +313,44 @@ public class WallPaperFragment extends Fragment {
         View mCustomView = mInflater.inflate(R.layout.custom_actionbar, null);
         TextView tvTitle = mCustomView.findViewById(R.id.title);
         ImageView share = mCustomView.findViewById(R.id.share);
-         ivFavorite = mCustomView.findViewById(R.id.favorite);
+        ivFavorite = mCustomView.findViewById(R.id.favorite);
         RelativeLayout layout_save = mCustomView.findViewById(R.id.layout_save);
         tvTitle.setText(strModelNo);
         share.setVisibility(View.VISIBLE);
         layout_save.setVisibility(View.VISIBLE);
         ivFavorite.setVisibility(View.VISIBLE);
 
-            ivFavorite.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    ivFavorite.setImageDrawable(getActivity().getResources().getDrawable(R.drawable.like));
-                    if (validate()) {
+        ivFavorite.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ivFavorite.setImageDrawable(getActivity().getResources().getDrawable(R.drawable.like));
+                if (validate()) {
 
-                        if (image.equals(GeneralUtils.checkLikedPicture(getActivity()))) {
-                            GeneralUtils.connectFragmentWithDrawer(getActivity(), new LikeFragment());
-                        } else {
-                            pDialog = AlertUtils.createProgressBar(getActivity());
-                            pDialog.show();
-                            apiCallLiked();
-                        }
-
+                    if (image.equals(GeneralUtils.checkLikedPicture(getActivity()))) {
+                        GeneralUtils.connectFragmentWithDrawer(getActivity(), new LikeFragment());
+                    } else {
+                        pDialog = AlertUtils.createProgressBar(getActivity());
+                        pDialog.show();
+                        apiCallLiked();
                     }
+
                 }
-            });
+            }
+        });
 
 
         //saving wallpaper
         layout_save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getActivity(), "Saving please wait a while!", Toast.LENGTH_SHORT).show();
-                try {
-                    URL url = new URL(image);
-                    bitmap = BitmapFactory.decodeStream(url.openConnection().getInputStream());
-                    FileUtilitiy.saveWallPaper(getActivity(), bitmap);
-                } catch (IOException e) {
-                    System.out.println(e);
-                }
+                pDialog = AlertUtils.createProgressBar(getActivity());
+                pDialog.show();
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        initSaveWallpaper();
+                    }
+                }, 800);
             }
         });
         //sharing wallpaper
@@ -367,6 +365,21 @@ public class WallPaperFragment extends Fragment {
         mActionBar.setCustomView(mCustomView);
         mActionBar.setDisplayShowCustomEnabled(true);
         mActionBar.show();
+    }
+
+    private void initSaveWallpaper() {
+
+        try {
+//            Toast.makeText(getActivity(), "Saving please wait a while!", Toast.LENGTH_SHORT).show();
+            URL url = new URL(image);
+            bitmap = BitmapFactory.decodeStream(url.openConnection().getInputStream());
+            boolean isSaveImage = FileUtilitiy.saveWallPaper(getActivity(), bitmap);
+            if (isSaveImage) {
+                pDialog.dismiss();
+            }
+        } catch (IOException e) {
+            System.out.println(e);
+        }
     }
 }
 

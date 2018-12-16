@@ -83,7 +83,7 @@ public class ItemAdapter extends BaseAdapter {
 
                 boolean b  = likedImagesCurd.checkImageUrl(model.getImage());
                 GeneralUtils.putBooleanValueInEditor(context,"like_image",b);
-                Toast.makeText(context, String.valueOf(b), Toast.LENGTH_SHORT).show();
+
                 GeneralUtils.putStringValueInEditor(context,"image",model.getImage());
                 GeneralUtils.putStringValueInEditor(context,"model_no",model.getModelNumber());
                 GeneralUtils.connectFragmentWithDrawer(context,new WallPaperFragment());
