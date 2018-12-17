@@ -156,6 +156,7 @@ public class WallPaperFragment extends Fragment {
 
             super.onPreExecute();
             pDialog = AlertUtils.createProgressBar(getActivity());
+            pDialog.show();
 
         }
 

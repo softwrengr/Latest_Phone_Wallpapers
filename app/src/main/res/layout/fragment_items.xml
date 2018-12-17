@@ -32,6 +32,7 @@
             android:layout_width="320dp"
             android:layout_height="50dp"
             android:layout_centerHorizontal="true"
+            android:layout_gravity="bottom|center"
             ads:adSize="BANNER"
             ads:adUnitId="@string/test_banner_id">
         </com.google.android.gms.ads.AdView>

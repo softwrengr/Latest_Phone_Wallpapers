@@ -79,9 +79,7 @@ public class NavigationActivity extends AppCompatActivity
         }
         else if (id == R.id.nav_liked) {
            GeneralUtils.connectFragmentWithDrawer(NavigationActivity.this,new LikeFragment());
-        } else if (id == R.id.nav_policy) {
-
-        } else if (id == R.id.nav_feedback) {
+        }else if (id == R.id.nav_feedback) {
           loadGooglePlay();
         } else if (id == R.id.nav_share) {
             startActivity(ShareUtils.shareApp());
