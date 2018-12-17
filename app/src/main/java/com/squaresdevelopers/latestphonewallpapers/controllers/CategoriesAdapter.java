@@ -39,6 +39,7 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.My
     public CategoriesAdapter(Activity context, ArrayList<CategoryModel> categoryModelList) {
         this.context = context;
         this.categoryModelList = categoryModelList;
+        Collections.reverse(categoryModelList);
 
     }
 
