@@ -22,6 +22,7 @@ import com.squaresdevelopers.latestphonewallpapers.utils.GeneralUtils;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import butterknife.ButterKnife;
@@ -38,6 +39,7 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.My
     public CategoriesAdapter(Activity context, ArrayList<CategoryModel> categoryModelList) {
         this.context = context;
         this.categoryModelList = categoryModelList;
+
     }
 
 
@@ -46,6 +48,7 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.My
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.custom_categories_layout, parent, false);
+        Collections.reverse(categoryModelList);
         return new MyViewHolder(itemView);
     }
 
@@ -67,7 +70,7 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.My
             public void onClick(View v) {
 
                 GeneralUtils.putStringValueInEditor(context, "id", model.getId());
-                GeneralUtils.putStringValueInEditor(context,"name",model.getName());
+                GeneralUtils.putStringValueInEditor(context, "name", model.getName());
                 GeneralUtils.connectFragmentWithDrawer(context, new ItemsFragment());
             }
         });

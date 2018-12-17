@@ -4,10 +4,7 @@ import android.app.WallpaperManager;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.media.MediaScannerConnection;
-import android.net.Uri;
 import android.os.Environment;
-import android.util.Log;
 import android.widget.Toast;
 
 import java.io.File;
@@ -25,7 +22,8 @@ import java.util.Date;
 public class FileUtilitiy {
 
 
-    public static void setWallPaper(Context context, String string) {
+    public static boolean setWallPaper(Context context, String string) {
+        boolean setWallpaper = false;
         WallpaperManager myWallpaperManager
                 = WallpaperManager.getInstance(context);
         try {
@@ -33,10 +31,13 @@ public class FileUtilitiy {
             Bitmap bitmap = BitmapFactory.decodeStream(url.openConnection().getInputStream());
             myWallpaperManager.setBitmap(bitmap);
             Toast.makeText(context, "WallPaper set Successfully", Toast.LENGTH_SHORT).show();
+            setWallpaper = true;
         } catch (IOException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
+
+        return setWallpaper;
     }
 
     public static boolean saveWallPaper(Context context, Bitmap bm) throws IOException {

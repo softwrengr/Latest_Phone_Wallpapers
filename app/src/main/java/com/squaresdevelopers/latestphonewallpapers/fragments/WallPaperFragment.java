@@ -91,6 +91,7 @@ public class WallPaperFragment extends Fragment {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_wall_paper, container, false);
         strModelNo = GeneralUtils.getModel(getActivity());
+        pDialog = AlertUtils.createProgressBar(getActivity());
         customActionBar();
         onback(view);
         likedImagesCurd = new LikedImagesCurd(getActivity());
@@ -131,8 +132,21 @@ public class WallPaperFragment extends Fragment {
         layoutApplyWallPaper.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getActivity(), "Applying...", Toast.LENGTH_SHORT).show();
-                FileUtilitiy.setWallPaper(getActivity(), image);
+
+                pDialog.show();
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        boolean setWallpaper = FileUtilitiy.setWallPaper(getActivity(), image);
+                        if (setWallpaper){
+                            pDialog.dismiss();
+                        }else {
+                            Toast.makeText(getActivity(), "error", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                },500);
+
+
 
             }
         });
@@ -155,7 +169,6 @@ public class WallPaperFragment extends Fragment {
             // TODO Auto-generated method stub
 
             super.onPreExecute();
-            pDialog = AlertUtils.createProgressBar(getActivity());
             pDialog.show();
 
         }
