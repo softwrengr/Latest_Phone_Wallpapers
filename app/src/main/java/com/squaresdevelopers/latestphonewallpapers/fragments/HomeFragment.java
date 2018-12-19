@@ -137,6 +137,9 @@ public class HomeFragment extends Fragment {
                     case R.id.sony:
                         initUI("Sony");
                         break;
+                    case R.id.one_plaus:
+                        initUI("OnePlus");
+                        break;
 
                 }
                 return true;

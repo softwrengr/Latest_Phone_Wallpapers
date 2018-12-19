@@ -69,7 +69,7 @@ public class ItemsFragment extends Fragment {
         initUI();
 
         MobileAds.initialize(getActivity(),
-                getActivity().getResources().getString(R.string.test_app_id));
+                getActivity().getResources().getString(R.string.app_id));
 
         adRequest = new AdRequest.Builder().build();
         adView.loadAd(adRequest);
@@ -85,6 +85,7 @@ public class ItemsFragment extends Fragment {
             public void onAdFailedToLoad(int errorCode) {
                 // Code to be executed when an ad request fails.
                 Log.d("error","ad fail to load = "+String.valueOf(errorCode));
+
             }
 
             @Override

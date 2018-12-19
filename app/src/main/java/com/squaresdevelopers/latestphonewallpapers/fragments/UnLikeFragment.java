@@ -9,6 +9,7 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
 import android.os.StrictMode;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
@@ -114,8 +115,19 @@ public class UnLikeFragment extends Fragment {
         layoutApplyWallPaper.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getActivity(), "Applying...", Toast.LENGTH_SHORT).show();
-                FileUtilitiy.setWallPaper(getActivity(), image);
+                alertDialog = AlertUtils.createProgressDialog(getActivity());
+                alertDialog.show();
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        boolean setWallpaper = FileUtilitiy.setWallPaper(getActivity(), image);
+                        if (setWallpaper){
+                            alertDialog.dismiss();
+                        }else {
+                            Toast.makeText(getActivity(), "error", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                },300);
 
             }
         });
@@ -268,29 +280,6 @@ public class UnLikeFragment extends Fragment {
     }
 
     private void apiCallUnLiked() {
-
-//        ApiInterface services = ApiClient.getApiClient().create(ApiInterface.class);
-//
-//        retrofit2.Call<UnLikeModel> delete = services.unLikeItems(String.valueOf(imageId),"DELETE");
-//        delete.enqueue(new Callback<UnLikeModel>() {
-//            @Override
-//            public void onResponse(retrofit2.Call<UnLikeModel> call, Response<UnLikeModel> response) {
-//                pDialog.dismiss();
-//                Toast.makeText(getActivity(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
-//                if (response.body().getMessage().equals("successfully Deleted the Like Wallpaper")) {
-//                    GeneralUtils.connectFragmentWithDrawer(getActivity(), new LikeFragment());
-//                    GeneralUtils.putStringValueInEditor(getActivity(), "liked_picture", "image not liked");
-//                } else {
-//                    Toast.makeText(getActivity(), "you got some error", Toast.LENGTH_SHORT).show();
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(retrofit2.Call<UnLikeModel> call, Throwable t) {
-//                Log.d("error", t.getMessage());
-//                pDialog.dismiss();
-//            }
-//        });
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, Config.DELETE + String.valueOf(imageId)
                 , new com.android.volley.Response.Listener<String>() {

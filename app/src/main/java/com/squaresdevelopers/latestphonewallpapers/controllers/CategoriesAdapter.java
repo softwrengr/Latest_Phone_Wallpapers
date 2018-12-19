@@ -49,7 +49,7 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.My
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.custom_categories_layout, parent, false);
-        Collections.reverse(categoryModelList);
+            Collections.reverse(categoryModelList);
         return new MyViewHolder(itemView);
     }
 

@@ -106,7 +106,7 @@ public class WallPaperFragment extends Fragment {
         StrictMode.setVmPolicy(builder.build());
 
         MobileAds.initialize(getActivity(),
-                getActivity().getResources().getString(R.string.test_app_id));
+                getActivity().getResources().getString(R.string.app_id));
 
         AdRequest adRequest = new AdRequest.Builder().build();
         adView.loadAd(adRequest);
@@ -133,18 +133,19 @@ public class WallPaperFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                pDialog.show();
+                alertDialog = AlertUtils.createProgressDialog(getActivity());
+                alertDialog.show();
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
                         boolean setWallpaper = FileUtilitiy.setWallPaper(getActivity(), image);
                         if (setWallpaper){
-                            pDialog.dismiss();
+                            alertDialog.dismiss();
                         }else {
                             Toast.makeText(getActivity(), "error", Toast.LENGTH_SHORT).show();
                         }
                     }
-                },500);
+                },300);
 
 
 

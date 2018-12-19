@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Latest Stock HD Wallpapers</string>
+    <string name="app_name">Latest StockWall</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
@@ -10,7 +10,6 @@
 
     <string name="action_settings">Settings</string>
 
-    <string name="banner_ad_unit_id">ca-app-pub-9746083138551194/6243916949</string>
-    <string name="test_banner_id">ca-app-pub-3940256099942544/6300978111</string>
-    <string name="test_app_id">ca-app-pub-3940256099942544~3347511713</string>
+    <string name="banner_id">ca-app-pub-5962186004579669/4217832485</string>
+    <string name="app_id">ca-app-pub-5962186004579669~8108265596</string>
 </resources>

@@ -48,8 +48,11 @@ dependencies {
     //noinspection GradleCompatible
     implementation 'com.google.firebase:firebase-ads:17.0.0'
     implementation 'com.google.android.gms:play-services-ads:17.0.0'
-    implementation 'com.google.firebase:firebase-ads:17.1.2'
+
 }
 
 
 apply plugin: 'com.google.gms.google-services'
+
+//keystore password = wallpaper00
+//passwrod = wallpaper11

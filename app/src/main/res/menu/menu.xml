@@ -11,6 +11,10 @@
         android:title="Samsung"/>
 
     <item
+        android:id="@+id/one_plaus"
+        android:title="OnePlus"/>
+
+    <item
         android:id="@+id/apple"
         android:title="Apple"/>
 
