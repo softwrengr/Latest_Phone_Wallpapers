@@ -14,7 +14,7 @@ public class ShareUtils {
         Intent sendIntent = new Intent();
         sendIntent.setAction(Intent.ACTION_SEND);
         sendIntent.putExtra(Intent.EXTRA_TEXT,
-                "Hey check out my app at:\n https://play.google.com/store/apps/details?id=com.google.android.apps.plus");
+                "Hey check out my app at:\n https://play.google.com/store/apps/details?id=com.squaresdevelopers.lateststockwallpapers&hl=en");
         sendIntent.setType("text/plain");
         return sendIntent;
     }

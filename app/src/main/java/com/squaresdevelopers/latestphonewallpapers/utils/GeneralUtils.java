@@ -26,7 +26,7 @@ public class GeneralUtils {
         return fragment;
     }
     public static Fragment connectFragmentWithDrawer(Context context, Fragment fragment) {
-        ((AppCompatActivity) context).getSupportFragmentManager().beginTransaction().replace(R.id.drawer_container, fragment).addToBackStack("").commit();
+        ((AppCompatActivity) context).getSupportFragmentManager().beginTransaction().replace(R.id.drawer_container, fragment).addToBackStack("abc").commit();
         return fragment;
     }
 
