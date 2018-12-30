@@ -15,7 +15,6 @@ import com.squaresdevelopers.latestphonewallpapers.dataModels.likeDataModel.Like
 import com.squaresdevelopers.latestphonewallpapers.dataModels.showLikeDataModel.ShowDetailModel;
 import com.squaresdevelopers.latestphonewallpapers.dataModels.wallpaperDataModel.ItemDetailModel;
 import com.squaresdevelopers.latestphonewallpapers.fragments.UnLikeFragment;
-import com.squaresdevelopers.latestphonewallpapers.fragments.WallPaperFragment;
 import com.squaresdevelopers.latestphonewallpapers.utils.GeneralUtils;
 import com.squareup.picasso.Picasso;
 

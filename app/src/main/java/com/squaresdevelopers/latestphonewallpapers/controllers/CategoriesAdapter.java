@@ -39,7 +39,7 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.My
     public CategoriesAdapter(Activity context, ArrayList<CategoryModel> categoryModelList) {
         this.context = context;
         this.categoryModelList = categoryModelList;
-        Collections.reverse(categoryModelList);
+     //   Collections.reverse(categoryModelList);
 
     }
 
@@ -49,7 +49,7 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.My
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.custom_categories_layout, parent, false);
-            Collections.reverse(categoryModelList);
+           // Collections.reverse(categoryModelList);
         return new MyViewHolder(itemView);
     }
 
@@ -59,12 +59,6 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.My
         final CategoryModel model = categoryModelList.get(position);
 
         holder.tvName.setText(model.getName());
-//        if(model.getImage()==null){
-//            holder.ivLayout.setImageDrawable(context.getResources().getDrawable(R.drawable.transparent_background));
-//        }
-//        else {
-//            Picasso.with(context).load(model.getImage()).into(holder.ivLayout);
-//        }
 
         holder.ivLayout.setOnClickListener(new View.OnClickListener() {
             @Override

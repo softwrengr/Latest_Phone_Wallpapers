@@ -21,6 +21,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -51,6 +52,7 @@ public class NetworkingCall {
                         model.setImage(image);
 
                         categoryModelList.add(model);
+                        Collections.reverse(categoryModelList);
                         categoriesAdapter.notifyDataSetChanged();
 
                     }

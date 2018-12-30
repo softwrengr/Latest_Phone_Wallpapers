@@ -34,32 +34,33 @@ public class ItemAdapter extends BaseAdapter {
     private LikedImagesCurd likedImagesCurd;
 
     public ItemAdapter(Context context, ArrayList<ItemDetailModel> itemReponseModelArrayList) {
-        this.itemReponseModelArrayList=itemReponseModelArrayList;
-        this.context=context;
+        this.itemReponseModelArrayList = itemReponseModelArrayList;
+        this.context = context;
 
         likedImagesCurd = new LikedImagesCurd(context);
-        if (context!=null)
-        {
-            this.layoutInflater=LayoutInflater.from(context);
+        if (context != null) {
+            this.layoutInflater = LayoutInflater.from(context);
 
         }
     }
 
     @Override
     public int getCount() {
-        if (itemReponseModelArrayList!=null) return itemReponseModelArrayList.size();
+        if (itemReponseModelArrayList != null) return itemReponseModelArrayList.size();
         return 0;
     }
 
     @Override
     public Object getItem(int position) {
-        if(itemReponseModelArrayList != null && itemReponseModelArrayList.size() > position) return  itemReponseModelArrayList.get(position);
+        if (itemReponseModelArrayList != null && itemReponseModelArrayList.size() > position)
+            return itemReponseModelArrayList.get(position);
         return null;
     }
 
     @Override
     public long getItemId(int position) {
-        if(itemReponseModelArrayList != null && itemReponseModelArrayList.size() > position) return  itemReponseModelArrayList.size();
+        if (itemReponseModelArrayList != null && itemReponseModelArrayList.size() > position)
+            return itemReponseModelArrayList.size();
         return 0;
     }
 
@@ -69,24 +70,21 @@ public class ItemAdapter extends BaseAdapter {
         final ItemDetailModel model = itemReponseModelArrayList.get(position);
 
         viewHolder = new MyViewHolder();
-        convertView=layoutInflater.inflate(R.layout.wallpaper_layout,parent,false);
+        convertView = layoutInflater.inflate(R.layout.wallpaper_layout, parent, false);
         viewHolder.imageView = convertView.findViewById(R.id.iv_wallpaper);
-       // viewHolder.tvModelName=(TextView)convertView.findViewById(R.id.tv_model_name);
         viewHolder.layout = convertView.findViewById(R.id.layout);
 
-//        viewHolder.tvModelName.setText(model.getModelNumber());
         Picasso.with(context).load(model.getImage()).into(viewHolder.imageView);
 
         viewHolder.layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                boolean b  = likedImagesCurd.checkImageUrl(model.getImage());
-                GeneralUtils.putBooleanValueInEditor(context,"like_image",b);
-
-                GeneralUtils.putStringValueInEditor(context,"image",model.getImage());
-                GeneralUtils.putStringValueInEditor(context,"model_no",model.getModelNumber());
-                GeneralUtils.connectFragmentWithDrawer(context,new WallPaperFragment());
+                boolean b = likedImagesCurd.checkImageUrl(model.getImage());
+                GeneralUtils.putBooleanValueInEditor(context, "like_image", b);
+                GeneralUtils.putStringValueInEditor(context, "image", model.getImage());
+                GeneralUtils.putStringValueInEditor(context, "model_no", model.getModelNumber());
+                GeneralUtils.connectFragmentWithDrawer(context, new WallPaperFragment());
             }
         });
 
@@ -95,7 +93,7 @@ public class ItemAdapter extends BaseAdapter {
     }
 
 
-    private class MyViewHolder  {
+    private class MyViewHolder {
         RelativeLayout layout;
         TextView tvModelName;
         ImageView imageView;

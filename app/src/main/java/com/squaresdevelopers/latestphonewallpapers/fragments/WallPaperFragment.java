@@ -139,14 +139,13 @@ public class WallPaperFragment extends Fragment {
                     @Override
                     public void run() {
                         boolean setWallpaper = FileUtilitiy.setWallPaper(getActivity(), image);
-                        if (setWallpaper){
+                        if (setWallpaper) {
                             alertDialog.dismiss();
-                        }else {
+                        } else {
                             Toast.makeText(getActivity(), "error", Toast.LENGTH_SHORT).show();
                         }
                     }
-                },300);
-
+                }, 300);
 
 
             }
@@ -385,7 +384,6 @@ public class WallPaperFragment extends Fragment {
     private void initSaveWallpaper() {
 
         try {
-//            Toast.makeText(getActivity(), "Saving please wait a while!", Toast.LENGTH_SHORT).show();
             URL url = new URL(image);
             bitmap = BitmapFactory.decodeStream(url.openConnection().getInputStream());
             boolean isSaveImage = FileUtilitiy.saveWallPaper(getActivity(), bitmap);

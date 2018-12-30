@@ -22,22 +22,16 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/4.6/fileHashes/fileHashes.lock" afterPath="$PROJECT_DIR$/.gradle/4.6/fileHashes/fileHashes.lock" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/4.6/javaCompile/classAnalysis.bin" afterPath="$PROJECT_DIR$/.gradle/4.6/javaCompile/classAnalysis.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/4.6/javaCompile/javaCompile.lock" afterPath="$PROJECT_DIR$/.gradle/4.6/javaCompile/javaCompile.lock" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/4.6/javaCompile/taskHistory.bin" afterPath="$PROJECT_DIR$/.gradle/4.6/javaCompile/taskHistory.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/4.6/taskHistory/taskHistory.bin" afterPath="$PROJECT_DIR$/.gradle/4.6/taskHistory/taskHistory.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/4.6/taskHistory/taskHistory.lock" afterPath="$PROJECT_DIR$/.gradle/4.6/taskHistory/taskHistory.lock" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/mipmap-hdpi/icon.png" afterPath="$PROJECT_DIR$/app/src/main/res/mipmap-hdpi/icon.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/mipmap-mdpi/icon.png" afterPath="$PROJECT_DIR$/app/src/main/res/mipmap-mdpi/icon.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/mipmap-xhdpi/icon.png" afterPath="$PROJECT_DIR$/app/src/main/res/mipmap-xhdpi/icon.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/mipmap-xxhdpi/icon.png" afterPath="$PROJECT_DIR$/app/src/main/res/mipmap-xxhdpi/icon.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/mipmap-xxxhdpi/icon.png" afterPath="$PROJECT_DIR$/app/src/main/res/mipmap-xxxhdpi/icon.png" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/app.iml" afterPath="$PROJECT_DIR$/app/app.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build.gradle" afterPath="$PROJECT_DIR$/app/build.gradle" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/squaresdevelopers/latestphonewallpapers/activities/NavigationActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/squaresdevelopers/latestphonewallpapers/activities/NavigationActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/squaresdevelopers/latestphonewallpapers/utils/GeneralUtils.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/squaresdevelopers/latestphonewallpapers/utils/GeneralUtils.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/squaresdevelopers/latestphonewallpapers/utils/ShareUtils.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/squaresdevelopers/latestphonewallpapers/utils/ShareUtils.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/squaresdevelopers/latestphonewallpapers/controllers/CategoriesAdapter.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/squaresdevelopers/latestphonewallpapers/controllers/CategoriesAdapter.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/squaresdevelopers/latestphonewallpapers/controllers/ItemAdapter.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/squaresdevelopers/latestphonewallpapers/controllers/ItemAdapter.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/squaresdevelopers/latestphonewallpapers/controllers/LikeItemAdapter.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/squaresdevelopers/latestphonewallpapers/controllers/LikeItemAdapter.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/squaresdevelopers/latestphonewallpapers/fragments/WallPaperFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/squaresdevelopers/latestphonewallpapers/fragments/WallPaperFragment.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/squaresdevelopers/latestphonewallpapers/networking/NetworkingCall.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/squaresdevelopers/latestphonewallpapers/networking/NetworkingCall.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -131,22 +125,12 @@
     </system>
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="ItemAdapter.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/squaresdevelopers/latestphonewallpapers/controllers/ItemAdapter.java">
+    <leaf>
+      <file leaf-file-name="HomeFragment.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/squaresdevelopers/latestphonewallpapers/fragments/HomeFragment.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="402">
-              <caret line="88" column="45" lean-forward="false" selection-start-line="88" selection-start-column="45" selection-end-line="88" selection-end-column="45" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="GeneralUtils.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/squaresdevelopers/latestphonewallpapers/utils/GeneralUtils.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="315">
-              <caret line="27" column="27" lean-forward="false" selection-start-line="27" selection-start-column="27" selection-end-line="27" selection-end-column="27" />
+            <state relative-caret-position="281">
+              <caret line="67" column="26" lean-forward="false" selection-start-line="67" selection-start-column="26" selection-end-line="67" selection-end-column="26" />
               <folding />
             </state>
           </provider>
@@ -2459,30 +2443,30 @@
         <option value="$PROJECT_DIR$/app/src/main/res/values-v21/styles.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/values/styles.xml" />
         <option value="$PROJECT_DIR$/build.gradle" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/squaresdevelopers/latestphonewallpapers/networking/NetworkingCall.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_home.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/squaresdevelopers/latestphonewallpapers/dataBase/LikedImagesDataBase.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/squaresdevelopers/latestphonewallpapers/fragments/LikeFragment.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/squaresdevelopers/latestphonewallpapers/controllers/LikeItemAdapter.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/squaresdevelopers/latestphonewallpapers/dataBase/LikedImagesCurd.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/squaresdevelopers/latestphonewallpapers/controllers/ItemAdapter.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/menu/activity_navigation_drawer.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/squaresdevelopers/latestphonewallpapers/utils/FileUtilitiy.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/squaresdevelopers/latestphonewallpapers/controllers/CategoriesAdapter.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/squaresdevelopers/latestphonewallpapers/fragments/HomeFragment.java" />
         <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/menu/menu.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/squaresdevelopers/latestphonewallpapers/fragments/UnLikeFragment.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/custom_actionbar.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_wall_paper.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/squaresdevelopers/latestphonewallpapers/fragments/WallPaperFragment.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_items.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/squaresdevelopers/latestphonewallpapers/fragments/ItemsFragment.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/squaresdevelopers/latestphonewallpapers/utils/ShareUtils.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/squaresdevelopers/latestphonewallpapers/activities/NavigationActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
         <option value="$PROJECT_DIR$/app/build.gradle" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/squaresdevelopers/latestphonewallpapers/utils/GeneralUtils.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/squaresdevelopers/latestphonewallpapers/fragments/WallPaperFragment.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/squaresdevelopers/latestphonewallpapers/controllers/LikeItemAdapter.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/squaresdevelopers/latestphonewallpapers/controllers/ItemAdapter.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/squaresdevelopers/latestphonewallpapers/controllers/CategoriesAdapter.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/squaresdevelopers/latestphonewallpapers/networking/NetworkingCall.java" />
       </list>
     </option>
   </component>
@@ -2505,6 +2489,37 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
+      <pane id="ProjectPane">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Latest_Phone_Wallpapers" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Latest_Phone_Wallpapers" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Latest_Phone_Wallpapers" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Latest_Phone_Wallpapers" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
+      <pane id="PackagesPane" />
+      <pane id="Scratches" />
       <pane id="AndroidView">
         <subPane>
           <PATH>
@@ -2583,43 +2598,12 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="controllers" />
+              <option name="myItemId" value="fragments" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scratches" />
-      <pane id="ProjectPane">
-        <subPane>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Latest_Phone_Wallpapers" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Latest_Phone_Wallpapers" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Latest_Phone_Wallpapers" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Latest_Phone_Wallpapers" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-      </pane>
-      <pane id="Scope" />
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -2758,7 +2742,7 @@
       <option name="DEEP_LINK" value="" />
       <option name="ACTIVITY_CLASS" value="" />
       <method>
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1546163609601" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1546186699305" />
       </method>
     </configuration>
     <configuration default="true" type="AndroidTestRunConfigurationType" factoryName="Android Instrumented Tests">
@@ -2805,7 +2789,7 @@
         <option name="ADVANCED_PROFILING_ENABLED" value="false" />
       </Profilers>
       <method>
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1546163609601" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1546186699305" />
       </method>
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
@@ -2837,27 +2821,6 @@
         </option>
         <option name="vmOptions" />
       </ExternalSystemSettings>
-      <method />
-    </configuration>
-    <configuration default="true" type="JUnit" factoryName="JUnit">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <module name="" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="METHOD_NAME" />
-      <option name="TEST_OBJECT" value="class" />
-      <option name="VM_PARAMETERS" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="singleModule" />
-      </option>
-      <envs />
-      <patterns />
       <method />
     </configuration>
     <configuration default="true" type="JarApplication" factoryName="JAR Application">
@@ -2979,7 +2942,7 @@
       <option name="DEEP_LINK" value="" />
       <option name="ACTIVITY_CLASS" value="" />
       <method>
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1546163609602" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1546186699306" />
       </method>
     </configuration>
     <list size="2">
@@ -3115,7 +3078,21 @@
       <option name="project" value="LOCAL" />
       <updated>1545195834741</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="icon changed and minor bug fixed">
+      <created>1546163708405</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1546163708405</updated>
+    </task>
+    <task id="LOCAL-00017" summary="icon changed and minor bug fixed">
+      <created>1546163750008</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1546163750008</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -3203,7 +3180,8 @@
     <MESSAGE value="banner ad integrated" />
     <MESSAGE value="like" />
     <MESSAGE value="completed first version" />
-    <option name="LAST_COMMIT_MESSAGE" value="completed first version" />
+    <MESSAGE value="icon changed and minor bug fixed" />
+    <option name="LAST_COMMIT_MESSAGE" value="icon changed and minor bug fixed" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -3223,7 +3201,6 @@
     <entry file="file://$PROJECT_DIR$/app/google-services.json" />
     <entry file="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/play-services-ads-lite-17.1.2.aar/7b28e5e07434c05c11134fe8b707895f/jars/classes.jar!/com/google/android/gms/ads/AdRequest.class" />
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/squaresdevelopers/latestphonewallpapers/activities/MainActivity.java" />
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/squaresdevelopers/latestphonewallpapers/networking/NetworkingCall.java" />
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_home.xml" />
     <entry file="file://$PROJECT_DIR$/app/build/generated/source/apt/debug/com/squaresdevelopers/latestphonewallpapers/fragments/ItemsFragment_ViewBinding.java" />
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/squaresdevelopers/latestphonewallpapers/dataModels/LikedImagesmodel.java">
@@ -3253,13 +3230,6 @@
       </provider>
     </entry>
     <entry file="file://$USER_HOME$/Android/Sdk/sources/android-28/android/os/StrictMode.java" />
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/squaresdevelopers/latestphonewallpapers/controllers/LikeItemAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="915">
-          <caret line="80" column="72" lean-forward="false" selection-start-line="80" selection-start-column="72" selection-end-line="80" selection-end-column="72" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/squaresdevelopers/latestphonewallpapers/dataBase/LikedImagesCurd.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="465">
@@ -3381,13 +3351,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="1" column="37" lean-forward="false" selection-start-line="1" selection-start-column="37" selection-end-line="1" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/custom_actionbar.xml">
       <provider editor-type-id="android-designer2">
         <state />
@@ -3409,58 +3372,19 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="180">
           <caret line="12" column="46" lean-forward="false" selection-start-line="12" selection-start-column="46" selection-end-line="12" selection-end-column="46" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/squaresdevelopers/latestphonewallpapers/fragments/HomeFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="648">
-          <caret line="78" column="65" lean-forward="false" selection-start-line="78" selection-start-column="65" selection-end-line="78" selection-end-column="65" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
-      <provider editor-type-id="android-manifest">
-        <state />
-      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="236">
           <caret line="18" column="39" lean-forward="false" selection-start-line="18" selection-start-column="8" selection-end-line="18" selection-end-column="39" />
           <folding />
         </state>
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/build.gradle">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="252">
-          <caret line="33" column="55" lean-forward="false" selection-start-line="33" selection-start-column="55" selection-end-line="33" selection-end-column="55" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/squaresdevelopers/latestphonewallpapers/fragments/ItemsFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="51" column="13" lean-forward="false" selection-start-line="51" selection-start-column="13" selection-end-line="51" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/squaresdevelopers/latestphonewallpapers/fragments/WallPaperFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-271">
-          <caret line="68" column="13" lean-forward="false" selection-start-line="68" selection-start-column="13" selection-end-line="68" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/squaresdevelopers/latestphonewallpapers/controllers/CategoriesAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="422">
-          <caret line="74" column="73" lean-forward="false" selection-start-line="74" selection-start-column="73" selection-end-line="74" selection-end-column="73" />
-          <folding />
-        </state>
+      <provider editor-type-id="android-manifest">
+        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml">
@@ -3485,29 +3409,95 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/build.gradle">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="252">
+          <caret line="33" column="55" lean-forward="false" selection-start-line="33" selection-start-column="55" selection-end-line="33" selection-end-column="55" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/squaresdevelopers/latestphonewallpapers/controllers/LikeItemAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="219">
+          <caret line="16" column="76" lean-forward="false" selection-start-line="16" selection-start-column="76" selection-end-line="16" selection-end-column="76" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/squaresdevelopers/latestphonewallpapers/fragments/WallPaperFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="68" column="21" lean-forward="false" selection-start-line="68" selection-start-column="21" selection-end-line="68" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/content_navigation.xml">
       <provider editor-type-id="android-designer2">
         <state />
       </provider>
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="12" column="0" lean-forward="true" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/squaresdevelopers/latestphonewallpapers/controllers/ItemAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="402">
-          <caret line="88" column="45" lean-forward="false" selection-start-line="88" selection-start-column="45" selection-end-line="88" selection-end-column="45" />
+        <state relative-caret-position="90">
+          <caret line="6" column="16" lean-forward="false" selection-start-line="6" selection-start-column="16" selection-end-line="6" selection-end-column="16" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/squaresdevelopers/latestphonewallpapers/utils/GeneralUtils.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="27" column="27" lean-forward="false" selection-start-line="27" selection-start-column="27" selection-end-line="27" selection-end-column="27" />
+        <state relative-caret-position="292">
+          <caret line="28" column="103" lean-forward="false" selection-start-line="28" selection-start-column="103" selection-end-line="28" selection-end-column="103" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/squaresdevelopers/latestphonewallpapers/fragments/ItemsFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1272">
+          <caret line="51" column="13" lean-forward="false" selection-start-line="51" selection-start-column="13" selection-end-line="51" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/squaresdevelopers/latestphonewallpapers/controllers/ItemAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="378">
+          <caret line="86" column="38" lean-forward="false" selection-start-line="86" selection-start-column="38" selection-end-line="86" selection-end-column="38" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="1" column="34" lean-forward="false" selection-start-line="1" selection-start-column="34" selection-end-line="1" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/squaresdevelopers/latestphonewallpapers/controllers/CategoriesAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="60" column="47" lean-forward="false" selection-start-line="60" selection-start-column="47" selection-end-line="60" selection-end-column="47" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/squaresdevelopers/latestphonewallpapers/networking/NetworkingCall.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="465">
+          <caret line="54" column="21" lean-forward="false" selection-start-line="54" selection-start-column="21" selection-end-line="54" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/squaresdevelopers/latestphonewallpapers/fragments/HomeFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="281">
+          <caret line="67" column="26" lean-forward="false" selection-start-line="67" selection-start-column="26" selection-end-line="67" selection-end-column="26" />
           <folding />
         </state>
       </provider>
