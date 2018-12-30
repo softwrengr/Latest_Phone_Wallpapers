@@ -13,6 +13,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
 import com.squaresdevelopers.latestphonewallpapers.R;
+import com.squaresdevelopers.latestphonewallpapers.fragments.AboutFragment;
 import com.squaresdevelopers.latestphonewallpapers.fragments.HomeFragment;
 import com.squaresdevelopers.latestphonewallpapers.fragments.LikeFragment;
 import com.squaresdevelopers.latestphonewallpapers.utils.GeneralUtils;
@@ -78,6 +79,12 @@ public class NavigationActivity extends AppCompatActivity
         } else if (id == R.id.nav_share) {
             startActivity(ShareUtils.shareApp());
         }
+        else if (id == R.id.nav_policy) {
+         startActivity(new Intent(ShareUtils.loadPrivacyPolicy()));
+        }
+        else if (id == R.id.nav_about) {
+            GeneralUtils.connectFragmentWithDrawer(NavigationActivity.this,new AboutFragment());
+        }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
@@ -92,5 +99,6 @@ public class NavigationActivity extends AppCompatActivity
                     Uri.parse("http://play.google.com/store/apps/details?id=" + this.getPackageName())));
         }
     }
+
 
 }

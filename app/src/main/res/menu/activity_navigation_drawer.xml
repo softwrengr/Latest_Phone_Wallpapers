@@ -13,10 +13,7 @@
             android:id="@+id/nav_liked"
             android:icon="@drawable/like_image"
             android:title="Liked" />
-        <!--<item-->
-            <!--android:id="@+id/nav_policy"-->
-            <!--android:icon="@drawable/ic_menu_gallery"-->
-            <!--android:title="Policy" />-->
+
         <item
             android:id="@+id/nav_feedback"
             android:icon="@drawable/feedback"
@@ -31,6 +28,20 @@
                 android:icon="@drawable/ic_menu_share"
                 android:title="Share App" />
 
+        </menu>
+    </item>
+
+    <item android:title="Information">
+        <menu>
+            <item
+            android:id="@+id/nav_policy"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="Policy" />
+
+            <item
+            android:id="@+id/nav_about"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="About Us" />
         </menu>
     </item>
 

@@ -1,6 +1,8 @@
 package com.squaresdevelopers.latestphonewallpapers.controllers;
 
 import android.content.Context;
+import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -75,7 +77,6 @@ public class ItemAdapter extends BaseAdapter {
         viewHolder.layout = convertView.findViewById(R.id.layout);
 
         Picasso.with(context).load(model.getImage()).into(viewHolder.imageView);
-
         viewHolder.layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -84,7 +85,7 @@ public class ItemAdapter extends BaseAdapter {
                 GeneralUtils.putBooleanValueInEditor(context, "like_image", b);
                 GeneralUtils.putStringValueInEditor(context, "image", model.getImage());
                 GeneralUtils.putStringValueInEditor(context, "model_no", model.getModelNumber());
-                GeneralUtils.connectFragmentWithDrawer(context, new WallPaperFragment());
+                GeneralUtils.connect(context, new WallPaperFragment());
             }
         });
 
@@ -95,7 +96,6 @@ public class ItemAdapter extends BaseAdapter {
 
     private class MyViewHolder {
         RelativeLayout layout;
-        TextView tvModelName;
         ImageView imageView;
     }
 }

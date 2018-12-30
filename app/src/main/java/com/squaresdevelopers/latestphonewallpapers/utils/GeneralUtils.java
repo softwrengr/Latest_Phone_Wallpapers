@@ -30,6 +30,10 @@ public class GeneralUtils {
         return fragment;
     }
 
+    public static Fragment connect(Context context, Fragment fragment) {
+        ((AppCompatActivity) context).getSupportFragmentManager().beginTransaction().replace(R.id.drawer_container, fragment).commit();
+        return fragment;
+    }
 
     public static SharedPreferences.Editor putStringValueInEditor(Context context, String key, String value) {
         sharedPreferences = getSharedPreferences(context);

@@ -68,6 +68,8 @@ public class ItemsFragment extends Fragment {
         customActionBar();
         initUI();
 
+        onback(view);
+
         MobileAds.initialize(getActivity(),
                 getActivity().getResources().getString(R.string.app_id));
 
@@ -172,4 +174,21 @@ public class ItemsFragment extends Fragment {
         super.onDestroy();
     }
 
+    private void onback(View view) {
+
+        view.setFocusableInTouchMode(true);
+        view.requestFocus();
+        view.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+
+                if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_UP) {
+                    GeneralUtils.connect(getActivity(),new HomeFragment());
+                    return true;
+                }
+                return false;
+            }
+        });
+
+    }
 }

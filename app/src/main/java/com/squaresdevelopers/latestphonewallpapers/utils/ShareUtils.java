@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 
+import com.squaresdevelopers.latestphonewallpapers.R;
+
 /**
  * Created by eapple on 13/12/2018.
  */
@@ -26,5 +28,12 @@ public class ShareUtils {
         return  goToMarket.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY |
                 Intent.FLAG_ACTIVITY_NEW_DOCUMENT |
                 Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
+    }
+
+
+    public static Intent loadPrivacyPolicy(){
+        Intent i = new Intent(Intent.ACTION_VIEW);
+        i.setData(Uri.parse("https://docs.google.com/document/d/1Dsob8l6ykSdqHWPk9SDpRofj4xlf9RvZ1Pqa_XIQyPA/edit"));
+        return i;
     }
 }

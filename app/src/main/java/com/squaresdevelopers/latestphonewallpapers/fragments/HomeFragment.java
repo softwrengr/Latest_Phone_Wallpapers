@@ -79,7 +79,7 @@ public class HomeFragment extends Fragment {
         View mCustomView = mInflater.inflate(R.layout.custom_actionbar, null);
         TextView tvTitle = mCustomView.findViewById(R.id.title);
         final TextView tvFilter = mCustomView.findViewById(R.id.ivFilter);
-        tvTitle.setText("Stock HD Wallpapers");
+        tvTitle.setText(getResources().getString(R.string.app_name));
         tvFilter.setVisibility(View.VISIBLE);
         tvFilter.setOnClickListener(new View.OnClickListener() {
             @Override

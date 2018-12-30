@@ -65,6 +65,8 @@ import okhttp3.RequestBody;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static android.content.ContentValues.TAG;
+
 
 public class WallPaperFragment extends Fragment {
     private ProgressDialog pDialog;
@@ -110,6 +112,8 @@ public class WallPaperFragment extends Fragment {
 
         AdRequest adRequest = new AdRequest.Builder().build();
         adView.loadAd(adRequest);
+
+        onback(view);
 
         return view;
     }
@@ -236,13 +240,13 @@ public class WallPaperFragment extends Fragment {
         view.setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
-                //  Log.i(tag, "keyCode: " + keyCode);
+
                 if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_UP) {
-                    //   Log.i(tag, "onKey Back listener is working!!!");
                     getFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
                     File filepath = Environment.getExternalStorageDirectory();
                     File dir = new File(filepath.getAbsolutePath() + "/.HD Wallpaper");
                     deleteDir(dir);
+                    GeneralUtils.connect(getActivity(),new ItemsFragment());
                     return true;
                 }
                 return false;
@@ -316,6 +320,8 @@ public class WallPaperFragment extends Fragment {
 
         return valid;
     }
+
+
 
 
     public void customActionBar() {
@@ -394,6 +400,7 @@ public class WallPaperFragment extends Fragment {
             System.out.println(e);
         }
     }
+
 }
 
 

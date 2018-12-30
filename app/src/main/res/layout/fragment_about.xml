@@ -1,0 +1,55 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.squaresdevelopers.latestphonewallpapers.fragments.AboutFragment">
+
+
+    <TextView
+        android:id="@+id/about"
+        android:layout_width="100sp"
+        android:layout_height="wrap_content"
+        android:text="About Us :"
+        android:textColor="@color/colorPrimary"
+        android:layout_marginLeft="10sp"
+        android:layout_marginRight="10sp"
+        android:layout_marginTop="10sp"
+        android:textSize="18sp"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="12sp"
+        android:layout_marginRight="10sp"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:layout_below="@id/about"
+        android:text="@string/about"/>
+
+    <TextView
+        android:id="@+id/developer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="12sp"
+        android:layout_marginRight="10sp"
+        android:layout_alignParentBottom="true"
+        android:textSize="16sp"
+        android:layout_marginBottom="5sp"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:text="Developer Email:"/>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5sp"
+        android:layout_marginRight="10sp"
+        android:layout_alignParentBottom="true"
+        android:layout_toRightOf="@id/developer"
+        android:layout_marginBottom="5sp"
+        android:textSize="16sp"
+        android:text="@string/email"/>
+
+</RelativeLayout>
