@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.squaresdevelopers.latestphonewallpapers.R;
 import com.squaresdevelopers.latestphonewallpapers.dataModels.likeDataModel.LikeDetailModel;
 import com.squaresdevelopers.latestphonewallpapers.dataModels.showLikeDataModel.ShowDetailModel;
@@ -68,7 +69,8 @@ public class LikeItemAdapter extends BaseAdapter {
         viewHolder.imageView = convertView.findViewById(R.id.iv_wallpaper);
         viewHolder.layout = convertView.findViewById(R.id.layout);
 
-        Picasso.with(context).load(model.getImageUrl()).into(viewHolder.imageView);
+        //Picasso.with(context).load(model.getImageUrl()).into(viewHolder.imageView);
+        Glide.with(context).load(model.getImageUrl()).into(viewHolder.imageView);
 
         viewHolder.layout.setOnClickListener(new View.OnClickListener() {
             @Override

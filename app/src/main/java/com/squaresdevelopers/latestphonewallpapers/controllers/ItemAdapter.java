@@ -76,11 +76,11 @@ public class ItemAdapter extends BaseAdapter {
         viewHolder.imageView = convertView.findViewById(R.id.iv_wallpaper);
         viewHolder.layout = convertView.findViewById(R.id.layout);
 
-        Picasso.with(context).load(model.getImage()).into(viewHolder.imageView);
+        //Picasso.with(context).load(model.getImage()).into(viewHolder.imageView);
+        Glide.with(context).load(model.getImage()).into(viewHolder.imageView);
         viewHolder.layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 boolean b = likedImagesCurd.checkImageUrl(model.getImage());
                 GeneralUtils.putBooleanValueInEditor(context, "like_image", b);
                 GeneralUtils.putStringValueInEditor(context, "image", model.getImage());

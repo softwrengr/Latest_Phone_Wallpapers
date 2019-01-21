@@ -4,7 +4,11 @@ import android.app.WallpaperManager;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Environment;
+import android.os.StrictMode;
+import android.util.Log;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import java.io.File;
@@ -21,20 +25,21 @@ import java.util.Date;
 
 public class FileUtilitiy {
 
-
-    public static boolean setWallPaper(Context context, String string) {
+    public static boolean setWallPaper(Context context, ImageView string) {
         boolean setWallpaper = false;
-        WallpaperManager myWallpaperManager
-                = WallpaperManager.getInstance(context);
+        Bitmap bitmap;
+        WallpaperManager myWallpaperManager = WallpaperManager.getInstance(context);
         try {
-            URL url = new URL(string);
-            Bitmap bitmap = BitmapFactory.decodeStream(url.openConnection().getInputStream());
+
+            bitmap = ((BitmapDrawable) string.getDrawable()).getBitmap();
             myWallpaperManager.setBitmap(bitmap);
             Toast.makeText(context, "WallPaper set Successfully", Toast.LENGTH_SHORT).show();
             setWallpaper = true;
+
+
         } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+            Log.d("zma", e.getMessage());
+            Toast.makeText(context, e.getMessage(), Toast.LENGTH_SHORT).show();
         }
 
         return setWallpaper;

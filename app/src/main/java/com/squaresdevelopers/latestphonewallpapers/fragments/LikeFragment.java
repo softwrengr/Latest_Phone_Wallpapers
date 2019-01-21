@@ -63,10 +63,6 @@ public class LikeFragment extends Fragment {
         likedImagesCurd = new LikedImagesCurd(getActivity());
 
 
-
-
-
-
         initUI();
 
 
@@ -76,7 +72,7 @@ public class LikeFragment extends Fragment {
     }
 
     private void initUI() {
-        ButterKnife.bind(this,view);
+        ButterKnife.bind(this, view);
         strDeviceID = GeneralUtils.getDeviceID(getActivity());
         alertDialog = AlertUtils.createProgressDialog(getActivity());
         alertDialog.show();
@@ -87,7 +83,7 @@ public class LikeFragment extends Fragment {
 
     }
 
-    private void apiCall(){
+    private void apiCall() {
         ApiInterface services = ApiClient.getApiClient().create(ApiInterface.class);
         Call<ShowLikeResponseModel> categoriesResponseModelCall = services.showLikeItems(strDeviceID);
         categoriesResponseModelCall.enqueue(new Callback<ShowLikeResponseModel>() {
@@ -101,7 +97,7 @@ public class LikeFragment extends Fragment {
 
             @Override
             public void onFailure(Call<ShowLikeResponseModel> call, Throwable t) {
-                Log.d("zma",t.getMessage());
+                Log.d("zma", t.getMessage());
                 alertDialog.dismiss();
             }
         });

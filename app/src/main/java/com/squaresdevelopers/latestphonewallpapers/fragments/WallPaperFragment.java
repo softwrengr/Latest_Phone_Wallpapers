@@ -2,6 +2,7 @@ package com.squaresdevelopers.latestphonewallpapers.fragments;
 
 import android.app.DownloadManager;
 import android.app.ProgressDialog;
+import android.app.WallpaperManager;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
@@ -32,6 +33,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
@@ -103,9 +105,11 @@ public class WallPaperFragment extends Fragment {
             ivFavorite.setImageDrawable(getActivity().getResources().getDrawable(R.drawable.like));
         }
 
+        NetworkUtils.grantPermession(getActivity());
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
+
         initUI();
-        StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
-        StrictMode.setVmPolicy(builder.build());
 
         MobileAds.initialize(getActivity(),
                 getActivity().getResources().getString(R.string.app_id));
@@ -129,7 +133,7 @@ public class WallPaperFragment extends Fragment {
         if (image.equals("") || image == null) {
             ivWallPaper.setImageDrawable(getActivity().getResources().getDrawable(R.drawable.transparent_background));
         } else {
-            Picasso.with(getActivity()).load(image).into(ivWallPaper);
+            Glide.with(getActivity()).load(image).into(ivWallPaper);
         }
 
 
@@ -139,10 +143,11 @@ public class WallPaperFragment extends Fragment {
 
                 alertDialog = AlertUtils.createProgressDialog(getActivity());
                 alertDialog.show();
+
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        boolean setWallpaper = FileUtilitiy.setWallPaper(getActivity(), image);
+                        boolean setWallpaper = FileUtilitiy.setWallPaper(getActivity(), ivWallPaper);
                         if (setWallpaper) {
                             alertDialog.dismiss();
                         } else {
@@ -246,7 +251,7 @@ public class WallPaperFragment extends Fragment {
                     File filepath = Environment.getExternalStorageDirectory();
                     File dir = new File(filepath.getAbsolutePath() + "/.HD Wallpaper");
                     deleteDir(dir);
-                    GeneralUtils.connect(getActivity(),new ItemsFragment());
+                    GeneralUtils.connect(getActivity(), new ItemsFragment());
                     return true;
                 }
                 return false;
@@ -320,8 +325,6 @@ public class WallPaperFragment extends Fragment {
 
         return valid;
     }
-
-
 
 
     public void customActionBar() {
@@ -400,6 +403,7 @@ public class WallPaperFragment extends Fragment {
             System.out.println(e);
         }
     }
+
 
 }
 

@@ -13,8 +13,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-       // GeneralUtils.connectFragment(MainActivity.this,new TabsFragment());
-
         startActivity(new Intent(MainActivity.this,NavigationActivity.class));
 
     }

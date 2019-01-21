@@ -67,7 +67,8 @@ public class NetworkingCall {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-
+                alertDialog.dismiss();
+                Toast.makeText(context, error.getMessage(), Toast.LENGTH_SHORT).show();
             }
         }) {
             @Override

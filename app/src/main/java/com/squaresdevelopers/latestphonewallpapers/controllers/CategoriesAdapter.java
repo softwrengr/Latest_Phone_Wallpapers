@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 import com.squaresdevelopers.latestphonewallpapers.R;
 import com.squaresdevelopers.latestphonewallpapers.dataModels.CategoryModel;
+import com.squaresdevelopers.latestphonewallpapers.dataModels.categoryListDataModel.CategoryDetailModel;
 import com.squaresdevelopers.latestphonewallpapers.dataModels.wallpaperDataModel.ItemDetailModel;
 import com.squaresdevelopers.latestphonewallpapers.fragments.ItemsFragment;
 import com.squaresdevelopers.latestphonewallpapers.utils.GeneralUtils;
@@ -33,10 +34,10 @@ import butterknife.ButterKnife;
 
 public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.MyViewHolder> {
     private Context context;
-    private List<CategoryModel> categoryModelList;
+    private List<CategoryDetailModel> categoryModelList;
 
 
-    public CategoriesAdapter(Activity context, ArrayList<CategoryModel> categoryModelList) {
+    public CategoriesAdapter(Activity context, ArrayList<CategoryDetailModel> categoryModelList) {
         this.context = context;
         this.categoryModelList = categoryModelList;
      //   Collections.reverse(categoryModelList);
@@ -49,23 +50,23 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.My
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.custom_categories_layout, parent, false);
-           // Collections.reverse(categoryModelList);
+               // Collections.reverse(categoryModelList);
         return new MyViewHolder(itemView);
     }
 
     @SuppressLint("ResourceType")
     @Override
     public void onBindViewHolder(@NonNull final MyViewHolder holder, final int position) {
-        final CategoryModel model = categoryModelList.get(position);
+        final CategoryDetailModel model = categoryModelList.get(position);
 
-        holder.tvName.setText(model.getName());
+        holder.tvName.setText(model.getCategoryName());
 
         holder.ivLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                GeneralUtils.putStringValueInEditor(context, "id", model.getId());
-                GeneralUtils.putStringValueInEditor(context, "name", model.getName());
+                GeneralUtils.putStringValueInEditor(context, "id", String.valueOf(model.getId()));
+                GeneralUtils.putStringValueInEditor(context, "name", model.getCategoryName());
                 GeneralUtils.connectFragmentWithDrawer(context, new ItemsFragment());
             }
         });

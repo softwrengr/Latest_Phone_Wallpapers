@@ -31,6 +31,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.bumptech.glide.Glide;
 import com.squaresdevelopers.latestphonewallpapers.R;
 import com.squaresdevelopers.latestphonewallpapers.dataBase.LikedImagesCurd;
 import com.squaresdevelopers.latestphonewallpapers.dataModels.CategoryModel;
@@ -87,7 +88,7 @@ public class UnLikeFragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_un_like, container, false);
         customActionBar();
         initUI();
-        likedImagesCurd  =new LikedImagesCurd(getActivity());
+        likedImagesCurd = new LikedImagesCurd(getActivity());
         StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
         StrictMode.setVmPolicy(builder.build());
 
@@ -108,7 +109,7 @@ public class UnLikeFragment extends Fragment {
         if (image.equals("") || image == null) {
             ivWallPaper.setImageDrawable(getActivity().getResources().getDrawable(R.drawable.transparent_background));
         } else {
-            Picasso.with(getActivity()).load(image).into(ivWallPaper);
+            Glide.with(getActivity()).load(image).into(ivWallPaper);
         }
 
 
@@ -120,14 +121,14 @@ public class UnLikeFragment extends Fragment {
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        boolean setWallpaper = FileUtilitiy.setWallPaper(getActivity(), image);
-                        if (setWallpaper){
+                        boolean setWallpaper = FileUtilitiy.setWallPaper(getActivity(), ivWallPaper);
+                        if (setWallpaper) {
                             alertDialog.dismiss();
-                        }else {
+                        } else {
                             Toast.makeText(getActivity(), "error", Toast.LENGTH_SHORT).show();
                         }
                     }
-                },300);
+                }, 300);
 
             }
         });
