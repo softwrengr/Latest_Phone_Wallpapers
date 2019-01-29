@@ -15,6 +15,10 @@
         android:title="Blackberry"/>
 
     <item
+        android:id="@+id/pixel"
+        android:title="Google"/>
+
+    <item
         android:id="@+id/huawei"
         android:title="Huawei"/>
 
@@ -31,10 +35,6 @@
     <item
         android:id="@+id/one_plaus"
         android:title="OnePlus"/>
-
-    <item
-        android:id="@+id/pixel"
-        android:title="Google"/>
 
 
     <item

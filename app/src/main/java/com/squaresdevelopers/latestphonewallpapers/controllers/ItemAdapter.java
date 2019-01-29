@@ -1,6 +1,9 @@
 package com.squaresdevelopers.latestphonewallpapers.controllers;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.StrictMode;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
@@ -22,6 +25,8 @@ import com.squaresdevelopers.latestphonewallpapers.fragments.WallPaperFragment;
 import com.squaresdevelopers.latestphonewallpapers.utils.GeneralUtils;
 import com.squareup.picasso.Picasso;
 
+import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 
 /**
@@ -76,8 +81,8 @@ public class ItemAdapter extends BaseAdapter {
         viewHolder.imageView = convertView.findViewById(R.id.iv_wallpaper);
         viewHolder.layout = convertView.findViewById(R.id.layout);
 
-        //Picasso.with(context).load(model.getImage()).into(viewHolder.imageView);
         Glide.with(context).load(model.getImage()).into(viewHolder.imageView);
+
         viewHolder.layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -92,7 +97,6 @@ public class ItemAdapter extends BaseAdapter {
         convertView.setTag(viewHolder);
         return convertView;
     }
-
 
     private class MyViewHolder {
         RelativeLayout layout;

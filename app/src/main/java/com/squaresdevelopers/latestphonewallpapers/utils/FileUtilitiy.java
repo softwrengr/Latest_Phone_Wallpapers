@@ -46,13 +46,14 @@ public class FileUtilitiy {
     }
 
     public static boolean saveWallPaper(Context context, Bitmap bm) throws IOException {
-        Toast.makeText(context, "WallPaper saved in folder Latest WallPaper", Toast.LENGTH_SHORT).show();
+        Toast.makeText(context, "WallPaper saved in folder Awalls", Toast.LENGTH_SHORT).show();
 
         boolean imageSave = false;
 
         Date currentTime = Calendar.getInstance().getTime();
         String dataTime = String.valueOf(currentTime);
-        File path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES + "Latest WallPaper");
+       // Environment.DIRECTORY_PICTURES
+                File path = Environment.getExternalStoragePublicDirectory("Awalls");
 
         if (!path.exists()) {
             path.mkdirs();
@@ -64,16 +65,6 @@ public class FileUtilitiy {
             out.flush();
             out.close();
 
-            // Tell the media scanner about the new file so that it is
-            // immediately available to the user.
-//            MediaScannerConnection.scanFile(context, new String[]{imageFile.getAbsolutePath()}, null, new MediaScannerConnection.OnScanCompletedListener() {
-//                public void onScanCompleted(String path, Uri uri) {
-//                    Log.i("ExternalStorage", "Scanned " + path + ":");
-//                    Log.i("ExternalStorage", "-> uri=" + uri);
-//
-//
-//                }
-//            });
             imageSave = true;
 
         } catch (FileNotFoundException e) {
