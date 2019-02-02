@@ -5,12 +5,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/screen"
     tools:context="com.squaresdevelopers.latestphonewallpapers.activities.SplashActivity">
 
 
     <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:src="@drawable/splash"
+        android:layout_width="220sp"
+        android:layout_height="220sp"
+        android:src="@drawable/icon"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
         android:scaleType="fitXY"/>
 </RelativeLayout>

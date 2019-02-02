@@ -200,9 +200,42 @@ public class HomeFragment extends Fragment {
 
             @Override
             public void onFailure(Call<CategorResponseModel> call, Throwable t) {
-                Log.d("fail",t.getMessage());
+                Log.d("fail", t.getMessage());
             }
         });
-    }
+//        StringRequest stringRequest = new StringRequest(Request.Method.GET, Config.CATEGORIES
+//                , new com.android.volley.Response.Listener<String>() {
+//            @Override
+//            public void onResponse(String response) {
+//                Toast.makeText(getActivity(), response, Toast.LENGTH_LONG).show();
+//                Log.d("response", response);
+//
+//            }
+//
+//        }, new com.android.volley.Response.ErrorListener() {
+//            @Override
+//            public void onErrorResponse(VolleyError error) {
+////                alertDialog.dismiss();
+//                Toast.makeText(getActivity(), error.getMessage(), Toast.LENGTH_SHORT).show();
+//                Log.d("response", error.getMessage());
+//
+//            }
+//        }) {
+//
+//
+//            @Override
+//            public Map<String, String> getHeaders() throws AuthFailureError {
+//                HashMap<String, String> headers = new HashMap<String, String>();
+//                return headers;
+//            }
+//
+//        };
+//        RequestQueue mRequestQueue = Volley.newRequestQueue(getActivity());
+//        stringRequest.setRetryPolicy(new DefaultRetryPolicy(20000,
+//                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+//                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+//        mRequestQueue.add(stringRequest);
+//    }
 
+    }
 }

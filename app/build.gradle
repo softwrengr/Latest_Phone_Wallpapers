@@ -6,8 +6,8 @@ android {
         applicationId "com.squaresdevelopers.lateststockwallpapers"
         minSdkVersion 19
         targetSdkVersion 28
-        versionCode 7
-        versionName "1.1.1"
+        versionCode 8
+        versionName "1.1.2"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -15,8 +15,8 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
-
     }
+    useLibrary 'org.apache.http.legacy'
 }
 
 
