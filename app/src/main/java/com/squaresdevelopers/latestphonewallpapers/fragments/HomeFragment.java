@@ -1,6 +1,8 @@
 package com.squaresdevelopers.latestphonewallpapers.fragments;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
@@ -15,41 +17,19 @@ import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.android.volley.AuthFailureError;
-import com.android.volley.DefaultRetryPolicy;
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdView;
-import com.google.android.gms.ads.MobileAds;
 import com.squaresdevelopers.latestphonewallpapers.R;
 import com.squaresdevelopers.latestphonewallpapers.dataModels.categoryListDataModel.CategorResponseModel;
 import com.squaresdevelopers.latestphonewallpapers.dataModels.categoryListDataModel.CategoryDetailModel;
-import com.squaresdevelopers.latestphonewallpapers.dataModels.showLikeDataModel.ShowLikeResponseModel;
 import com.squaresdevelopers.latestphonewallpapers.networking.ApiClient;
 import com.squaresdevelopers.latestphonewallpapers.networking.ApiInterface;
 import com.squaresdevelopers.latestphonewallpapers.networking.NetworkingCall;
 import com.squaresdevelopers.latestphonewallpapers.controllers.CategoriesAdapter;
 import com.squaresdevelopers.latestphonewallpapers.dataModels.CategoryModel;
 import com.squaresdevelopers.latestphonewallpapers.utils.AlertUtils;
-import com.squaresdevelopers.latestphonewallpapers.utils.Config;
-import com.squaresdevelopers.latestphonewallpapers.utils.GeneralUtils;
 import com.squaresdevelopers.latestphonewallpapers.utils.NetworkUtils;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import retrofit2.Call;
@@ -98,6 +78,8 @@ public class HomeFragment extends Fragment {
         mActionBar.setDisplayShowHomeEnabled(false);
         mActionBar.setDisplayShowTitleEnabled(false);
         mActionBar.setDisplayHomeAsUpEnabled(false);
+        mActionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#002080")));
+        mActionBar.setStackedBackgroundDrawable(new ColorDrawable(Color.parseColor("#002699")));
         LayoutInflater mInflater = LayoutInflater.from(getActivity());
         View mCustomView = mInflater.inflate(R.layout.custom_actionbar, null);
         TextView tvTitle = mCustomView.findViewById(R.id.title);
@@ -203,39 +185,6 @@ public class HomeFragment extends Fragment {
                 Log.d("fail", t.getMessage());
             }
         });
-//        StringRequest stringRequest = new StringRequest(Request.Method.GET, Config.CATEGORIES
-//                , new com.android.volley.Response.Listener<String>() {
-//            @Override
-//            public void onResponse(String response) {
-//                Toast.makeText(getActivity(), response, Toast.LENGTH_LONG).show();
-//                Log.d("response", response);
-//
-//            }
-//
-//        }, new com.android.volley.Response.ErrorListener() {
-//            @Override
-//            public void onErrorResponse(VolleyError error) {
-////                alertDialog.dismiss();
-//                Toast.makeText(getActivity(), error.getMessage(), Toast.LENGTH_SHORT).show();
-//                Log.d("response", error.getMessage());
-//
-//            }
-//        }) {
-//
-//
-//            @Override
-//            public Map<String, String> getHeaders() throws AuthFailureError {
-//                HashMap<String, String> headers = new HashMap<String, String>();
-//                return headers;
-//            }
-//
-//        };
-//        RequestQueue mRequestQueue = Volley.newRequestQueue(getActivity());
-//        stringRequest.setRetryPolicy(new DefaultRetryPolicy(20000,
-//                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
-//                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-//        mRequestQueue.add(stringRequest);
-//    }
 
     }
 }

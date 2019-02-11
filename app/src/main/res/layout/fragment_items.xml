@@ -3,8 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:ads="http://schemas.android.com/apk/res-auto"
-    android:background="@color/gray"
-    tools:context="com.squaresdevelopers.latestphonewallpapers.fragments.ItemsFragment">
+    android:background="@drawable/home_back"
+    tools:context="com.squaresdevelopers.latestphonewallpapers.fragments.CatogoryWallpaperFragment">
 
 
 

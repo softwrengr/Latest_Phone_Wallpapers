@@ -5,6 +5,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -70,8 +72,6 @@ public class UnLikeFragment extends Fragment {
     AlertDialog alertDialog;
     @BindView(R.id.like_wallpaper)
     ImageView ivWallPaper;
-    @BindView(R.id.like_apply_wallpaper)
-    LinearLayout layoutApplyWallPaper;
 
     View view;
     String image, strModelNo, strImageUrl;
@@ -91,6 +91,8 @@ public class UnLikeFragment extends Fragment {
         likedImagesCurd = new LikedImagesCurd(getActivity());
         StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
         StrictMode.setVmPolicy(builder.build());
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
 
         return view;
     }
@@ -112,92 +114,11 @@ public class UnLikeFragment extends Fragment {
             Glide.with(getActivity()).load(image).into(ivWallPaper);
         }
 
-
-        layoutApplyWallPaper.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                alertDialog = AlertUtils.createProgressDialog(getActivity());
-                alertDialog.show();
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        boolean setWallpaper = FileUtilitiy.setWallPaper(getActivity(), ivWallPaper);
-                        if (setWallpaper) {
-                            alertDialog.dismiss();
-                        } else {
-                            Toast.makeText(getActivity(), "error", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                }, 300);
-
-            }
-        });
-
-    }
-
-    public void customActionBar() {
-        android.support.v7.app.ActionBar mActionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
-        mActionBar.setDisplayShowHomeEnabled(false);
-        mActionBar.setDisplayShowTitleEnabled(false);
-        mActionBar.setDisplayHomeAsUpEnabled(false);
-        LayoutInflater mInflater = LayoutInflater.from(getActivity());
-        View mCustomView = mInflater.inflate(R.layout.custom_actionbar, null);
-        TextView tvTitle = mCustomView.findViewById(R.id.title);
-        ImageView share = mCustomView.findViewById(R.id.share);
-        RelativeLayout layout_save = mCustomView.findViewById(R.id.layout_save);
-        TextView tvUnlike = mCustomView.findViewById(R.id.tvUnlike);
-        tvTitle.setText("Liked");
-        share.setVisibility(View.VISIBLE);
-        layout_save.setVisibility(View.VISIBLE);
-        tvUnlike.setVisibility(View.VISIBLE);
-
-
-        tvUnlike.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                if (validate()) {
-                    pDialog = AlertUtils.createProgressBar(getActivity());
-                    pDialog.show();
-                    apiCallUnLiked();
-
-                }
-            }
-        });
-
-
-        //saving wallpaper
-        layout_save.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(getActivity(), "Saving please wait a while!", Toast.LENGTH_SHORT).show();
-                try {
-                    URL url = new URL(image);
-                    bitmap = BitmapFactory.decodeStream(url.openConnection().getInputStream());
-                    FileUtilitiy.saveWallPaper(getActivity(), bitmap);
-                } catch (IOException e) {
-                    System.out.println(e);
-                }
-            }
-        });
-        //sharing wallpaper
-        share.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                (new ShareTask(getActivity())).execute(image);
-            }
-        });
-
-
-        mActionBar.setCustomView(mCustomView);
-        mActionBar.setDisplayShowCustomEnabled(true);
-        mActionBar.show();
     }
 
 
     private boolean validate() {
         valid = true;
-
         if (image.isEmpty()) {
             Toast.makeText(getActivity(), "Image path not getting", Toast.LENGTH_SHORT).show();
             valid = false;
@@ -217,11 +138,7 @@ public class UnLikeFragment extends Fragment {
 
         @Override
         protected void onPreExecute() {
-            // TODO Auto-generated method stub
-
             super.onPreExecute();
-            pDialog = AlertUtils.createProgressBar(getActivity());
-
         }
 
         @Override
@@ -276,7 +193,7 @@ public class UnLikeFragment extends Fragment {
             Log.d("zma", String.valueOf(file.getAbsolutePath()));
             share.putExtra(Intent.EXTRA_STREAM, Uri.parse("file://" + file.getAbsolutePath()));
             startActivity(Intent.createChooser(share, "Share Image"));
-            pDialog.dismiss();
+            alertDialog.dismiss();
         }
     }
 
@@ -286,12 +203,11 @@ public class UnLikeFragment extends Fragment {
                 , new com.android.volley.Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                pDialog.dismiss();
+                alertDialog.dismiss();
                 try {
                     JSONObject jsonObject = new JSONObject(response);
                     String message = jsonObject.getString("message");
                     if (message.equals("Liked Wallpaper successfully deleted")) {
-
                         likedImagesCurd.deleteLikeImage(strImageUrl);
                         GeneralUtils.connectFragmentWithDrawer(getActivity(), new LikeFragment());
                     }
@@ -303,6 +219,7 @@ public class UnLikeFragment extends Fragment {
         }, new com.android.volley.Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+                alertDialog.dismiss();
                 Toast.makeText(getActivity(), error.getMessage(), Toast.LENGTH_SHORT).show();
             }
         }) {
@@ -327,5 +244,99 @@ public class UnLikeFragment extends Fragment {
 
     }
 
+    public void customActionBar() {
+        android.support.v7.app.ActionBar mActionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
+        mActionBar.setDisplayShowHomeEnabled(false);
+        mActionBar.setDisplayShowTitleEnabled(false);
+        mActionBar.setDisplayHomeAsUpEnabled(false);
+        mActionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#330000ff")));
+        mActionBar.setStackedBackgroundDrawable(new ColorDrawable(Color.parseColor("#550000ff")));
+        LayoutInflater mInflater = LayoutInflater.from(getActivity());
+        View mCustomView = mInflater.inflate(R.layout.custom_wallp_layout, null);
+        LinearLayout layoutUnlike, layoutShare, layoutSave, layoutSet;
+        TextView tvUnlike = mCustomView.findViewById(R.id.like_wall);
+        layoutUnlike = mCustomView.findViewById(R.id.layout_like);
+        layoutSet = mCustomView.findViewById(R.id.layout_set);
+        layoutSave = mCustomView.findViewById(R.id.layout_save);
+        layoutShare = mCustomView.findViewById(R.id.layout_share);
+        tvUnlike.setText("Unlike");
+
+
+        layoutUnlike.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if (validate()) {
+                    alertDialog = AlertUtils.createProgressDialog(getActivity());
+                    alertDialog.show();
+                    apiCallUnLiked();
+
+                }
+            }
+        });
+
+
+        //saving wallpaper
+        layoutSave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alertDialog = AlertUtils.createProgressDialog(getActivity());
+                alertDialog.show();
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        saveWallpaper();
+                    }
+                }, 800);
+
+            }
+        });
+        //sharing wallpaper
+        layoutShare.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alertDialog = AlertUtils.createProgressDialog(getActivity());
+                alertDialog.show();
+                (new ShareTask(getActivity())).execute(image);
+            }
+        });
+
+        layoutSet.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alertDialog = AlertUtils.createProgressDialog(getActivity());
+                alertDialog.show();
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        boolean setWallpaper = FileUtilitiy.setWallPaper(getActivity(), ivWallPaper);
+                        if (setWallpaper) {
+                            alertDialog.dismiss();
+                        } else {
+                            Toast.makeText(getActivity(), "error", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                }, 300);
+            }
+        });
+
+
+        mActionBar.setCustomView(mCustomView);
+        mActionBar.setDisplayShowCustomEnabled(true);
+        mActionBar.show();
+    }
+
+    private void saveWallpaper(){
+        try {
+            URL url = new URL(image);
+            bitmap = BitmapFactory.decodeStream(url.openConnection().getInputStream());
+            boolean isSaveImage = FileUtilitiy.saveWallPaper(getActivity(), bitmap);
+            if(isSaveImage){
+                alertDialog.dismiss();
+            }
+        } catch (IOException e) {
+            System.out.println(e);
+        }
+    }
 
 }

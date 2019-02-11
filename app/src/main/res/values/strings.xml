@@ -16,4 +16,8 @@
     <string name="about">We are super motivated developers seeking the best quality stock wallpapers. We hand pick our selection and give you the latest releases before anyone else.</string>
     <string name="email">softwrengr@gmail.com</string>
     <string name="privacy">https://docs.google.com/document/d/1Dsob8l6ykSdqHWPk9SDpRofj4xlf9RvZ1Pqa_XIQyPA/edit</string>
+
+    <string name="title_activity_fullscreen">FullscreenActivity</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
 </resources>

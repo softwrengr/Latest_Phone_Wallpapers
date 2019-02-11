@@ -14,6 +14,7 @@
         android:maxLines="1"
         android:textSize="19sp"
         android:textStyle="bold"
+        android:fontFamily="@font/light"
         android:layout_centerVertical="true"
         android:textColor="#fff"/>
 

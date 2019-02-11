@@ -1,32 +1,28 @@
 package com.squaresdevelopers.latestphonewallpapers.fragments;
 
-import android.app.DownloadManager;
 import android.app.ProgressDialog;
-import android.app.WallpaperManager;
 import android.content.Context;
 import android.content.Intent;
-import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
-import android.media.MediaScannerConnection;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.StrictMode;
-import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.telecom.Call;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -46,28 +42,18 @@ import com.squaresdevelopers.latestphonewallpapers.utils.AlertUtils;
 import com.squaresdevelopers.latestphonewallpapers.utils.FileUtilitiy;
 import com.squaresdevelopers.latestphonewallpapers.utils.GeneralUtils;
 import com.squaresdevelopers.latestphonewallpapers.utils.NetworkUtils;
-import com.squareup.picasso.Picasso;
 
-import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import okhttp3.MediaType;
-import okhttp3.RequestBody;
 import retrofit2.Callback;
 import retrofit2.Response;
-
-import static android.content.ContentValues.TAG;
 
 
 public class WallPaperFragment extends Fragment {
@@ -75,6 +61,8 @@ public class WallPaperFragment extends Fragment {
     AlertDialog alertDialog;
     @BindView(R.id.wallpaper)
     ImageView ivWallPaper;
+    @BindView(R.id.model_name)
+    TextView tvModelName;
     @BindView(R.id.apply_wallpaper)
     LinearLayout layoutApplyWallPaper;
 
@@ -100,12 +88,14 @@ public class WallPaperFragment extends Fragment {
         onback(view);
         likedImagesCurd = new LikedImagesCurd(getActivity());
 
-        aBooleanLikeImage = GeneralUtils.getSharedPreferences(getActivity()).getBoolean("like_image", false);
-        if (!aBooleanLikeImage) {
-            ivFavorite.setImageDrawable(getActivity().getResources().getDrawable(R.drawable.like));
-        }
+//        aBooleanLikeImage = GeneralUtils.getSharedPreferences(getActivity()).getBoolean("like_image", false);
+//        if (!aBooleanLikeImage) {
+//            ivFavorite.setImageDrawable(getActivity().getResources().getDrawable(R.drawable.like));
+//        }
 
         NetworkUtils.grantPermession(getActivity());
+        StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
+        StrictMode.setVmPolicy(builder.build());
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
 
@@ -118,14 +108,13 @@ public class WallPaperFragment extends Fragment {
         adView.loadAd(adRequest);
 
         onback(view);
-
         return view;
     }
-
 
     private void initUI() {
         ButterKnife.bind(this, view);
         NetworkUtils.grantPermession(getActivity());
+        tvModelName.setText(strModelNo);
 
         image = GeneralUtils.getImage(getActivity());
         strUUID = GeneralUtils.getDeviceID(getActivity());
@@ -135,30 +124,6 @@ public class WallPaperFragment extends Fragment {
         } else {
             Glide.with(getActivity()).load(image).into(ivWallPaper);
         }
-
-
-        layoutApplyWallPaper.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                alertDialog = AlertUtils.createProgressDialog(getActivity());
-                alertDialog.show();
-
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        boolean setWallpaper = FileUtilitiy.setWallPaper(getActivity(), ivWallPaper);
-                        if (setWallpaper) {
-                            alertDialog.dismiss();
-                        } else {
-                            Toast.makeText(getActivity(), "error", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                }, 300);
-
-
-            }
-        });
 
     }
 
@@ -175,11 +140,8 @@ public class WallPaperFragment extends Fragment {
 
         @Override
         protected void onPreExecute() {
-            // TODO Auto-generated method stub
-
             super.onPreExecute();
             pDialog.show();
-
         }
 
         @Override
@@ -187,9 +149,7 @@ public class WallPaperFragment extends Fragment {
             // TODO Auto-generated method stub
 
             try {
-
                 myFileUrl = new URL(args[0]);
-                //myFileUrl1 = args[0];
 
                 HttpURLConnection conn = (HttpURLConnection) myFileUrl.openConnection();
                 conn.setDoInput(true);
@@ -210,9 +170,7 @@ public class WallPaperFragment extends Fragment {
                     dir.mkdirs();
                 }
                 String fileName = idStr;
-
                 file = new File(dir, fileName);
-
 
                 FileOutputStream fos = new FileOutputStream(file);
                 bmImg.compress(Bitmap.CompressFormat.PNG, 75, fos);
@@ -239,7 +197,6 @@ public class WallPaperFragment extends Fragment {
     }
 
     private void onback(View view) {
-
         view.setFocusableInTouchMode(true);
         view.requestFocus();
         view.setOnKeyListener(new View.OnKeyListener() {
@@ -251,7 +208,7 @@ public class WallPaperFragment extends Fragment {
                     File filepath = Environment.getExternalStorageDirectory();
                     File dir = new File(filepath.getAbsolutePath() + "/.HD Wallpaper");
                     deleteDir(dir);
-                    GeneralUtils.connect(getActivity(), new ItemsFragment());
+                    GeneralUtils.connectFragment(getActivity(), new CatogoryWallpaperFragment());
                     return true;
                 }
                 return false;
@@ -259,7 +216,6 @@ public class WallPaperFragment extends Fragment {
         });
 
     }
-
 
     public static boolean deleteDir(File dir) {
         if (dir.isDirectory()) {
@@ -271,7 +227,6 @@ public class WallPaperFragment extends Fragment {
                 }
             }
         }
-
         // The directory is now empty so delete it
         return dir.delete();
     }
@@ -287,16 +242,11 @@ public class WallPaperFragment extends Fragment {
                 pDialog.dismiss();
                 if (response.body().getMessage().equals("Image Like successfully")) {
 
-
                     if (likedImagesCurd.checkImageUrl(image)) {
-
-
                         likedImagesCurd.insertData(image);
                         GeneralUtils.connectFragmentWithDrawer(getActivity(), new LikeFragment());
                         GeneralUtils.putStringValueInEditor(getActivity(), "liked_picture", image);
                     }
-
-
                 } else {
                     Toast.makeText(getActivity(), "you got some error", Toast.LENGTH_SHORT).show();
                 }
@@ -308,13 +258,10 @@ public class WallPaperFragment extends Fragment {
                 pDialog.dismiss();
             }
         });
-
     }
-
 
     private boolean validate() {
         valid = true;
-
         if (image.isEmpty()) {
             Toast.makeText(getActivity(), "Image path not getting", Toast.LENGTH_SHORT).show();
             valid = false;
@@ -322,31 +269,27 @@ public class WallPaperFragment extends Fragment {
             Toast.makeText(getActivity(), "you got some error please try again", Toast.LENGTH_SHORT).show();
             valid = false;
         }
-
         return valid;
     }
-
 
     public void customActionBar() {
         android.support.v7.app.ActionBar mActionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
         mActionBar.setDisplayShowHomeEnabled(false);
         mActionBar.setDisplayShowTitleEnabled(false);
         mActionBar.setDisplayHomeAsUpEnabled(false);
+        mActionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#330000ff")));
+        mActionBar.setStackedBackgroundDrawable(new ColorDrawable(Color.parseColor("#550000ff")));
         LayoutInflater mInflater = LayoutInflater.from(getActivity());
-        View mCustomView = mInflater.inflate(R.layout.custom_actionbar, null);
-        TextView tvTitle = mCustomView.findViewById(R.id.title);
-        ImageView share = mCustomView.findViewById(R.id.share);
-        ivFavorite = mCustomView.findViewById(R.id.favorite);
-        RelativeLayout layout_save = mCustomView.findViewById(R.id.layout_save);
-        tvTitle.setText(strModelNo);
-        share.setVisibility(View.VISIBLE);
-        layout_save.setVisibility(View.VISIBLE);
-        ivFavorite.setVisibility(View.VISIBLE);
+        View mCustomView = mInflater.inflate(R.layout.custom_wallp_layout, null);
+        LinearLayout layoutLike,layoutShare,layoutSave,layoutSet;
+        layoutLike = mCustomView.findViewById(R.id.layout_like);
+        layoutSet = mCustomView.findViewById(R.id.layout_set);
+        layoutSave = mCustomView.findViewById(R.id.layout_save);
+        layoutShare = mCustomView.findViewById(R.id.layout_share);
 
-        ivFavorite.setOnClickListener(new View.OnClickListener() {
+        layoutLike.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ivFavorite.setImageDrawable(getActivity().getResources().getDrawable(R.drawable.like));
                 if (validate()) {
 
                     if (image.equals(GeneralUtils.checkLikedPicture(getActivity()))) {
@@ -363,7 +306,7 @@ public class WallPaperFragment extends Fragment {
 
 
         //saving wallpaper
-        layout_save.setOnClickListener(new View.OnClickListener() {
+        layoutSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 pDialog = AlertUtils.createProgressBar(getActivity());
@@ -377,10 +320,30 @@ public class WallPaperFragment extends Fragment {
             }
         });
         //sharing wallpaper
-        share.setOnClickListener(new View.OnClickListener() {
+        layoutShare.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 (new ShareTask(getActivity())).execute(image);
+            }
+        });
+
+        layoutSet.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alertDialog = AlertUtils.createProgressDialog(getActivity());
+                alertDialog.show();
+
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        boolean setWallpaper = FileUtilitiy.setWallPaper(getActivity(), ivWallPaper);
+                        if (setWallpaper) {
+                            alertDialog.dismiss();
+                        } else {
+                            Toast.makeText(getActivity(), "error", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                }, 300);
             }
         });
 
@@ -406,5 +369,3 @@ public class WallPaperFragment extends Fragment {
 
 
 }
-
-

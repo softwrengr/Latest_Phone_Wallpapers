@@ -3,30 +3,21 @@ package com.squaresdevelopers.latestphonewallpapers.controllers;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
-import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
-import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.squaresdevelopers.latestphonewallpapers.R;
-import com.squaresdevelopers.latestphonewallpapers.dataModels.CategoryModel;
 import com.squaresdevelopers.latestphonewallpapers.dataModels.categoryListDataModel.CategoryDetailModel;
-import com.squaresdevelopers.latestphonewallpapers.dataModels.wallpaperDataModel.ItemDetailModel;
-import com.squaresdevelopers.latestphonewallpapers.fragments.ItemsFragment;
+import com.squaresdevelopers.latestphonewallpapers.fragments.CatogoryWallpaperFragment;
 import com.squaresdevelopers.latestphonewallpapers.utils.GeneralUtils;
-import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-
-import butterknife.ButterKnife;
 
 /**
  * Created by eapple on 30/11/2018.
@@ -67,7 +58,7 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.My
 
                 GeneralUtils.putStringValueInEditor(context, "id", String.valueOf(model.getId()));
                 GeneralUtils.putStringValueInEditor(context, "name", model.getCategoryName());
-                GeneralUtils.connectFragmentWithDrawer(context, new ItemsFragment());
+                GeneralUtils.connectFragmentWithDrawer(context, new CatogoryWallpaperFragment());
             }
         });
     }

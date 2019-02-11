@@ -12,32 +12,4 @@
         android:src="@drawable/transparent_background"
         />
 
-    <LinearLayout
-        android:id="@+id/like_apply_wallpaper"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_gravity="right|bottom"
-        android:layout_marginBottom="10sp"
-        android:padding="10sp"
-        android:layout_marginRight="20sp">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Set WallPaper"
-            android:textColor="@color/white"
-            android:layout_marginRight="10sp"
-            android:layout_gravity="center"
-            android:textSize="14sp"
-            android:textStyle="bold"/>
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:src="@drawable/apply"/>
-
-    </LinearLayout>
-
 </FrameLayout>

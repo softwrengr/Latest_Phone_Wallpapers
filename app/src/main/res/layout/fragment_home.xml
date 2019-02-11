@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     xmlns:ads="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:background="@color/black"
+    android:background="@drawable/home_back"
     tools:context="com.squaresdevelopers.latestphonewallpapers.fragments.HomeFragment">
 
 
@@ -15,15 +15,5 @@
           >
       </android.support.v7.widget.RecyclerView>
 
-
-
-    <!--<com.google.android.gms.ads.AdView-->
-        <!--android:id="@+id/ad_view"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="50sp"-->
-        <!--android:layout_gravity="bottom|center"-->
-        <!--ads:adSize="BANNER"-->
-        <!--ads:adUnitId="@string/banner_ad_unit_id">-->
-    <!--</com.google.android.gms.ads.AdView>-->
 
 </FrameLayout>

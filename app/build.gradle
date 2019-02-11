@@ -6,8 +6,8 @@ android {
         applicationId "com.squaresdevelopers.lateststockwallpapers"
         minSdkVersion 19
         targetSdkVersion 28
-        versionCode 8
-        versionName "1.1.2"
+        versionCode 9
+        versionName "1.1.3"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -41,6 +41,7 @@ dependencies {
     implementation 'com.squareup.retrofit2:retrofit:2.1.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.1.0'
     implementation 'com.squareup.picasso:picasso:2.5.0'
+    implementation 'com.kelin.translucentbar:library:0.8.0'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
@@ -57,3 +58,4 @@ apply plugin: 'com.google.gms.google-services'
 
 //keystore password = wallpaper00
 //passwrod = wallpaper11
+

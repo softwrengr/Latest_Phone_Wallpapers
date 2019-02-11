@@ -1,23 +1,15 @@
 package com.squaresdevelopers.latestphonewallpapers.fragments;
 
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
-import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridView;
-import android.widget.ListAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,9 +18,7 @@ import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
 import com.squaresdevelopers.latestphonewallpapers.R;
-import com.squaresdevelopers.latestphonewallpapers.controllers.CategoriesAdapter;
 import com.squaresdevelopers.latestphonewallpapers.controllers.ItemAdapter;
-import com.squaresdevelopers.latestphonewallpapers.dataModels.WallpaperItems;
 import com.squaresdevelopers.latestphonewallpapers.dataModels.wallpaperDataModel.ItemDetailModel;
 import com.squaresdevelopers.latestphonewallpapers.dataModels.wallpaperDataModel.ItemReponseModel;
 import com.squaresdevelopers.latestphonewallpapers.networking.ApiClient;
@@ -36,11 +26,6 @@ import com.squaresdevelopers.latestphonewallpapers.networking.ApiInterface;
 import com.squaresdevelopers.latestphonewallpapers.utils.AlertUtils;
 import com.squaresdevelopers.latestphonewallpapers.utils.GeneralUtils;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.File;
 import java.util.ArrayList;
 
 import butterknife.BindView;
@@ -49,7 +34,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 
 
-public class ItemsFragment extends Fragment {
+public class CatogoryWallpaperFragment extends Fragment {
     AlertDialog alertDialog;
     View view;
     @BindView(R.id.gv_categories_items)
@@ -183,7 +168,7 @@ public class ItemsFragment extends Fragment {
             public boolean onKey(View v, int keyCode, KeyEvent event) {
 
                 if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_UP) {
-                    GeneralUtils.connect(getActivity(),new HomeFragment());
+                    GeneralUtils.connectFragment(getActivity(),new HomeFragment());
                     return true;
                 }
                 return false;

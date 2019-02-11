@@ -15,25 +15,21 @@ public class GeneralUtils {
     public static SharedPreferences.Editor editor;
 
 
+    public static Fragment connect(Context context, Fragment fragment) {
+        ((AppCompatActivity) context).getSupportFragmentManager().beginTransaction().replace(R.id.zma, fragment).commit();
+        return fragment;
+    }
 
     public static Fragment connectFragment(Context context, Fragment fragment) {
         ((AppCompatActivity) context).getSupportFragmentManager().beginTransaction().replace(R.id.drawer_container, fragment).commit();
         return fragment;
     }
 
-    public static Fragment connectFragmentWithBackStack(Context context, Fragment fragment) {
-        ((AppCompatActivity) context).getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, fragment).addToBackStack("true").commit();
-        return fragment;
-    }
     public static Fragment connectFragmentWithDrawer(Context context, Fragment fragment) {
         ((AppCompatActivity) context).getSupportFragmentManager().beginTransaction().replace(R.id.drawer_container, fragment).addToBackStack("abc").commit();
         return fragment;
     }
 
-    public static Fragment connect(Context context, Fragment fragment) {
-        ((AppCompatActivity) context).getSupportFragmentManager().beginTransaction().replace(R.id.drawer_container, fragment).commit();
-        return fragment;
-    }
 
     public static SharedPreferences.Editor putStringValueInEditor(Context context, String key, String value) {
         sharedPreferences = getSharedPreferences(context);

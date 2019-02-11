@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    >
+
+    <LinearLayout
+        android:id="@+id/layout_like"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:orientation="horizontal">
+
+
+        <ImageView
+            android:layout_width="20sp"
+            android:layout_height="20sp"
+            android:layout_gravity="center"
+            android:src="@drawable/new_heart"/>
+
+        <TextView
+            android:id="@+id/like_wall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Like"
+            android:textSize="14sp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="3sp"
+            android:fontFamily="@font/light"
+            android:textColor="@color/white" />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_set"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:layout_toRightOf="@id/layout_like"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="18sp"
+        android:orientation="horizontal">
+
+
+        <ImageView
+            android:layout_width="20sp"
+            android:layout_height="20sp"
+            android:layout_gravity="center"
+            android:src="@drawable/set"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="45sp"
+            android:src="@drawable/heart"
+            android:text="Set"
+            android:textSize="14sp"
+            android:layout_marginLeft="3sp"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:fontFamily="@font/light"
+            android:layout_toLeftOf="@id/share" />
+
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_share"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:layout_marginLeft="18sp"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@id/layout_set"
+        android:orientation="horizontal">
+
+
+        <ImageView
+            android:layout_width="20sp"
+            android:layout_height="20sp"
+            android:layout_gravity="center"
+            android:src="@drawable/new_share"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="45sp"
+            android:src="@drawable/heart_one"
+            android:text="share"
+            android:fontFamily="@font/light"
+            android:textSize="14sp"
+            android:gravity="center"
+            android:layout_marginLeft="3sp"
+            android:textColor="@color/white"
+            />
+
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_save"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:layout_toRightOf="@id/layout_share"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="18sp"
+        android:orientation="horizontal">
+
+
+        <ImageView
+            android:layout_width="20sp"
+            android:layout_height="20sp"
+            android:layout_gravity="center"
+            android:src="@drawable/save"/>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="45sp"
+            android:src="@drawable/heart_one"
+            android:text="save"
+            android:fontFamily="@font/light"
+            android:textSize="14sp"
+            android:gravity="center"
+            android:layout_marginLeft="3sp"
+            android:textColor="@color/white" />
+
+
+
+    </LinearLayout>
+</RelativeLayout>
