@@ -8,7 +8,7 @@
 
     <TextView
         android:id="@+id/title"
-        android:layout_width="190sp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Title"
         android:maxLines="1"
@@ -18,19 +18,16 @@
         android:layout_centerVertical="true"
         android:textColor="#fff"/>
 
-    <TextView
+    <ImageView
         android:id="@+id/ivFilter"
-        android:layout_width="wrap_content"
+        android:layout_width="30sp"
         android:layout_height="wrap_content"
-        android:text="Filter"
-        android:textColor="@color/white"
-        android:textStyle="bold"
-        android:textSize="18sp"
         android:layout_centerVertical="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:visibility="gone"
-        android:layout_marginRight="5sp"/>
+        android:src="@drawable/filter"
+        android:layout_marginRight="10sp"/>
 
 
     <TextView

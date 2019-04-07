@@ -6,8 +6,8 @@ android {
         applicationId "com.squaresdevelopers.lateststockwallpapers"
         minSdkVersion 19
         targetSdkVersion 28
-        versionCode 9
-        versionName "1.1.3"
+        versionCode 12
+        versionName "1.2.1"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {

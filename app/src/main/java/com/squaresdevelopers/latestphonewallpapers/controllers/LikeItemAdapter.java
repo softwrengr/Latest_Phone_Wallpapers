@@ -12,7 +12,9 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.squaresdevelopers.latestphonewallpapers.R;
+import com.squaresdevelopers.latestphonewallpapers.dataModels.LikedImagesmodel;
 import com.squaresdevelopers.latestphonewallpapers.dataModels.likeDataModel.LikeDetailModel;
+import com.squaresdevelopers.latestphonewallpapers.dataModels.likeDataModel.LikeWallPaperModel;
 import com.squaresdevelopers.latestphonewallpapers.dataModels.showLikeDataModel.ShowDetailModel;
 import com.squaresdevelopers.latestphonewallpapers.dataModels.wallpaperDataModel.ItemDetailModel;
 import com.squaresdevelopers.latestphonewallpapers.fragments.UnLikeFragment;
@@ -26,12 +28,12 @@ import java.util.ArrayList;
  */
 
 public class LikeItemAdapter extends BaseAdapter {
-    ArrayList<ShowDetailModel> itemReponseModelArrayList;
+    ArrayList<LikeWallPaperModel> itemReponseModelArrayList;
     Context context;
     private LayoutInflater layoutInflater;
     MyViewHolder viewHolder = null;
 
-    public LikeItemAdapter(Context context, ArrayList<ShowDetailModel> itemReponseModelArrayList) {
+    public LikeItemAdapter(Context context, ArrayList<LikeWallPaperModel> itemReponseModelArrayList) {
         this.itemReponseModelArrayList=itemReponseModelArrayList;
         this.context=context;
         if (context!=null)
@@ -62,21 +64,19 @@ public class LikeItemAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
-        final ShowDetailModel model = itemReponseModelArrayList.get(position);
+        final LikeWallPaperModel model = itemReponseModelArrayList.get(position);
 
         viewHolder = new MyViewHolder();
         convertView=layoutInflater.inflate(R.layout.wallpaper_layout,parent,false);
         viewHolder.imageView = convertView.findViewById(R.id.iv_wallpaper);
         viewHolder.layout = convertView.findViewById(R.id.layout);
 
-        //Picasso.with(context).load(model.getImageUrl()).into(viewHolder.imageView);
         Glide.with(context).load(model.getImageUrl()).into(viewHolder.imageView);
-
         viewHolder.layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Bundle bundle = new Bundle();
-                bundle.putInt("delete",model.getId());
+                bundle.putInt("delete",Integer.parseInt(model.getImageID()));
                 bundle.putString("image_url",model.getImageUrl());
                 GeneralUtils.putStringValueInEditor(context,"image",model.getImageUrl());
                 GeneralUtils.connectFragmentWithDrawer(context,new UnLikeFragment()).setArguments(bundle);

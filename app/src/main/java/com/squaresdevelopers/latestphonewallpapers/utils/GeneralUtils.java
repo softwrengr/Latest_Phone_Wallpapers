@@ -66,6 +66,9 @@ public class GeneralUtils {
     public static String getImage(Context context){
         return getSharedPreferences(context).getString("image","");
     }
+    public static String getImageID(Context context){
+        return getSharedPreferences(context).getString("image_id","");
+    }
     public static String getModel(Context context){
         return getSharedPreferences(context).getString("model_no","");
     }
@@ -75,6 +78,10 @@ public class GeneralUtils {
     }
     public static String checkLikedPicture(Context context){
         return getSharedPreferences(context).getString("liked_picture","");
+    }
+
+    public static int getImagePosition(Context context){
+        return getSharedPreferences(context).getInt("position",1);
     }
 
     public static String getDeviceID(Context context){

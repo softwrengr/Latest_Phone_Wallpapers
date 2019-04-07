@@ -1,4 +1,4 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -8,12 +8,33 @@
     tools:context="com.squaresdevelopers.latestphonewallpapers.fragments.HomeFragment">
 
 
-      <android.support.v7.widget.RecyclerView
-          android:id="@+id/rvCategory"
+
+      <EditText
+          android:id="@+id/et_search_phone"
           android:layout_width="match_parent"
-          android:layout_height="match_parent"
-          >
+          android:layout_height="45sp"
+          android:layout_marginLeft="20sp"
+          android:layout_marginRight="20sp"
+          android:layout_marginTop="10sp"
+          android:inputType="textEmailAddress"
+          android:paddingLeft="20sp"
+          android:hint="Search"
+          android:textColor="@color/white"
+          android:textColorHint="@color/white"
+          android:drawablePadding="10sp"
+          android:background="@drawable/edit_text"/>
+
+
+      <android.support.v7.widget.RecyclerView
+          android:layout_below="@id/et_search_phone"
+          android:id="@+id/rvCategory"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginLeft="10sp"
+          android:layout_marginRight="10sp"
+          android:layout_marginTop="10sp">
+
       </android.support.v7.widget.RecyclerView>
 
 
-</FrameLayout>
+</RelativeLayout>

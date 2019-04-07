@@ -22,50 +22,59 @@ import java.util.List;
 public class LikedImagesCurd {
 
     private static SQLiteDatabase sqLiteDatabase;
-
     private Context context;
 
     public LikedImagesCurd(Context context) {
-        LikedImagesDataBase likedImagesDataBase = new LikedImagesDataBase(context);
-        sqLiteDatabase = likedImagesDataBase.getWritableDatabase();
+        LikedImagesDataBase database = new LikedImagesDataBase(context);
+        sqLiteDatabase = database.getWritableDatabase();
         this.context = context;
     }
 
-    public void insertData(String strImageUrl) {
+    //inserting single products to cart
+    public void insertSingleProduct(String image_id,String image_url) {
 
-        ContentValues values = new ContentValues();
-        values.put("URL", strImageUrl);
+        if (!checkProduct(image_id)) {
+            ContentValues values = new ContentValues();
+            values.put("IMAGE_ID", image_id);
+            values.put("IMAGE_URL",image_url);
+            sqLiteDatabase.insert("LIKE_IMAGES", null, values);
+            Toast.makeText(context, "Successful liked", Toast.LENGTH_SHORT).show();
 
-        sqLiteDatabase.insert("LIKED_IMAGE_TABLE", null, values);
-        Toast.makeText(context, "Successful", Toast.LENGTH_SHORT).show();
-
-
-    }
-
-    public void deleteLikeImage(String strLikeImage) {
-
-        if (!checkImageUrl(strLikeImage)) {
-            Cursor cursor = this.sqLiteDatabase.rawQuery("SELECT * FROM LIKED_IMAGE_TABLE WHERE URL = '" + strLikeImage + "' ", null);
-            if (cursor.moveToFirst()) {
-
-                this.sqLiteDatabase.delete("LIKED_IMAGE_TABLE", "URL = '" + strLikeImage + "'", null);
-                Toast.makeText(context, "unlike successful", Toast.LENGTH_SHORT).show();
-
-
-            }
+        } else {
+            Toast.makeText(context, "already liked", Toast.LENGTH_SHORT).show();
         }
-
-
     }
 
-    public boolean checkImageUrl(String strUrl) {
 
-        Cursor cursor = this.sqLiteDatabase.rawQuery("SELECT * FROM LIKED_IMAGE_TABLE WHERE URL = '" + strUrl + "' ", null);
-        boolean isCheckUrl = true;
+
+    //check for single products
+    public boolean checkProduct(String image_id) {
+        Cursor cursor = this.sqLiteDatabase.rawQuery("SELECT * FROM LIKE_IMAGES WHERE IMAGE_ID = '" + image_id + "' ", null);
+        boolean isItemAddChart = false;
         if (cursor.moveToFirst()) {
-            isCheckUrl = false;
+            isItemAddChart = true;
         }
-        return isCheckUrl;
+        return isItemAddChart;
+
+    }
+
+    //fetching all products
+    public Cursor getProducts() {
+        String query = "SELECT * FROM LIKE_IMAGES";
+
+        Cursor cursor = sqLiteDatabase.rawQuery(query, null);
+        return cursor;
+    }
+
+    //deleting item from cart table
+    public void delete(String imageID) {
+        this.sqLiteDatabase.delete("LIKE_IMAGES", "IMAGE_ID = '" + imageID + "'", null);
+        Toast.makeText(context, "delete item successful", Toast.LENGTH_SHORT).show();
+    }
+
+    public void clearData(){
+        String clearData = "DELETE  FROM CART_TABLE";
+        sqLiteDatabase.execSQL(clearData);
     }
 
 

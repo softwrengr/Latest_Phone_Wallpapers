@@ -13,6 +13,7 @@ import com.squaresdevelopers.latestphonewallpapers.dataModels.categoryListDataMo
 import com.squaresdevelopers.latestphonewallpapers.dataModels.categoryListDataModel.CategoryDetailModel;
 import com.squaresdevelopers.latestphonewallpapers.networking.ApiClient;
 import com.squaresdevelopers.latestphonewallpapers.networking.ApiInterface;
+import com.squaresdevelopers.latestphonewallpapers.networking.BaseNetworking;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -27,6 +28,7 @@ public class SplashActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
         this.getSupportActionBar().hide();
+
 
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {

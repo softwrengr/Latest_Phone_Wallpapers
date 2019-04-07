@@ -15,6 +15,7 @@ import android.os.Handler;
 import android.os.StrictMode;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -22,10 +23,8 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,10 +33,9 @@ import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
 import com.squaresdevelopers.latestphonewallpapers.R;
+import com.squaresdevelopers.latestphonewallpapers.controllers.ImageAdapter;
 import com.squaresdevelopers.latestphonewallpapers.dataBase.LikedImagesCurd;
-import com.squaresdevelopers.latestphonewallpapers.dataModels.likeDataModel.LikeResponseModel;
-import com.squaresdevelopers.latestphonewallpapers.networking.ApiClient;
-import com.squaresdevelopers.latestphonewallpapers.networking.ApiInterface;
+import com.squaresdevelopers.latestphonewallpapers.dataModels.wallpaperDataModel.ItemDetailModel;
 import com.squaresdevelopers.latestphonewallpapers.utils.AlertUtils;
 import com.squaresdevelopers.latestphonewallpapers.utils.FileUtilitiy;
 import com.squaresdevelopers.latestphonewallpapers.utils.GeneralUtils;
@@ -49,33 +47,32 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 
 public class WallPaperFragment extends Fragment {
     private ProgressDialog pDialog;
     AlertDialog alertDialog;
-    @BindView(R.id.wallpaper)
-    ImageView ivWallPaper;
     @BindView(R.id.model_name)
     TextView tvModelName;
     @BindView(R.id.apply_wallpaper)
     LinearLayout layoutApplyWallPaper;
 
     View view;
-    String image, strModelNo, strUUID;
+    String image, strModelNo,strImageID;
     Bitmap bitmap = null;
     private boolean valid = false;
     @BindView(R.id.ad_view)
     AdView adView;
-    private ImageView ivFavorite;
-    private boolean aBooleanLikeImage;
-
     private LikedImagesCurd likedImagesCurd;
+    public static List<ItemDetailModel> itemsArrayList;
+    @BindView(R.id.view_pager)
+    ViewPager viewPager;
+    ImageAdapter adapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -88,10 +85,6 @@ public class WallPaperFragment extends Fragment {
         onback(view);
         likedImagesCurd = new LikedImagesCurd(getActivity());
 
-//        aBooleanLikeImage = GeneralUtils.getSharedPreferences(getActivity()).getBoolean("like_image", false);
-//        if (!aBooleanLikeImage) {
-//            ivFavorite.setImageDrawable(getActivity().getResources().getDrawable(R.drawable.like));
-//        }
 
         NetworkUtils.grantPermession(getActivity());
         StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
@@ -117,13 +110,38 @@ public class WallPaperFragment extends Fragment {
         tvModelName.setText(strModelNo);
 
         image = GeneralUtils.getImage(getActivity());
-        strUUID = GeneralUtils.getDeviceID(getActivity());
+        strImageID = GeneralUtils.getImageID(getActivity());
 
-        if (image.equals("") || image == null) {
-            ivWallPaper.setImageDrawable(getActivity().getResources().getDrawable(R.drawable.transparent_background));
-        } else {
-            Glide.with(getActivity()).load(image).into(ivWallPaper);
-        }
+        adapter = new ImageAdapter(getActivity(), itemsArrayList);
+        viewPager.setAdapter(adapter);
+
+        viewPager.setCurrentItem(GeneralUtils.getImagePosition(getActivity()));
+
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int i, float v, int i1) {
+
+            }
+
+            @Override
+            public void onPageSelected(int i) {
+                GeneralUtils.putIntegerValueInEditor(getActivity(), "pager_item", i);
+                image = itemsArrayList.get(i).getImage();
+                strImageID = String.valueOf(itemsArrayList.get(i).getId());
+
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int i) {
+
+            }
+        });
+
+//        if (image.equals("") || image == null) {
+//            ivWallPaper.setImageDrawable(getActivity().getResources().getDrawable(R.drawable.transparent_background));
+//        } else {
+//            Glide.with(getActivity()).load(image).into(ivWallPaper);
+//        }
 
     }
 
@@ -208,7 +226,7 @@ public class WallPaperFragment extends Fragment {
                     File filepath = Environment.getExternalStorageDirectory();
                     File dir = new File(filepath.getAbsolutePath() + "/.HD Wallpaper");
                     deleteDir(dir);
-                    GeneralUtils.connectFragment(getActivity(), new CatogoryWallpaperFragment());
+                    GeneralUtils.connectFragment(getActivity(), new WallpaperItemsFragment());
                     return true;
                 }
                 return false;
@@ -231,46 +249,8 @@ public class WallPaperFragment extends Fragment {
         return dir.delete();
     }
 
-    private void apiCallLiked() {
 
-        ApiInterface services = ApiClient.getApiClient().create(ApiInterface.class);
 
-        retrofit2.Call<LikeResponseModel> userLogin = services.like(image, strUUID, strModelNo);
-        userLogin.enqueue(new Callback<LikeResponseModel>() {
-            @Override
-            public void onResponse(retrofit2.Call<LikeResponseModel> call, Response<LikeResponseModel> response) {
-                pDialog.dismiss();
-                if (response.body().getMessage().equals("Image Like successfully")) {
-
-                    if (likedImagesCurd.checkImageUrl(image)) {
-                        likedImagesCurd.insertData(image);
-                        GeneralUtils.connectFragmentWithDrawer(getActivity(), new LikeFragment());
-                        GeneralUtils.putStringValueInEditor(getActivity(), "liked_picture", image);
-                    }
-                } else {
-                    Toast.makeText(getActivity(), "you got some error", Toast.LENGTH_SHORT).show();
-                }
-            }
-
-            @Override
-            public void onFailure(retrofit2.Call<LikeResponseModel> call, Throwable t) {
-                Log.d("error", t.getMessage());
-                pDialog.dismiss();
-            }
-        });
-    }
-
-    private boolean validate() {
-        valid = true;
-        if (image.isEmpty()) {
-            Toast.makeText(getActivity(), "Image path not getting", Toast.LENGTH_SHORT).show();
-            valid = false;
-        } else if (strUUID.isEmpty()) {
-            Toast.makeText(getActivity(), "you got some error please try again", Toast.LENGTH_SHORT).show();
-            valid = false;
-        }
-        return valid;
-    }
 
     public void customActionBar() {
         android.support.v7.app.ActionBar mActionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
@@ -291,14 +271,7 @@ public class WallPaperFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 if (validate()) {
-
-                    if (image.equals(GeneralUtils.checkLikedPicture(getActivity()))) {
-                        GeneralUtils.connectFragmentWithDrawer(getActivity(), new LikeFragment());
-                    } else {
-                        pDialog = AlertUtils.createProgressBar(getActivity());
-                        pDialog.show();
-                        apiCallLiked();
-                    }
+                    likeWallpaper();
 
                 }
             }
@@ -336,7 +309,7 @@ public class WallPaperFragment extends Fragment {
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        boolean setWallpaper = FileUtilitiy.setWallPaper(getActivity(), ivWallPaper);
+                        boolean setWallpaper = FileUtilitiy.setWallPaper(getActivity(), image);
                         if (setWallpaper) {
                             alertDialog.dismiss();
                         } else {
@@ -353,8 +326,12 @@ public class WallPaperFragment extends Fragment {
         mActionBar.show();
     }
 
-    private void initSaveWallpaper() {
+    private void likeWallpaper() {
+        likedImagesCurd.insertSingleProduct(strImageID, image);
+        GeneralUtils.connectFragmentWithDrawer(getActivity(), new LikeFragment());
+    }
 
+    private void initSaveWallpaper() {
         try {
             URL url = new URL(image);
             bitmap = BitmapFactory.decodeStream(url.openConnection().getInputStream());
@@ -365,6 +342,18 @@ public class WallPaperFragment extends Fragment {
         } catch (IOException e) {
             System.out.println(e);
         }
+    }
+
+    private boolean validate() {
+        valid = true;
+        if (image.isEmpty()) {
+            Toast.makeText(getActivity(), "Image path not getting", Toast.LENGTH_SHORT).show();
+            valid = false;
+        } else if (strImageID.isEmpty()) {
+            Toast.makeText(getActivity(), "you got some error please try again", Toast.LENGTH_SHORT).show();
+            valid = false;
+        }
+        return valid;
     }
 
 

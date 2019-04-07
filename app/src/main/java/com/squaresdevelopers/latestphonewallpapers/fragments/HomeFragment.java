@@ -8,11 +8,15 @@ import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
@@ -39,6 +43,8 @@ import retrofit2.Callback;
 public class HomeFragment extends Fragment {
     View view;
     android.support.v7.app.AlertDialog alertDialog;
+    @BindView(R.id.et_search_phone)
+    EditText etSearch;
     @BindView(R.id.rvCategory)
     RecyclerView rvCategories;
     CategoriesAdapter categoriesAdapter;
@@ -58,6 +64,11 @@ public class HomeFragment extends Fragment {
             initUI(strFiltercategory);
         }
 
+        InputMethodManager imm = (InputMethodManager)getActivity().getSystemService(
+                Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(etSearch.getWindowToken(), 0);
+
+
         return view;
     }
 
@@ -68,7 +79,22 @@ public class HomeFragment extends Fragment {
         categoryModelList = new ArrayList<>();
         alertDialog = AlertUtils.createProgressDialog(getActivity());
         alertDialog.show();
+        categoriesAdapter = new CategoriesAdapter(getActivity(), categoryModelList);
+        rvCategories.setAdapter(categoriesAdapter);
         getList(s);
+
+        etSearch.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
+            @Override
+            public void afterTextChanged(Editable s) {
+                categoriesAdapter.getFilter().filter( etSearch.getText().toString());
+            }
+        });
 
     }
 
@@ -83,17 +109,7 @@ public class HomeFragment extends Fragment {
         LayoutInflater mInflater = LayoutInflater.from(getActivity());
         View mCustomView = mInflater.inflate(R.layout.custom_actionbar, null);
         TextView tvTitle = mCustomView.findViewById(R.id.title);
-        final TextView tvFilter = mCustomView.findViewById(R.id.ivFilter);
         tvTitle.setText(getResources().getString(R.string.app_name));
-        tvFilter.setVisibility(View.VISIBLE);
-        tvFilter.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showDropDownMenu(tvFilter);
-
-            }
-        });
-
         mActionBar.setCustomView(mCustomView);
         mActionBar.setDisplayShowCustomEnabled(true);
         mActionBar.show();
@@ -101,9 +117,9 @@ public class HomeFragment extends Fragment {
     }
 
 
-    private void showDropDownMenu(TextView layout) {
+    private void showDropDownMenu(ImageView filter) {
         //Creating the instance of PopupMenu
-        PopupMenu popup = new PopupMenu(getActivity(), layout);
+        PopupMenu popup = new PopupMenu(getActivity(), filter);
         //Inflating the Popup using xml file
         popup.getMenuInflater()
                 .inflate(R.menu.menu, popup.getMenu());
@@ -167,9 +183,6 @@ public class HomeFragment extends Fragment {
 
                     categoryModelList.addAll(response.body().getData());
                     Collections.reverse(categoryModelList);
-
-                    categoriesAdapter = new CategoriesAdapter(getActivity(), categoryModelList);
-                    rvCategories.setAdapter(categoriesAdapter);
                     categoriesAdapter.notifyDataSetChanged();
 
                 } else {

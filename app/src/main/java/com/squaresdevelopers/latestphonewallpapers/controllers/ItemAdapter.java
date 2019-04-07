@@ -11,8 +11,6 @@ import android.widget.RelativeLayout;
 
 import com.bumptech.glide.Glide;
 import com.squaresdevelopers.latestphonewallpapers.R;
-import com.squaresdevelopers.latestphonewallpapers.activities.FullscreenActivity;
-import com.squaresdevelopers.latestphonewallpapers.dataBase.LikedImagesCurd;
 import com.squaresdevelopers.latestphonewallpapers.dataModels.wallpaperDataModel.ItemDetailModel;
 import com.squaresdevelopers.latestphonewallpapers.fragments.WallPaperFragment;
 import com.squaresdevelopers.latestphonewallpapers.utils.GeneralUtils;
@@ -28,13 +26,10 @@ public class ItemAdapter extends BaseAdapter {
     Context context;
     private LayoutInflater layoutInflater;
     MyViewHolder viewHolder = null;
-    private LikedImagesCurd likedImagesCurd;
 
     public ItemAdapter(Context context, ArrayList<ItemDetailModel> itemReponseModelArrayList) {
         this.itemReponseModelArrayList = itemReponseModelArrayList;
         this.context = context;
-
-        likedImagesCurd = new LikedImagesCurd(context);
         if (context != null) {
             this.layoutInflater = LayoutInflater.from(context);
 
@@ -62,7 +57,7 @@ public class ItemAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
 
         final ItemDetailModel model = itemReponseModelArrayList.get(position);
 
@@ -72,16 +67,14 @@ public class ItemAdapter extends BaseAdapter {
         viewHolder.layout = convertView.findViewById(R.id.layout);
 
         Glide.with(context).load(model.getImage()).into(viewHolder.imageView);
-
         viewHolder.layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                boolean b = likedImagesCurd.checkImageUrl(model.getImage());
-                GeneralUtils.putBooleanValueInEditor(context, "like_image", b);
                 GeneralUtils.putStringValueInEditor(context, "image", model.getImage());
+                GeneralUtils.putStringValueInEditor(context, "image_id", String.valueOf(model.getId()));
                 GeneralUtils.putStringValueInEditor(context, "model_no", model.getModelNumber());
+                GeneralUtils.putIntegerValueInEditor(context,"position",position);
                 GeneralUtils.connectFragment(context,new WallPaperFragment());
-                //context.startActivity(new Intent(context,FullscreenActivity.class));
             }
         });
 

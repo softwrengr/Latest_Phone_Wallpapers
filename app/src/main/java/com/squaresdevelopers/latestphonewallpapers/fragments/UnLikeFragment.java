@@ -67,14 +67,12 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class UnLikeFragment extends Fragment {
-
-    private ProgressDialog pDialog;
     AlertDialog alertDialog;
     @BindView(R.id.like_wallpaper)
     ImageView ivWallPaper;
 
     View view;
-    String image, strModelNo, strImageUrl;
+    String image, strImageUrl;
     Bitmap bitmap = null;
     private boolean valid = false;
     int imageId;
@@ -89,10 +87,6 @@ public class UnLikeFragment extends Fragment {
         customActionBar();
         initUI();
         likedImagesCurd = new LikedImagesCurd(getActivity());
-        StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
-        StrictMode.setVmPolicy(builder.build());
-        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
-        StrictMode.setThreadPolicy(policy);
 
         return view;
     }
@@ -101,6 +95,7 @@ public class UnLikeFragment extends Fragment {
     private void initUI() {
         ButterKnife.bind(this, view);
         NetworkUtils.grantPermession(getActivity());
+        strictMode();
 
         image = GeneralUtils.getImage(getActivity());
         Bundle bundle = this.getArguments();
@@ -198,50 +193,8 @@ public class UnLikeFragment extends Fragment {
     }
 
     private void apiCallUnLiked() {
-
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, Config.DELETE + String.valueOf(imageId)
-                , new com.android.volley.Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                alertDialog.dismiss();
-                try {
-                    JSONObject jsonObject = new JSONObject(response);
-                    String message = jsonObject.getString("message");
-                    if (message.equals("Liked Wallpaper successfully deleted")) {
-                        likedImagesCurd.deleteLikeImage(strImageUrl);
-                        GeneralUtils.connectFragmentWithDrawer(getActivity(), new LikeFragment());
-                    }
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-
-            }
-        }, new com.android.volley.Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                alertDialog.dismiss();
-                Toast.makeText(getActivity(), error.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        }) {
-            @Override
-            public String getBodyContentType() {
-                return "application/json; charset=utf-8";
-            }
-
-            @Override
-            protected Map<String, String> getParams() {
-                Map<String, String> params = new HashMap<String, String>();
-                // params.put("_method","DELETE");
-
-                return params;
-            }
-        };
-        RequestQueue mRequestQueue = Volley.newRequestQueue(getActivity());
-        stringRequest.setRetryPolicy(new DefaultRetryPolicy(20000,
-                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
-                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-        mRequestQueue.add(stringRequest);
-
+        likedImagesCurd.delete(String.valueOf(imageId));
+        GeneralUtils.connectFragmentWithDrawer(getActivity(), new LikeFragment());
     }
 
     public void customActionBar() {
@@ -267,8 +220,6 @@ public class UnLikeFragment extends Fragment {
             public void onClick(View v) {
 
                 if (validate()) {
-                    alertDialog = AlertUtils.createProgressDialog(getActivity());
-                    alertDialog.show();
                     apiCallUnLiked();
 
                 }
@@ -309,7 +260,7 @@ public class UnLikeFragment extends Fragment {
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        boolean setWallpaper = FileUtilitiy.setWallPaper(getActivity(), ivWallPaper);
+                        boolean setWallpaper = FileUtilitiy.setWallPaper(getActivity(), image);
                         if (setWallpaper) {
                             alertDialog.dismiss();
                         } else {
@@ -337,6 +288,14 @@ public class UnLikeFragment extends Fragment {
         } catch (IOException e) {
             System.out.println(e);
         }
+    }
+
+    private void strictMode(){
+        StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
+        StrictMode.setVmPolicy(builder.build());
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
+
     }
 
 }

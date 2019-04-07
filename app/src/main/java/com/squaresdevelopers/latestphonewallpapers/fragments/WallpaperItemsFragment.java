@@ -34,7 +34,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 
 
-public class CatogoryWallpaperFragment extends Fragment {
+public class WallpaperItemsFragment extends Fragment {
     AlertDialog alertDialog;
     View view;
     @BindView(R.id.gv_categories_items)
@@ -61,37 +61,6 @@ public class CatogoryWallpaperFragment extends Fragment {
         adRequest = new AdRequest.Builder().build();
         adView.loadAd(adRequest);
 
-
-        adView.setAdListener(new AdListener() {
-            @Override
-            public void onAdLoaded() {
-                // Code to be executed when an ad finishes loading.
-            }
-
-            @Override
-            public void onAdFailedToLoad(int errorCode) {
-                // Code to be executed when an ad request fails.
-                Log.d("error","ad fail to load = "+String.valueOf(errorCode));
-
-            }
-
-            @Override
-            public void onAdOpened() {
-                // Code to be executed when an ad opens an overlay that
-                // covers the screen.
-            }
-
-            @Override
-            public void onAdLeftApplication() {
-                // Code to be executed when the user has left the app.
-            }
-
-            @Override
-            public void onAdClosed() {
-                // Code to be executed when when the user is about to return
-                // to the app after tapping on an ad.
-            }
-        });
         return view;
     }
 
@@ -113,10 +82,10 @@ public class CatogoryWallpaperFragment extends Fragment {
         categoriesResponseModelCall.enqueue(new Callback<ItemReponseModel>() {
             @Override
             public void onResponse(Call<ItemReponseModel> call, retrofit2.Response<ItemReponseModel> response) {
-
                 alertDialog.dismiss();
                 itemReponseModelArrayList.addAll(response.body().getData());
                 categoriesAdapter.notifyDataSetChanged();
+                WallPaperFragment.itemsArrayList = itemReponseModelArrayList;
             }
 
             @Override

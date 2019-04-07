@@ -25,23 +25,20 @@ import java.util.Date;
 
 public class FileUtilitiy {
 
-    public static boolean setWallPaper(Context context, ImageView string) {
+    public static boolean setWallPaper(Context context, String imageUrl) {
         boolean setWallpaper = false;
         Bitmap bitmap;
         WallpaperManager myWallpaperManager = WallpaperManager.getInstance(context);
-        try {
 
-            bitmap = ((BitmapDrawable) string.getDrawable()).getBitmap();
-            myWallpaperManager.setBitmap(bitmap);
+        try {
+            URL url = new URL(imageUrl);
+            Bitmap image = BitmapFactory.decodeStream(url.openConnection().getInputStream());
+            myWallpaperManager.setBitmap(image);
             Toast.makeText(context, "WallPaper set Successfully", Toast.LENGTH_SHORT).show();
             setWallpaper = true;
-
-
-        } catch (IOException e) {
-            Log.d("zma", e.getMessage());
-            Toast.makeText(context, e.getMessage(), Toast.LENGTH_SHORT).show();
+        } catch(IOException e) {
+            System.out.println(e);
         }
-
         return setWallpaper;
     }
 

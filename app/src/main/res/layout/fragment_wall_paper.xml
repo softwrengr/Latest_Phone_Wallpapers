@@ -5,13 +5,11 @@
     xmlns:ads="http://schemas.android.com/apk/res-auto"
     tools:context="com.squaresdevelopers.latestphonewallpapers.fragments.WallPaperFragment">
 
-    <ImageView
-        android:id="@+id/wallpaper"
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/view_pager"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scaleType="fitXY"
-        android:src="@drawable/transparent_background"
-        />
+        android:layout_height="match_parent" />
 
     <LinearLayout
         android:id="@+id/apply_wallpaper"
@@ -31,12 +29,6 @@
             android:textSize="14sp"
             android:fontFamily="@font/light"
             android:textStyle="bold"/>
-
-        <!--<ImageView-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_gravity="center"-->
-            <!--android:src="@drawable/apply"/>-->
 
     </LinearLayout>
 

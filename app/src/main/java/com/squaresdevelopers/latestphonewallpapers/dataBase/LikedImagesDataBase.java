@@ -9,7 +9,7 @@ import android.database.sqlite.SQLiteOpenHelper;
  */
 
 public class LikedImagesDataBase extends SQLiteOpenHelper {
-    private static String DB_NAME = "LIKED_IMAGE_DB";
+    private static String DB_NAME = "LIKE_IMAGES";
     public static int DB_VERSION = 1;
 
     public LikedImagesDataBase(Context context) {
@@ -20,13 +20,15 @@ public class LikedImagesDataBase extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
 
-        String query = "CREATE TABLE LIKED_IMAGE_TABLE (ID INTEGER PRIMARY KEY AUTOINCREMENT,URL)";
+        String query = "CREATE TABLE LIKE_IMAGES (ID INTEGER PRIMARY KEY AUTOINCREMENT,IMAGE_ID,IMAGE_URL)";
         sqLiteDatabase.execSQL(query);
+
 
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-
+        db.execSQL("DROP TABLE IF EXISTS LIKE_IMAGES");
+        onCreate(db);
     }
 }
