@@ -109,65 +109,11 @@ public class HomeFragment extends Fragment {
         LayoutInflater mInflater = LayoutInflater.from(getActivity());
         View mCustomView = mInflater.inflate(R.layout.custom_actionbar, null);
         TextView tvTitle = mCustomView.findViewById(R.id.title);
-        tvTitle.setText(getResources().getString(R.string.app_name));
+        tvTitle.setText("Awalls - Stock Wallpapers");
         mActionBar.setCustomView(mCustomView);
         mActionBar.setDisplayShowCustomEnabled(true);
         mActionBar.show();
 
-    }
-
-
-    private void showDropDownMenu(ImageView filter) {
-        //Creating the instance of PopupMenu
-        PopupMenu popup = new PopupMenu(getActivity(), filter);
-        //Inflating the Popup using xml file
-        popup.getMenuInflater()
-                .inflate(R.menu.menu, popup.getMenu());
-
-        //registering popup with OnMenuItemClickListener
-        popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-            public boolean onMenuItemClick(MenuItem item) {
-                switch (item.getItemId()) {
-                    case R.id.all:
-                        initUI("");
-                        break;
-                    case R.id.samsung:
-                        initUI("Samsung");
-                        break;
-                    case R.id.apple:
-                        initUI("Apple");
-                        break;
-                    case R.id.nokia:
-                        initUI("Nokia");
-                        break;
-                    case R.id.huawei:
-                        initUI("Huawei");
-                        break;
-                    case R.id.blackberry:
-                        initUI("Blackberry");
-                        break;
-                    case R.id.LG:
-                        initUI("LG");
-                        break;
-                    case R.id.xiaomi:
-                        initUI("Xiaomi");
-                        break;
-                    case R.id.pixel:
-                        initUI("Google");
-                        break;
-                    case R.id.sony:
-                        initUI("Sony");
-                        break;
-                    case R.id.one_plaus:
-                        initUI("OnePlus");
-                        break;
-
-                }
-                return true;
-            }
-        });
-
-        popup.show();
     }
 
     private void getList(String search) {

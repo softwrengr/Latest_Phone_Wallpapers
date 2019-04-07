@@ -12,11 +12,12 @@
         android:layout_height="wrap_content"
         android:text="Title"
         android:maxLines="1"
-        android:textSize="19sp"
+        android:textSize="18sp"
         android:textStyle="bold"
+        android:paddingTop="3sp"
         android:fontFamily="@font/light"
         android:layout_centerVertical="true"
-        android:textColor="#fff"/>
+        android:textColor="@color/white"/>
 
     <ImageView
         android:id="@+id/ivFilter"
