@@ -12,6 +12,7 @@
 
     <string name="banner_id">ca-app-pub-5962186004579669/4217832485</string>
     <string name="app_id">ca-app-pub-5962186004579669~8108265596</string>
+    <string name="interstitial_id">ca-app-pub-5962186004579669/7964084929</string>
 
     <string name="about">We are super motivated developers seeking the best quality stock wallpapers. We hand pick our selection and give you the latest releases before anyone else.</string>
     <string name="email">softwrengr@gmail.com</string>
@@ -20,4 +21,9 @@
     <string name="title_activity_fullscreen">FullscreenActivity</string>
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
+
+
+    <!--<string name="app_id">ca-app-pub-3940256099942544~3347511713</string>-->
+    <!--<string name="banner_id">ca-app-pub-3940256099942544/6300978111</string>-->
+    <!--<string name="interstitial_id">ca-app-pub-3940256099942544/1033173712</string>-->
 </resources>

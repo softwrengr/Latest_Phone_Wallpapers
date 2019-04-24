@@ -73,8 +73,8 @@ public class ItemAdapter extends BaseAdapter {
                 GeneralUtils.putStringValueInEditor(context, "image", model.getImage());
                 GeneralUtils.putStringValueInEditor(context, "image_id", String.valueOf(model.getId()));
                 GeneralUtils.putStringValueInEditor(context, "model_no", model.getModelNumber());
-                GeneralUtils.putIntegerValueInEditor(context,"position",position);
-                GeneralUtils.connectFragment(context,new WallPaperFragment());
+                GeneralUtils.putIntegerValueInEditor(context, "position", position);
+                GeneralUtils.connectFragment(context, new WallPaperFragment());
             }
         });
 

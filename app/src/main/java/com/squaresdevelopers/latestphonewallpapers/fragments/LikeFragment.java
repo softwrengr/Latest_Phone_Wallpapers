@@ -13,6 +13,10 @@ import android.view.ViewGroup;
 import android.widget.GridView;
 import android.widget.TextView;
 
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.InterstitialAd;
+import com.google.android.gms.ads.MobileAds;
 import com.squaresdevelopers.latestphonewallpapers.R;
 import com.squaresdevelopers.latestphonewallpapers.controllers.LikeItemAdapter;
 import com.squaresdevelopers.latestphonewallpapers.dataBase.LikedImagesCurd;
@@ -43,6 +47,7 @@ public class LikeFragment extends Fragment {
 
     LikedImagesCurd likedImagesCurd;
     GridLayoutManager layoutManager;
+    private InterstitialAd mInterstitialAd;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -52,10 +57,7 @@ public class LikeFragment extends Fragment {
         customActionBar();
         likedImagesCurd = new LikedImagesCurd(getActivity());
 
-
         initUI();
-
-
         return view;
 
 
@@ -63,6 +65,14 @@ public class LikeFragment extends Fragment {
 
     private void initUI() {
         ButterKnife.bind(this, view);
+        MobileAds.initialize(getActivity(),
+                getActivity().getResources().getString(R.string.app_id));
+        mInterstitialAd = new InterstitialAd(getActivity());
+        mInterstitialAd.setAdUnitId(getActivity().getResources().getString(R.string.interstitial_id));
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mInterstitialAd.loadAd(adRequest);
+        showAds();
+
         layoutManager = new GridLayoutManager(getActivity(), 3);
         likedImagesmodelArrayList = new ArrayList<>();
         showLikeImages();
@@ -100,5 +110,40 @@ public class LikeFragment extends Fragment {
         mActionBar.show();
     }
 
+    private void showAds() {
+
+
+        mInterstitialAd.setAdListener(new AdListener() {
+            @Override
+            public void onAdLoaded() {
+                if (mInterstitialAd.isLoaded()) {
+                    mInterstitialAd.show();
+                } else {
+                    Log.d("TAG", "The interstitial wasn't loaded yet.");
+                }
+            }
+
+            @Override
+            public void onAdFailedToLoad(int errorCode) {
+                // Code to be executed when an ad request fails.
+                //Toast.makeText(getActivity(), "Ad failed", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onAdOpened() {
+                // Toast.makeText(getActivity(), "Ad open", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onAdLeftApplication() {
+                // Code to be executed when the user has left the app.
+            }
+
+            @Override
+            public void onAdClosed() {
+                Log.d("tag", "closed");
+            }
+        });
+    }
 
 }

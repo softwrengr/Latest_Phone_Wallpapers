@@ -5,6 +5,8 @@
       <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/library-0.8.0.aar/241c623deffd0eafd375dfdf2a9e78c2/res" />
     </CLASSES>
     <JAVADOC />
-    <SOURCES />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.kelin.translucentbar/library/0.8.0/3aaf9526a43d2604027f06a06dd5b77069b26c4d/library-0.8.0-sources.jar!/" />
+    </SOURCES>
   </library>
 </component>
